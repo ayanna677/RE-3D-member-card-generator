@@ -1,10 +1,9 @@
 :root{
   --font:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
 
-  /* Theme-driven (set by body.scene.theme-*) */
-  --base-1:#2f2f2f;  /* highlight */
-  --base-2:#1b1b1b;  /* mid */
-  --base-3:#0c0c0c;  /* shadow */
+  --base-1:#2f2f2f;
+  --base-2:#1b1b1b;
+  --base-3:#0c0c0c;
   --edge-glow:rgba(255,255,255,.16);
   --scene-accent:rgba(150,160,200,.18);
 
@@ -19,7 +18,6 @@
 html,body{height:100%}
 body{
   margin:0;color:var(--text);font-family:var(--font);
-  /* theme-synced blurred glow + deep dark */
   background:
     radial-gradient(800px 420px at 62% 10%, var(--scene-accent), transparent 60%),
     radial-gradient(900px 540px at 15% 85%, rgba(0,0,0,.35), rgba(0,0,0,.9) 70%),
@@ -48,7 +46,6 @@ body{
   padding:18px 20px 20px;display:flex;flex-direction:column;justify-content:space-between;
   box-shadow:var(--shadow-xl);transform-style:preserve-3d;transition:transform .12s ease-out;
 
-  /* realistic metallic: top gloss + tri-tone base */
   background:
     linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.04) 38%, transparent 45%),
     linear-gradient(148deg, var(--base-1), var(--base-2) 58%, var(--base-3));
@@ -56,14 +53,11 @@ body{
   color:var(--text);
 }
 
-/* inner vignette depth — FIX: clip to radius (no bottom line) */
 .card::before{
   content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
   box-shadow:inset 0 0 36px rgba(0,0,0,.36), inset 0 0 1px rgba(255,255,255,.12);
   clip-path: inset(0 round var(--radius));
 }
-
-/* rim light — FIX: clip to radius (no bleed line) */
 .card::after{
   content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
   background:linear-gradient(180deg, transparent 12%, var(--edge-glow) 50%, transparent 88%);
@@ -71,7 +65,7 @@ body{
   clip-path: inset(0 round var(--radius));
 }
 
-/* brushed reflection layer (moves with CSS vars) */
+/* brushed reflection */
 .brushed{
   position:absolute;inset:-8%;border-radius:inherit;pointer-events:none;opacity:.35;
   background:
@@ -87,14 +81,12 @@ body{
 }
 .card:hover .brushed{opacity:.5}
 
-/* top row */
 .card-top{display:flex;align-items:center;gap:12px;z-index:2}
 .card-logo{width:44px;height:44px;object-fit:contain;flex:0 0 44px}
 .card-titles{line-height:1}
 .main-title{font-weight:800;letter-spacing:1px;font-size:22px;color:var(--text-strong)}
 .sub-title{font-weight:700;font-size:14px;opacity:.9}
 
-/* avatar */
 .avatar{position:absolute;left:20px;bottom:22px;z-index:2}
 .avatar-frame{
   width:80px;height:80px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;
@@ -111,7 +103,6 @@ body{
   font-size:11px;letter-spacing:1px;color:#c2cadc;opacity:.75;pointer-events:none;
 }
 
-/* name/role */
 .card-bottom{position:absolute;left:118px;bottom:28px;text-shadow:0 2px 6px rgba(0,0,0,.4)}
 .name{font-weight:700;font-size:19px}
 .role{font-size:12.5px;letter-spacing:2px;opacity:.92}
