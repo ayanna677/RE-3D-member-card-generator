@@ -125,14 +125,20 @@ button.share:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(40,140
 /* Footer */
 .footer-text{text-align:center;font-size:13px;opacity:.75;margin-top:25px;padding:15px 0;border-top:1px solid rgba(255,255,255,.1)}
 
-/* CARD COLOR THEMES */
-.theme-aqua { background: linear-gradient(145deg, #009dff, #00c8ff); }
-.theme-emerald { background: linear-gradient(145deg, #00c79f, #009970); }
-.theme-gold { background: linear-gradient(145deg, #ffcf33, #ffb347); color:#111; }
-.theme-sunset { background: linear-gradient(145deg, #ff784f, #ffb37a); }
-.theme-violet { background: linear-gradient(145deg, #6a5eff, #b69cff); }
-.theme-neon { background: linear-gradient(145deg, #00d4ff, #7f00ff); }
-.theme-rose { background: linear-gradient(145deg, #ff7eb9, #ff4181); }
-.theme-silver { background: linear-gradient(145deg, #fafafa, #e0e0e0); color:#111; }
-.theme-black { background: linear-gradient(145deg, #1c1c1c, #2d2d2d); }
-.theme-crimson { background: linear-gradient(145deg, #ff3d3d, #ff6b6b); }
+/* Default color scheme */
+.theme-default {
+  background: linear-gradient(145deg, #d1d1d1, #b5b5b5);
+  color: #111;
+}
+
+/* Other card colors (keep your old ones below this) */
+.theme-black { background: linear-gradient(145deg, #2a2a2a, #1a1a1a); color: #fff; }
+.theme-silver { background: linear-gradient(145deg, #fafafa, #e0e0e0); color: #111; }
+.theme-gold { background: linear-gradient(145deg, #ffcf33, #ffb347); color: #111; }
+.theme-aqua { background: linear-gradient(145deg, #00aaff, #007bff); color: #fff; }
+.theme-emerald { background: linear-gradient(145deg, #00c79f, #009970); color: #fff; }
+.theme-violet { background: linear-gradient(145deg, #6a5eff, #b69cff); color: #fff; }
+.theme-neon { background: linear-gradient(145deg, #00d4ff, #7f00ff); color: #fff; }
+.theme-crimson { background: linear-gradient(145deg, #ff3d3d, #ff6b6b); color: #fff; }
+.theme-rose { background: linear-gradient(145deg, #ff7eb9, #ff4181); color: #fff; }
+.theme-sunset { background: linear-gradient(145deg, #ff784f, #ffb37a); color: #fff; }
