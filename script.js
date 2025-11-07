@@ -13,18 +13,17 @@ const avatarImg = document.getElementById('avatarImg');
 const tiltWrap = document.getElementById('tiltWrap');
 const photoPlaceholder = document.getElementById('photoPlaceholder');
 
-// Name
+// Update name
 nameInput.addEventListener('input', () => {
   cardName.textContent = nameInput.value.trim() || 'LALA';
 });
 
-// Font
+// Font switch
 fontSelect.addEventListener('change', () => {
-  const f = fontSelect.value;
-  card.style.setProperty('--card-font', `'${f}', system-ui`);
+  card.style.fontFamily = `'${fontSelect.value}', system-ui`;
 });
 
-// Photo Upload
+// Photo upload
 photoInput.addEventListener('change', e => {
   const file = e.target.files?.[0];
   if (!file) return;
@@ -37,7 +36,7 @@ photoInput.addEventListener('change', e => {
   reader.readAsDataURL(file);
 });
 
-// Background Upload
+// Background upload
 bgInput.addEventListener('change', e => {
   const file = e.target.files?.[0];
   if (!file) return;
@@ -46,18 +45,36 @@ bgInput.addEventListener('change', e => {
     card.style.backgroundImage = `url('${reader.result}')`;
     card.style.backgroundSize = 'cover';
     card.style.backgroundPosition = 'center';
+    card.style.backgroundBlendMode = 'overlay';
     bgOk.hidden = false;
   };
   reader.readAsDataURL(file);
 });
 
-// Themes
+// Theme buttons — full working version
 document.querySelectorAll('.theme-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const theme = btn.dataset.theme;
+
+    // Remove old theme classes
+    card.classList.remove(
+      'theme-aqua','theme-emerald','theme-gold','theme-sunset',
+      'theme-violet','theme-neon','theme-rose','theme-silver',
+      'theme-black','theme-crimson'
+    );
+
+    document.body.classList.remove(
+      'theme-aqua','theme-emerald','theme-gold','theme-sunset',
+      'theme-violet','theme-neon','theme-rose','theme-silver',
+      'theme-black','theme-crimson'
+    );
+
+    // Apply the new theme color
+    card.classList.add(`theme-${theme}`);
+    document.body.classList.add(`theme-${theme}`);
+
+    // Remove background image if any
     card.style.backgroundImage = 'none';
-    card.className = `card theme-${theme}`;
-    document.body.className = `theme-${theme}`;
   });
 });
 
