@@ -177,3 +177,14 @@ button.ghost {
   padding:12px 14px;
   cursor:pointer;
 }
+
+.theme-aqua   { background: linear-gradient(145deg, #009dff, #00c8ff); }
+.theme-emerald{ background: linear-gradient(145deg, #00c79f, #009970); }
+.theme-gold   { background: linear-gradient(145deg, #ffcf33, #ffb347); color:#111; }
+.theme-sunset { background: linear-gradient(145deg, #ff784f, #ffb37a); }
+.theme-violet { background: linear-gradient(145deg, #6a5eff, #b69cff); }
+.theme-neon   { background: linear-gradient(145deg, #00d4ff, #7f00ff); }
+.theme-rose   { background: linear-gradient(145deg, #ff7eb9, #ff4181); }
+.theme-silver { background: linear-gradient(145deg, #fafafa, #e0e0e0); color:#111; }
+.theme-black  { background: linear-gradient(145deg, #1c1c1c, #2d2d2d); }
+.theme-crimson{ background: linear-gradient(145deg, #ff3d3d, #ff6b6b); }
