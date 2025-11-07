@@ -3,6 +3,8 @@ const nameInput   = document.getElementById('nameInput');
 const fontSelect  = document.getElementById('fontSelect');
 const photoInput  = document.getElementById('photoInput');
 const photoOk     = document.getElementById('photoOk');
+const bgInput     = document.getElementById('bgInput');
+const bgOk        = document.getElementById('bgOk');
 const resetBtn    = document.getElementById('resetBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 
@@ -10,22 +12,18 @@ const card      = document.getElementById('card');
 const cardName  = document.getElementById('cardName');
 const avatarImg = document.getElementById('avatarImg');
 const tiltWrap  = document.getElementById('tiltWrap');
+const photoPlaceholder = document.getElementById('photoPlaceholder');
 
-// Update name live
+// Live updates
 nameInput.addEventListener('input', () => {
-  cardName.textContent = nameInput.value.trim() || 'Member Name';
+  cardName.textContent = nameInput.value.trim() || 'LALA';
 });
 
 // Font switch
 fontSelect.addEventListener('change', () => {
   const f = fontSelect.value;
-  card.style.setProperty('--card-font', `'${f}', ${getFallback(f)}`);
+  card.style.setProperty('--card-font', `'${f}', system-ui`);
 });
-function getFallback(f){
-  if (f === 'Playfair Display') return 'serif';
-  if (f === 'Orbitron') return 'system-ui';
-  return 'system-ui';
-}
 
 // Photo upload
 photoInput.addEventListener('change', (e) => {
@@ -34,34 +32,54 @@ photoInput.addEventListener('change', (e) => {
   const reader = new FileReader();
   reader.onload = () => {
     avatarImg.src = reader.result;
+    photoPlaceholder.style.opacity = '0';
     photoOk.hidden = false;
   };
   reader.readAsDataURL(file);
 });
 
-// Theme buttons — sync both card + page background
+// Background upload
+bgInput.addEventListener('change', (e) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    card.style.backgroundImage = `url('${reader.result}')`;
+    card.style.backgroundSize = 'cover';
+    card.style.backgroundPosition = 'center';
+    card.style.backgroundBlendMode = 'overlay';
+    bgOk.hidden = false;
+  };
+  reader.readAsDataURL(file);
+});
+
+// Theme buttons
 document.querySelectorAll('.theme-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const theme = btn.dataset.theme;
     card.className = `card theme-${theme}`;
-    document.body.className = `theme-${theme}`; // sync page background
+    document.body.className = `theme-${theme}`;
   });
 });
 
 // Reset
 resetBtn.addEventListener('click', () => {
-  nameInput.value = 'Member Name';
+  nameInput.value = 'LALA';
   fontSelect.value = 'Inter';
   photoInput.value = '';
+  bgInput.value = '';
   photoOk.hidden = true;
-  cardName.textContent = 'Member Name';
+  bgOk.hidden = true;
+  photoPlaceholder.style.opacity = '1';
+  cardName.textContent = 'LALA';
   avatarImg.src = 'https://api.dicebear.com/9.x/identicon/svg?seed=RE';
-  card.className = 'card theme-ocean';
-  document.body.className = 'theme-ocean'; // reset background too
+  card.style.backgroundImage = 'none';
+  card.className = 'card theme-aqua';
+  document.body.className = 'theme-aqua';
   card.style.setProperty('--card-font', `'Inter', system-ui`);
 });
 
-// 3D tilt effect
+// 3D Tilt
 let rect = null;
 function updateRect(){ rect = tiltWrap.getBoundingClientRect(); }
 updateRect();
@@ -103,4 +121,4 @@ downloadBtn.addEventListener('click', async () => {
 
 // Init
 card.style.setProperty('--card-font', `'Inter', system-ui`);
-document.body.className = 'theme-ocean'; // start with ocean theme
+document.body.className = 'theme-aqua';
