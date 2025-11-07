@@ -4,12 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>3D Member Card Generator</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
-
-<body class="scene theme-black">
+<body>
   <header class="site-header">
     <h1>3D Member Card Generator</h1>
     <p class="community-line">Built for the Community ❤️</p>
@@ -20,14 +18,11 @@
     <section class="preview">
       <div id="tiltWrap" class="tilt-wrap">
         <div id="card" class="card theme-default" aria-label="RE Member Card">
-          
-          <!-- Card background image layer -->
+          <!-- Card image layer -->
           <div id="cardBg" class="card-bg"></div>
-          
-          <!-- Brushed reflection -->
+          <!-- Brushed sweep -->
           <div class="brushed" aria-hidden="true"></div>
 
-          <!-- Top Section -->
           <div class="card-top">
             <img src="logo.png" alt="RE Logo" class="card-logo" />
             <div class="card-titles">
@@ -36,7 +31,6 @@
             </div>
           </div>
 
-          <!-- Avatar -->
           <div class="avatar">
             <div class="avatar-frame">
               <img id="avatarImg" src="https://api.dicebear.com/9.x/identicon/svg?seed=RE" alt="Member photo" />
@@ -44,10 +38,9 @@
             </div>
           </div>
 
-          <!-- Member Info -->
           <div class="card-bottom">
             <div id="cardName" class="name">LALA</div>
-            <div id="cardRole" class="role">MEMBER</div>
+            <div class="role">MEMBER</div>
           </div>
         </div>
       </div>
@@ -83,7 +76,6 @@
         <small id="photoOk" hidden>✓ Photo uploaded</small>
       </label>
 
-      <!-- Card Background Upload (Fixed) -->
       <label class="control">
         <span>Card Background (inside card)</span>
         <input id="cardBgInput" type="file" accept="image/*" />
@@ -116,9 +108,7 @@
     </aside>
   </main>
 
-  <footer class="footer-text">
-    <p>© 2025 RE Community</p>
-  </footer>
+  <footer class="footer-text">© 2025 RE Community</footer>
 
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="script.js"></script>
