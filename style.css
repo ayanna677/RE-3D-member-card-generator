@@ -86,28 +86,32 @@ body {
 /* --- Logo + MEMBER PASS + RE --- */
 .card-top {
   position: absolute;
-  top: 26px;
-  left: 26px;
+  top: 24px;
+  left: 28px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
+
 .card-logo {
-  width: 46px;
-  height: 46px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
 }
+
 .card-titles {
   display: flex;
   flex-direction: column;
   line-height: 1.15;
 }
+
 .main-title {
   font-weight: 800;
-  font-size: 22px;
-  letter-spacing: 1px;
+  font-size: 24px;
+  letter-spacing: 1.2px;
   margin: 0;
 }
+
 .sub-title {
   font-size: 14px;
   font-weight: 700;
@@ -115,54 +119,58 @@ body {
   margin-top: 2px;
 }
 
-/* --- Avatar bottom-left --- */
+/* --- Avatar --- */
 .avatar {
   position: absolute;
-  bottom: 38px;
-  left: 36px;
-  display: flex;
-  align-items: center;
-}
-.avatar-frame {
-  width: 82px;
-  height: 82px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: rgba(255,255,255,.08);
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,.1);
+  bottom: 34px;
+  left: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+.avatar-frame {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255,255,255,0.1);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .avatar-frame img {
-  width: 85%;
-  height: 85%;
+  width: 80%;
+  height: 80%;
   object-fit: contain;
   mix-blend-mode: lighten;
 }
-.photo-placeholder { display: none; }
 
-/* --- Name + Role (right side of avatar) --- */
+/* --- Name + Role --- */
 .card-bottom {
   position: absolute;
-  bottom: 52px;
-  left: 145px;
+  bottom: 50px;
+  left: 140px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
+
 .name {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 800;
-  letter-spacing: .6px;
+  letter-spacing: 0.6px;
   margin: 0;
 }
+
 .role {
   font-size: 13px;
-  letter-spacing: 1.5px;
-  opacity: .86;
+  letter-spacing: 1.8px;
+  opacity: 0.88;
   margin: 0;
-}
+  }
 
 /* Controls Panel */
 .controls {
