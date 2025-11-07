@@ -5,93 +5,107 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>RE 3D Member Card Generator</title>
 
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Acme&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  <!-- Website Header -->
   <header class="site-header">
-    <img src="logo.png" alt="RE Logo" class="header-logo" />
-    <h1>RE Member Card Generator</h1>
-    <p class="subtitle">Design your own RE 3D Member Pass instantly</p>
+    <h1>3D Member Card Generator</h1>
+    <p class="subtitle">Create stunning RE 3D Member Passes easily</p>
   </header>
 
+  <!-- Layout Container -->
   <main class="layout">
-    <!-- CARD PREVIEW -->
+    <!-- LEFT: Card Preview -->
     <section class="preview">
       <div id="tiltWrap" class="tilt-wrap">
-        <div id="card" class="card theme-neon">
-          <div class="card-head">
-            <div class="brand-text">
-              <div class="main-title">RE</div>
-              <div class="sub-title">MEMBER PASS</div>
+        <div id="card" class="card theme-aqua" aria-label="RE Member Card">
+          
+          <!-- CARD HEADER -->
+          <header class="card-head">
+            <div class="brand">
+              <img src="logo.png" alt="RE Logo" class="brand-logo" />
+              <div class="brand-text">
+                <div class="main-title">MEMBER PASS</div>
+                <div class="sub-title">RE</div>
+              </div>
             </div>
-          </div>
+          </header>
 
-          <p class="slogan">Earn Like An Insurer</p>
+          <!-- SLOGAN -->
+          <div class="slogan">Earn Like An Insurer</div>
 
+          <!-- AVATAR -->
           <div class="avatar">
-            <div class="avatar-frame pulse">
+            <div class="avatar-frame">
               <img id="avatarImg" src="https://api.dicebear.com/9.x/identicon/svg?seed=RE" alt="Member photo" />
               <div class="photo-placeholder" id="photoPlaceholder">PHOTO</div>
             </div>
           </div>
 
+          <!-- MEMBER INFO -->
           <div class="card-bottom">
             <div id="cardName" class="name">LALA</div>
             <div id="cardRole" class="role">MEMBER</div>
           </div>
+
+          <!-- EFFECTS -->
+          <div class="rim"></div>
+          <div class="sweep"></div>
         </div>
       </div>
-      <p class="hint">Hover to view the 3D motion effect</p>
+      <p class="hint">Hover over the card to see the 3D effect</p>
     </section>
 
-    <!-- CONTROLS -->
+    <!-- RIGHT: Controls -->
     <aside class="controls">
       <label class="control">
         <span>Member Name</span>
-        <input id="nameInput" type="text" value="LALA" placeholder="Enter name" />
+        <input id="nameInput" type="text" placeholder="Enter member name" value="LALA" />
       </label>
 
       <label class="control">
         <span>Font Style</span>
         <select id="fontSelect">
           <option value="Poppins" selected>Poppins</option>
-          <option value="Acme">Acme</option>
+          <option value="Inter">Inter</option>
         </select>
       </label>
 
       <label class="control">
-        <span>Photo / Logo</span>
+        <span>Member Photo</span>
         <input id="photoInput" type="file" accept="image/*" />
-        <small id="photoOk" hidden>✓ Photo uploaded</small>
+        <small class="ok" id="photoOk" hidden>✓ Photo uploaded successfully</small>
       </label>
 
       <label class="control">
-        <span>Background</span>
+        <span>Background Image</span>
         <input id="bgInput" type="file" accept="image/*" />
-        <small id="bgOk" hidden>✓ Background set</small>
+        <small class="ok" id="bgOk" hidden>✓ Background uploaded successfully</small>
       </label>
 
       <div class="themes">
-        <h3>Select Theme</h3>
+        <h3>Choose Theme</h3>
         <div class="theme-grid">
-          <button class="theme-btn neon" data-theme="neon">Neon</button>
-          <button class="theme-btn aqua" data-theme="aqua">Aqua</button>
-          <button class="theme-btn violet" data-theme="violet">Violet</button>
-          <button class="theme-btn gold" data-theme="gold">Gold</button>
+          <button class="theme-btn aqua" data-theme="aqua">Aqua Blue</button>
           <button class="theme-btn emerald" data-theme="emerald">Emerald</button>
-          <button class="theme-btn crimson" data-theme="crimson">Crimson</button>
-          <button class="theme-btn rose" data-theme="rose">Rose</button>
-          <button class="theme-btn silver" data-theme="silver">Silver</button>
-          <button class="theme-btn black" data-theme="black">Black</button>
-          <button class="theme-btn sunset" data-theme="sunset">Sunset</button>
+          <button class="theme-btn gold" data-theme="gold">Royal Gold</button>
+          <button class="theme-btn sunset" data-theme="sunset">Sunset Coral</button>
+          <button class="theme-btn violet" data-theme="violet">Violet Dream</button>
+          <button class="theme-btn neon" data-theme="neon">Cyber Neon</button>
+          <button class="theme-btn rose" data-theme="rose">Rose Blush</button>
+          <button class="theme-btn silver" data-theme="silver">Arctic Silver</button>
+          <button class="theme-btn black" data-theme="black">Midnight Black</button>
+          <button class="theme-btn crimson" data-theme="crimson">Crimson Red</button>
         </div>
       </div>
 
       <div class="actions">
-        <button id="resetBtn" class="ghost">Reset</button>
-        <button id="downloadBtn" class="primary">Download Card</button>
+        <button id="resetBtn" type="button" class="ghost">Reset</button>
+        <button id="downloadBtn" type="button" class="primary">Download as PNG</button>
       </div>
     </aside>
   </main>
