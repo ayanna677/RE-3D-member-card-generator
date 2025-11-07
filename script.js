@@ -16,17 +16,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const tiltWrap = document.getElementById("tiltWrap");
   const scene = document.body;
 
-  // Update name
+  // Live update name
   nameInput.addEventListener("input", () => {
     cardName.textContent = nameInput.value.trim() || "LALA";
   });
 
-  // Font change
+  // Font style
   fontSelect.addEventListener("change", () => {
     card.style.fontFamily = `'${fontSelect.value}', sans-serif`;
   });
 
-  // Photo upload
+  // Upload photo / logo
   photoInput.addEventListener("change", (e) => {
     const f = e.target.files?.[0];
     if (!f) return;
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     r.readAsDataURL(f);
   });
 
-  // Background upload
+  // Upload background
   bgInput.addEventListener("change", (e) => {
     const f = e.target.files?.[0];
     if (!f) return;
@@ -55,17 +55,18 @@ document.addEventListener("DOMContentLoaded", function () {
     r.readAsDataURL(f);
   });
 
-  // Update background with optional image
+  // Update scene background (with optional image)
   function updateSceneBackground(imageURL) {
-    const accent = getComputedStyle(document.documentElement).getPropertyValue("--scene-accent").trim() || "rgba(90,120,255,.18)";
+    const accent =
+      getComputedStyle(document.documentElement).getPropertyValue("--scene-accent").trim() ||
+      "rgba(90,120,255,.18)";
     scene.style.background = `
-      radial-gradient(900px 520px at 60% 8%, ${accent}, transparent 65%),
+      radial-gradient(1000px 600px at 60% 10%, ${accent}, transparent 65%),
       ${imageURL ? `url('${imageURL}') center/cover no-repeat,` : ""}
-      #070a12
-    `;
+      #070a12`;
   }
 
-  // Glow color mapping for each theme
+  // Glow color mapping
   const glowMap = {
     black: "rgba(180,180,200,.20)",
     silver: "rgba(255,255,255,.32)",
@@ -79,22 +80,26 @@ document.addEventListener("DOMContentLoaded", function () {
     sunset: "rgba(255,160,110,.30)"
   };
 
-  // Apply theme
+  // Apply theme to card + sync background
   document.querySelectorAll(".theme-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const theme = btn.dataset.theme;
 
-      // remove old theme classes
+      // remove old themes
       card.classList.remove(
-        "theme-aqua","theme-emerald","theme-gold","theme-sunset",
-        "theme-violet","theme-neon","theme-rose","theme-silver",
-        "theme-black","theme-crimson"
+        "theme-aqua", "theme-emerald", "theme-gold", "theme-sunset",
+        "theme-violet", "theme-neon", "theme-rose", "theme-silver",
+        "theme-black", "theme-crimson"
       );
 
-      // apply new theme to card
+      // add new card theme
       card.classList.add(`theme-${theme}`);
 
-      // text contrast
+      // update glow color to match theme
+      const glowColor = glowMap[theme] || "rgba(150,160,200,.18)";
+      document.documentElement.style.setProperty("--scene-accent", glowColor);
+
+      // fix text color contrast for light themes
       const lightThemes = ["silver", "gold"];
       card.querySelectorAll(".main-title, .sub-title, .name, .role").forEach((el) => {
         if (lightThemes.includes(theme)) {
@@ -106,11 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      // background glow
-      const glowColor = glowMap[theme] || "rgba(150,160,200,.20)";
-      document.documentElement.style.setProperty("--scene-accent", glowColor);
-
-      // update page background
+      // sync background (apply glow + image)
       const bg = scene.dataset.bg;
       updateSceneBackground(bg || null);
     });
@@ -140,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
     shareBtn.hidden = true;
   });
 
-  // 3D tilt
+  // 3D Tilt
   let rect = null;
   function updateRect() {
     rect = tiltWrap.getBoundingClientRect();
@@ -162,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
     card.style.transform = "rotateX(0) rotateY(0)";
   });
 
-  // Download + show Share
+  // Download card + reveal share button
   downloadBtn.addEventListener("click", async () => {
     downloadBtn.disabled = true;
     downloadBtn.textContent = "Rendering…";
@@ -179,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Share on Twitter
+  // Share on X (Twitter)
   shareBtn.addEventListener("click", () => {
     const shareText = `Just generated my RE 3D MEMBER CARD\nYou can make your own card here: https://re-3d-member-card-generator.vercel.app/`;
     const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
