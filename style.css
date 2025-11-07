@@ -101,3 +101,28 @@ button{ cursor:pointer; border:none; border-radius:14px; font-weight:700; paddin
 
 /* footer */
 .footer-text{ text-align:center; opacity:.75; font-size:13px; padding:18px 0; border-top:1px solid rgba(255,255,255,.08); margin-top:12px; }
+/* === CARD THEME COLORS (used when JS toggles .theme-*) === */
+.card.theme-default { background: linear-gradient(145deg,#bfbfbf,#a8a8a8); color:#111; }
+
+.card.theme-black  { background: linear-gradient(145deg,#2a2a2a,#1a1a1a); color:#fff; }
+.card.theme-aqua   { background: linear-gradient(145deg,#00a2ff,#66ccff); color:#fff; }
+.card.theme-violet { background: linear-gradient(145deg,#8b5cf6,#c084fc); color:#fff; }
+.card.theme-neon   { background: linear-gradient(145deg,#00d4ff,#9b59ff); color:#fff; }
+.card.theme-emerald{ background: linear-gradient(145deg,#00c79f,#22e3b9); color:#fff; }
+.card.theme-crimson{ background: linear-gradient(145deg,#e63946,#ff6f61); color:#fff; }
+.card.theme-rose   { background: linear-gradient(145deg,#ff7eb9,#ffb3d9); color:#fff; }
+.card.theme-sunset { background: linear-gradient(145deg,#ff784f,#ffb37a); color:#fff; }
+
+/* light themes need dark text */
+.card.theme-silver { background: linear-gradient(145deg,#f0f0f0,#d7d7d7); color:#111; }
+.card.theme-gold   { background: linear-gradient(145deg,#ffcf33,#ffb347); color:#111; }
+
+/* ensure text is readable on light themes */
+.card.theme-silver .main-title,
+.card.theme-silver .sub-title,
+.card.theme-silver .name,
+.card.theme-silver .role,
+.card.theme-gold   .main-title,
+.card.theme-gold   .sub-title,
+.card.theme-gold   .name,
+.card.theme-gold   .role { color:#111 !important; text-shadow:none; }
