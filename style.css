@@ -142,3 +142,103 @@ button.share:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(40,140
 .theme-crimson { background: linear-gradient(145deg, #ff3d3d, #ff6b6b); color: #fff; }
 .theme-rose { background: linear-gradient(145deg, #ff7eb9, #ff4181); color: #fff; }
 .theme-sunset { background: linear-gradient(145deg, #ff784f, #ffb37a); color: #fff; }
+
+/* ---- RE METALLIC THEMES ---- */
+.theme-default {
+  background: linear-gradient(145deg, #bcbcbc, #a6a6a6);
+  background-image: 
+    linear-gradient(145deg, rgba(255,255,255,0.25), rgba(0,0,0,0.25)),
+    linear-gradient(145deg, #bcbcbc, #a6a6a6);
+  background-blend-mode: overlay;
+  color: #111;
+}
+
+/* Adds reflective metallic look */
+.card {
+  transition: background 0.5s ease, box-shadow 0.5s ease, color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0.15), transparent 50%);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Titanium Black */
+.theme-black {
+  background: radial-gradient(circle at 25% 25%, #2d2d2d, #0d0d0d);
+  box-shadow: 0 0 30px rgba(100,100,100,.25);
+  color: #fff;
+}
+
+/* Platinum Silver */
+.theme-silver {
+  background: linear-gradient(145deg, #e0e0e0, #ffffff);
+  box-shadow: 0 0 30px rgba(255,255,255,.2);
+  color: #111;
+}
+
+/* Royal Gold */
+.theme-gold {
+  background: linear-gradient(145deg, #ffcf33, #ffb347, #ffec99);
+  box-shadow: 0 0 30px rgba(255,200,100,.3);
+  color: #111;
+}
+
+/* Azure Pulse */
+.theme-aqua {
+  background: linear-gradient(145deg, #0077ff, #66ccff);
+  box-shadow: 0 0 35px rgba(0,180,255,.35);
+  color: #fff;
+}
+
+/* Emerald Blaze */
+.theme-emerald {
+  background: linear-gradient(145deg, #00cc88, #33ffbb);
+  box-shadow: 0 0 30px rgba(0,255,180,.3);
+  color: #fff;
+}
+
+/* Amethyst Mist */
+.theme-violet {
+  background: linear-gradient(145deg, #8b5cf6, #c084fc);
+  box-shadow: 0 0 30px rgba(160,120,255,.35);
+  color: #fff;
+}
+
+/* Cyber Neon */
+.theme-neon {
+  background: linear-gradient(145deg, #00d4ff, #9b59ff);
+  box-shadow: 0 0 40px rgba(140,0,255,.4);
+  color: #fff;
+}
+
+/* Rose Quartz */
+.theme-rose {
+  background: linear-gradient(145deg, #ff7eb9, #ffb3d9);
+  box-shadow: 0 0 30px rgba(255,140,180,.35);
+  color: #fff;
+}
+
+/* Crimson Flare */
+.theme-crimson {
+  background: linear-gradient(145deg, #e63946, #ff6f61);
+  box-shadow: 0 0 35px rgba(255,100,100,.4);
+  color: #fff;
+}
+
+/* Sunset Ember */
+.theme-sunset {
+  background: linear-gradient(145deg, #ff7043, #ffb347);
+  box-shadow: 0 0 35px rgba(255,150,100,.35);
+  color: #fff;
+}
+
+/* Subtle metallic fade animation */
+.card, body {
+  transition: background 0.6s ease, box-shadow 0.6s ease;
+}
