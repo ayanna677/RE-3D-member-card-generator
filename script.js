@@ -16,17 +16,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const tiltWrap = document.getElementById("tiltWrap");
   const scene = document.body;
 
-  // Live update name
+  // Update name
   nameInput.addEventListener("input", () => {
     cardName.textContent = nameInput.value.trim() || "LALA";
   });
 
-  // Font style
+  // Font change
   fontSelect.addEventListener("change", () => {
     card.style.fontFamily = `'${fontSelect.value}', sans-serif`;
   });
 
-  // Upload photo / logo
+  // Upload photo
   photoInput.addEventListener("change", (e) => {
     const f = e.target.files?.[0];
     if (!f) return;
@@ -55,22 +55,23 @@ document.addEventListener("DOMContentLoaded", function () {
     r.readAsDataURL(f);
   });
 
-  // Update scene background (with optional image)
+  // Update page background (keeps glow + optional image)
   function updateSceneBackground(imageURL) {
-    const accent =
-      getComputedStyle(document.documentElement).getPropertyValue("--scene-accent").trim() ||
-      "rgba(90,120,255,.18)";
+    const accent = getComputedStyle(document.documentElement)
+      .getPropertyValue("--scene-accent")
+      .trim() || "rgba(90,120,255,.18)";
     scene.style.background = `
       radial-gradient(1000px 600px at 60% 10%, ${accent}, transparent 65%),
       ${imageURL ? `url('${imageURL}') center/cover no-repeat,` : ""}
-      #070a12`;
+      #0a0a0a`;
   }
 
-  // Glow color mapping
+  // Theme glow colors (for background sync)
   const glowMap = {
+    default: "rgba(100,100,100,.2)",
     black: "rgba(180,180,200,.20)",
-    silver: "rgba(255,255,255,.32)",
-    gold: "rgba(255,210,120,.30)",
+    silver: "rgba(255,255,255,.25)",
+    gold: "rgba(255,210,120,.25)",
     aqua: "rgba(90,160,255,.30)",
     violet: "rgba(170,130,255,.28)",
     neon: "rgba(120,170,255,.30)",
@@ -80,26 +81,26 @@ document.addEventListener("DOMContentLoaded", function () {
     sunset: "rgba(255,160,110,.30)"
   };
 
-  // Apply theme to card + sync background
+  // Apply theme color to card + background
   document.querySelectorAll(".theme-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const theme = btn.dataset.theme;
 
-      // remove old themes
+      // Remove old themes
       card.classList.remove(
         "theme-aqua", "theme-emerald", "theme-gold", "theme-sunset",
         "theme-violet", "theme-neon", "theme-rose", "theme-silver",
-        "theme-black", "theme-crimson"
+        "theme-black", "theme-crimson", "theme-default"
       );
 
-      // add new card theme
+      // Add the new card color
       card.classList.add(`theme-${theme}`);
 
-      // update glow color to match theme
-      const glowColor = glowMap[theme] || "rgba(150,160,200,.18)";
+      // Set accent glow
+      const glowColor = glowMap[theme] || glowMap.default;
       document.documentElement.style.setProperty("--scene-accent", glowColor);
 
-      // fix text color contrast for light themes
+      // Text color auto fix
       const lightThemes = ["silver", "gold"];
       card.querySelectorAll(".main-title, .sub-title, .name, .role").forEach((el) => {
         if (lightThemes.includes(theme)) {
@@ -111,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      // sync background (apply glow + image)
+      // Update background glow
       const bg = scene.dataset.bg;
       updateSceneBackground(bg || null);
     });
@@ -133,10 +134,8 @@ document.addEventListener("DOMContentLoaded", function () {
     bgOk.hidden = true;
     delete scene.dataset.bg;
 
-    card.className = "card theme-black";
-    scene.className = "scene theme-black";
-
-    document.documentElement.style.setProperty("--scene-accent", "rgba(150,160,200,.18)");
+    card.className = "card theme-default";
+    document.documentElement.style.setProperty("--scene-accent", glowMap.default);
     updateSceneBackground(null);
     shareBtn.hidden = true;
   });
@@ -163,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
     card.style.transform = "rotateX(0) rotateY(0)";
   });
 
-  // Download card + reveal share button
+  // Download PNG + show Share button
   downloadBtn.addEventListener("click", async () => {
     downloadBtn.disabled = true;
     downloadBtn.textContent = "Rendering…";
