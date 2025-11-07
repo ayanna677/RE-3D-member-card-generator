@@ -10,23 +10,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const shareBtn     = document.getElementById("shareBtn");
 
   const card         = document.getElementById("card");
+  const cardBg       = document.getElementById("cardBg");
   const cardName     = document.getElementById("cardName");
   const avatarImg    = document.getElementById("avatarImg");
   const placeholder  = document.getElementById("photoPlaceholder");
   const tiltWrap     = document.getElementById("tiltWrap");
-  const cardBg       = document.getElementById("cardBg");
 
-  // Name
+  // === Page Glow Sync Map ===
+  const glowMap = {
+    default:"rgba(120,120,120,.18)",
+    black:"rgba(180,180,200,.22)",
+    silver:"rgba(255,255,255,.28)",
+    gold:"rgba(255,230,150,.28)",
+    aqua:"rgba(120,190,255,.28)",
+    violet:"rgba(200,150,255,.26)",
+    neon:"rgba(140,170,255,.30)",
+    emerald:"rgba(90,255,190,.26)",
+    crimson:"rgba(255,120,120,.30)",
+    rose:"rgba(255,170,190,.30)",
+    sunset:"rgba(255,180,120,.30)"
+  };
+  const setAccent = (theme) => {
+    const accent = glowMap[theme] || glowMap.default;
+    document.documentElement.style.setProperty("--accent", accent);
+  };
+
+  // === Name Input ===
   nameInput.addEventListener("input", () => {
     cardName.textContent = nameInput.value.trim() || "LALA";
   });
 
-  // Font
+  // === Font Change ===
   fontSelect.addEventListener("change", () => {
     card.style.fontFamily = `'${fontSelect.value}', sans-serif`;
   });
 
-  // Photo / logo upload
+  // === Photo Upload ===
   photoInput.addEventListener("change", (e) => {
     const f = e.target.files?.[0]; if (!f) return;
     const r = new FileReader();
@@ -40,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     r.readAsDataURL(f);
   });
 
-  // Card background upload (inside card)
+  // === Card Background Upload (inside card only) ===
   cardBgInput.addEventListener("change", (e) => {
     const f = e.target.files?.[0]; if (!f) return;
     const r = new FileReader();
@@ -52,59 +71,78 @@ document.addEventListener("DOMContentLoaded", () => {
     r.readAsDataURL(f);
   });
 
-  // Theme buttons → card color
+  // === Theme Buttons (color + background sync) ===
   document.querySelectorAll(".theme-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const theme = btn.dataset.theme;
       card.className = `card theme-${theme}`;
-      // contrast fix for very light themes
+      setAccent(theme);
+
+      // Text contrast for light cards
       const isLight = (theme === "silver" || theme === "gold");
-      card.querySelectorAll(".main-title,.sub-title,.name,.role").forEach(el=>{
+      card.querySelectorAll(".main-title,.sub-title,.name,.role").forEach(el => {
         el.style.color = isLight ? "#111" : "#fff";
         el.style.textShadow = isLight ? "none" : "0 2px 6px rgba(0,0,0,.45)";
       });
     });
   });
 
-  // Reset
+  // === Reset Button ===
   resetBtn.addEventListener("click", () => {
-    nameInput.value = "LALA"; cardName.textContent = "LALA";
-    fontSelect.value = "Poppins"; card.style.fontFamily = "";
-    photoInput.value = ""; photoOk.hidden = true; placeholder.style.opacity = "1";
+    nameInput.value = "LALA";
+    cardName.textContent = "LALA";
+    fontSelect.value = "Poppins";
+    card.style.fontFamily = "";
+    photoInput.value = "";
+    photoOk.hidden = true;
+    placeholder.style.opacity = "1";
     avatarImg.src = "https://api.dicebear.com/9.x/identicon/svg?seed=RE";
-    cardBgInput.value = ""; cardBgOk.hidden = true; cardBg.style.backgroundImage = ""; cardBg.style.opacity = "0";
+    cardBgInput.value = "";
+    cardBgOk.hidden = true;
+    cardBg.style.backgroundImage = "";
+    cardBg.style.opacity = "0";
     card.className = "card theme-default";
+    setAccent("default");
     shareBtn.hidden = true;
   });
 
-  // 3D tilt
-  let rect=null; const updateRect=()=>rect=tiltWrap.getBoundingClientRect(); updateRect();
+  // === 3D Tilt ===
+  let rect = null;
+  const updateRect = () => rect = tiltWrap.getBoundingClientRect();
+  updateRect();
   window.addEventListener("resize", updateRect);
+
   tiltWrap.addEventListener("mousemove", e => {
     if (!rect) return;
-    const cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
-    const dx=(e.clientX-cx)/(rect.width/2), dy=(e.clientY-cy)/(rect.height/2);
-    card.style.transform = `rotateX(${(-dy*12).toFixed(2)}deg) rotateY(${(dx*12).toFixed(2)}deg)`;
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    card.style.transform = `rotateX(${(-dy * 12).toFixed(2)}deg) rotateY(${(dx * 12).toFixed(2)}deg)`;
   });
-  tiltWrap.addEventListener("mouseleave", ()=> card.style.transform = "rotateX(0) rotateY(0)");
+  tiltWrap.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateX(0) rotateY(0)";
+  });
 
-  // Download + Share
+  // === Download + Share ===
   downloadBtn.addEventListener("click", async () => {
-    downloadBtn.disabled = true; downloadBtn.textContent = "Rendering…";
-    try{
-      const canvas = await html2canvas(card,{backgroundColor:null,scale:2,useCORS:true});
-      const a=document.createElement("a");
+    downloadBtn.disabled = true;
+    downloadBtn.textContent = "Rendering…";
+    try {
+      const canvas = await html2canvas(card, { backgroundColor: null, scale: 2, useCORS: true });
+      const a = document.createElement("a");
       a.href = canvas.toDataURL("image/png");
       a.download = `${nameInput.value || "RE_Member"}.png`;
       a.click();
       shareBtn.hidden = false;
-    }finally{
-      downloadBtn.disabled = false; downloadBtn.textContent = "Download PNG";
+    } finally {
+      downloadBtn.disabled = false;
+      downloadBtn.textContent = "Download PNG";
     }
   });
 
-  shareBtn.addEventListener("click", ()=>{
+  shareBtn.addEventListener("click", () => {
     const text = `Just generated my RE 3D MEMBER CARD\nYou can make your own card here: https://re-3d-member-card-generator.vercel.app/`;
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`,"_blank","noopener,noreferrer");
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   });
 });
