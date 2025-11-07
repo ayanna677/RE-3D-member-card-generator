@@ -5,12 +5,12 @@ body{
   background: radial-gradient(900px 600px at 60% 10%, rgba(120,120,120,.15), transparent 60%), #0b0b0f;
 }
 
-/* --- HEADER --- */
+/* HEADER */
 .site-header{ text-align:center; padding:24px 10px 6px; }
 .site-header h1{ margin:0 0 6px; font-size:28px; font-weight:800; }
 .community-line{ margin:0; opacity:.85; color:#c9d1ff; }
 
-/* --- LAYOUT --- */
+/* LAYOUT */
 .layout{
   max-width:1100px;
   margin:auto; padding:18px;
@@ -22,20 +22,19 @@ body{
 .preview{ display:grid; place-items:center; }
 .hint{ font-size:12px; opacity:.75; }
 
-/* --- CARD --- */
+/* CARD BASE */
 .tilt-wrap{ perspective:1200px; }
 .card{
   width:520px; height:310px;
   border-radius:22px;
   overflow:hidden; position:relative;
-  padding:18px;
   background: linear-gradient(145deg,#bfbfbf,#a8a8a8);
   border:1px solid rgba(255,255,255,.08);
   box-shadow:0 30px 80px rgba(0,0,0,.55);
   transition: transform .15s ease, background .4s ease;
 }
 
-/* --- BACKGROUND IMAGE --- */
+/* CARD BACKGROUND (inside card) */
 .card-bg{
   position:absolute; inset:0; border-radius:inherit; z-index:0;
   background-size:cover; background-position:center; background-repeat:no-repeat;
@@ -44,21 +43,23 @@ body{
 }
 .card > *:not(.card-bg){ position:relative; z-index:1; }
 
-/* --- REFLECTION --- */
+/* LIGHT REFLECTION */
 .brushed{
   position:absolute; inset:-10%; border-radius:inherit; pointer-events:none; opacity:.35;
   background: linear-gradient(100deg,transparent 0%,rgba(255,255,255,.12) 38%,rgba(255,255,255,.2) 54%,transparent 72%);
   filter: blur(10px);
 }
 
-/* --- CARD TOP --- */
+/* ---- FIXED RE LAYOUT ---- */
+
+/* TOP: LOGO + MEMBER PASS + RE */
 .card-top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   position: absolute;
   top: 28px;
   left: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 .card-logo {
   width: 48px;
@@ -73,39 +74,37 @@ body{
 }
 .main-title {
   font-weight: 800;
-  letter-spacing: 1px;
   font-size: 20px;
+  letter-spacing: 1px;
   margin: 0;
 }
 .sub-title {
+  font-size: 14px;
   font-weight: 700;
-  font-size: 13px;
-  margin-top: 2px;
+  margin-top: 3px;
   opacity: 0.9;
 }
 
-/* --- AVATAR + NAME --- */
+/* BOTTOM: AVATAR + NAME + ROLE */
 .avatar {
   position: absolute;
   bottom: 42px;
   left: 36px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
-
 .avatar-frame {
   width: 80px;
   height: 80px;
   border-radius: 50%;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.12);
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .avatar-frame img {
   width: 88%;
   height: 88%;
@@ -113,11 +112,9 @@ body{
   mix-blend-mode: lighten;
   transition: transform .25s ease;
 }
-
 .avatar-frame img:hover {
   transform: scale(1.05);
 }
-
 .photo-placeholder {
   position: absolute;
   inset: 0;
@@ -131,18 +128,18 @@ body{
   border-radius: 50%;
 }
 
-/* --- MEMBER INFO --- */
+/* MEMBER INFO beside avatar */
 .card-bottom {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  line-height: 1.2;
+  align-items: flex-start;
 }
 .name {
   font-weight: 800;
   font-size: 18px;
   letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 .role {
   font-size: 13px;
@@ -150,7 +147,7 @@ body{
   letter-spacing: 1px;
 }
 
-/* --- CONTROLS --- */
+/* ---- CONTROL PANEL ---- */
 .controls{
   background:#0e1320;
   border:1px solid #1e2740;
@@ -164,7 +161,7 @@ body{
   border:1px solid #222a3b; border-radius:10px; padding:10px;
 }
 
-/* --- THEME BUTTONS --- */
+/* THEMES */
 .themes h3{ margin:8px 0; font-size:14px; }
 .theme-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 .theme-btn{
@@ -174,7 +171,6 @@ body{
 }
 .theme-btn:hover{ transform:translateY(-2px) scale(1.02); }
 
-/* --- COLOR BUTTONS --- */
 .theme-btn.black{background:linear-gradient(145deg,#2b2b2b,#1b1b1b)}
 .theme-btn.silver{background:linear-gradient(145deg,#e3e3e3,#cfcfcf); color:#111}
 .theme-btn.gold{background:linear-gradient(145deg,#ffd76a,#dba400); color:#111}
@@ -186,7 +182,7 @@ body{
 .theme-btn.rose{background:linear-gradient(145deg,#ff7eb9,#ff4181)}
 .theme-btn.sunset{background:linear-gradient(145deg,#ff784f,#ffb37a)}
 
-/* --- ACTION BUTTONS --- */
+/* BUTTONS */
 .actions{ display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:10px; }
 .right-actions{ display:flex; gap:10px; }
 button{ cursor:pointer; border:none; border-radius:14px; font-weight:700; padding:12px 16px; font-size:14px; letter-spacing:.4px; }
@@ -194,9 +190,13 @@ button{ cursor:pointer; border:none; border-radius:14px; font-weight:700; paddin
 .ghost{ background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02)); color:#cfe0ff; border:1px solid rgba(255,255,255,.15); }
 .share{ background:linear-gradient(135deg,#111827,#0b77e3); color:#fff; }
 
-.footer-text{ text-align:center; opacity:.75; font-size:13px; padding:18px 0; border-top:1px solid rgba(255,255,255,.08); margin-top:12px; }
+.footer-text{
+  text-align:center;
+  opacity:.75; font-size:13px;
+  padding:18px 0; border-top:1px solid rgba(255,255,255,.08); margin-top:12px;
+}
 
-/* --- THEMES --- */
+/* THEMES COLORS */
 .theme-default{ background:linear-gradient(145deg,#bfbfbf,#a8a8a8); color:#111; }
 .theme-black{ background:linear-gradient(145deg,#2a2a2a,#1a1a1a); color:#fff; }
 .theme-silver{ background:linear-gradient(145deg,#f0f0f0,#d7d7d7); color:#111; }
