@@ -16,13 +16,15 @@
   </header>
 
   <main class="layout">
+    <!-- Preview -->
     <section class="preview">
       <div id="tiltWrap" class="tilt-wrap">
-        <div id="card" class="card">
-          <div class="brushed"></div>
+        <div id="card" class="card" aria-label="RE Member Card">
+          <!-- brushed reflection -->
+          <div class="brushed" aria-hidden="true"></div>
 
           <div class="card-top">
-            <img src="logo.png" alt="RE Logo" class="card-logo">
+            <img src="logo.png" alt="RE Logo" class="card-logo" />
             <div class="card-titles">
               <div class="main-title">MEMBER PASS</div>
               <div class="sub-title">RE</div>
@@ -31,9 +33,7 @@
 
           <div class="avatar">
             <div class="avatar-frame">
-              <img id="avatarImg"
-                   src="https://api.dicebear.com/9.x/identicon/svg?seed=RE"
-                   alt="Member photo" />
+              <img id="avatarImg" src="https://api.dicebear.com/9.x/identicon/svg?seed=RE" alt="Member photo" />
               <div class="photo-placeholder" id="photoPlaceholder">PHOTO</div>
             </div>
           </div>
@@ -47,6 +47,7 @@
       <p class="hint">Hover / move mouse to see brushed reflection ✨</p>
     </section>
 
+    <!-- Controls -->
     <aside class="controls">
       <label class="control">
         <span>Member Name</span>
@@ -99,10 +100,17 @@
 
       <div class="actions">
         <button id="resetBtn" class="ghost">Reset</button>
-        <button id="downloadBtn" class="primary">Download PNG</button>
+        <div class="right-actions">
+          <button id="downloadBtn" class="primary">Download PNG</button>
+          <button id="shareBtn" class="share" hidden>Share on X</button>
+        </div>
       </div>
     </aside>
   </main>
+
+  <footer class="footer-text">
+    <p>© 2025 RE Community</p>
+  </footer>
 
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="script.js"></script>
