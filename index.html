@@ -19,10 +19,15 @@
     <!-- Preview -->
     <section class="preview">
       <div id="tiltWrap" class="tilt-wrap">
-        <div id="card" class="card" aria-label="RE Member Card">
-          <!-- brushed reflection -->
+        <div id="card" class="card theme-default" aria-label="RE Member Card">
+          
+          <!-- Card background image layer -->
+          <div id="cardBg" class="card-bg"></div>
+          
+          <!-- Brushed reflection -->
           <div class="brushed" aria-hidden="true"></div>
 
+          <!-- Top Section -->
           <div class="card-top">
             <img src="logo.png" alt="RE Logo" class="card-logo" />
             <div class="card-titles">
@@ -31,6 +36,7 @@
             </div>
           </div>
 
+          <!-- Avatar -->
           <div class="avatar">
             <div class="avatar-frame">
               <img id="avatarImg" src="https://api.dicebear.com/9.x/identicon/svg?seed=RE" alt="Member photo" />
@@ -38,6 +44,7 @@
             </div>
           </div>
 
+          <!-- Member Info -->
           <div class="card-bottom">
             <div id="cardName" class="name">LALA</div>
             <div id="cardRole" class="role">MEMBER</div>
@@ -76,10 +83,11 @@
         <small id="photoOk" hidden>✓ Photo uploaded</small>
       </label>
 
+      <!-- Card Background Upload (Fixed) -->
       <label class="control">
-        <span>Background Image (page)</span>
-        <input id="bgInput" type="file" accept="image/*" />
-        <small id="bgOk" hidden>✓ Background set</small>
+        <span>Card Background (inside card)</span>
+        <input id="cardBgInput" type="file" accept="image/*" />
+        <small id="cardBgOk" hidden>✓ Card background set</small>
       </label>
 
       <div class="themes">
@@ -115,4 +123,4 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="script.js"></script>
 </body>
-</html>
+  </html>
