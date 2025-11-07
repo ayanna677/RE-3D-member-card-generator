@@ -13,20 +13,18 @@
   <header class="site-header">
     <img src="logo.png" alt="RE Logo" class="header-logo" />
     <h1>RE Member Card Generator</h1>
-    <p class="subtitle">Design your official RE pass in 3D style</p>
+    <p class="subtitle">Design your own RE 3D Member Pass instantly</p>
   </header>
 
   <main class="layout">
-    <!-- Preview -->
+    <!-- CARD PREVIEW -->
     <section class="preview">
       <div id="tiltWrap" class="tilt-wrap">
         <div id="card" class="card theme-neon">
           <div class="card-head">
-            <div class="brand">
-              <div class="brand-text">
-                <div class="main-title">RE</div>
-                <div class="sub-title">MEMBER PASS</div>
-              </div>
+            <div class="brand-text">
+              <div class="main-title">RE</div>
+              <div class="sub-title">MEMBER PASS</div>
             </div>
           </div>
 
@@ -43,22 +41,20 @@
             <div id="cardName" class="name">LALA</div>
             <div id="cardRole" class="role">MEMBER</div>
           </div>
-          <div class="rim"></div>
-          <div class="sweep"></div>
         </div>
       </div>
-      <p class="hint">Hover the card to view its 3D motion</p>
+      <p class="hint">Hover to view the 3D motion effect</p>
     </section>
 
-    <!-- Controls -->
+    <!-- CONTROLS -->
     <aside class="controls">
       <label class="control">
         <span>Member Name</span>
-        <input id="nameInput" type="text" placeholder="Enter name" value="LALA" />
+        <input id="nameInput" type="text" value="LALA" placeholder="Enter name" />
       </label>
 
       <label class="control">
-        <span>Font</span>
+        <span>Font Style</span>
         <select id="fontSelect">
           <option value="Poppins" selected>Poppins</option>
           <option value="Acme">Acme</option>
@@ -68,7 +64,7 @@
       <label class="control">
         <span>Photo / Logo</span>
         <input id="photoInput" type="file" accept="image/*" />
-        <small id="photoOk" hidden>✓ Photo added</small>
+        <small id="photoOk" hidden>✓ Photo uploaded</small>
       </label>
 
       <label class="control">
@@ -78,12 +74,18 @@
       </label>
 
       <div class="themes">
-        <h3>Card Theme</h3>
+        <h3>Select Theme</h3>
         <div class="theme-grid">
+          <button class="theme-btn neon" data-theme="neon">Neon</button>
           <button class="theme-btn aqua" data-theme="aqua">Aqua</button>
           <button class="theme-btn violet" data-theme="violet">Violet</button>
-          <button class="theme-btn neon" data-theme="neon">Neon</button>
           <button class="theme-btn gold" data-theme="gold">Gold</button>
+          <button class="theme-btn emerald" data-theme="emerald">Emerald</button>
+          <button class="theme-btn crimson" data-theme="crimson">Crimson</button>
+          <button class="theme-btn rose" data-theme="rose">Rose</button>
+          <button class="theme-btn silver" data-theme="silver">Silver</button>
+          <button class="theme-btn black" data-theme="black">Black</button>
+          <button class="theme-btn sunset" data-theme="sunset">Sunset</button>
         </div>
       </div>
 
