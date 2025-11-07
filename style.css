@@ -1,22 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Poppins:wght@400;600;800&display=swap');
+
 :root {
   --font-ui: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --bg: #0b0f17;
   --panel: #101521;
   --panel-b: #1a2130;
-  --card-w: 430px;
-  --card-h: 260px;
-  --radius: 20px;
   --shadow-xl: 0 30px 80px rgba(0,0,0,.55);
   --shadow-md: 0 16px 36px rgba(0,0,0,.35);
 }
 
-/* Basic Layout */
+/* --- PAGE --- */
 body {
   font-family: var(--font-ui);
   background: radial-gradient(circle at 70% 0%, rgba(90,120,255,.15), transparent 60%), #070a12;
   color: #fff;
   margin: 0;
 }
+
 .site-header { text-align:center; padding:25px 10px 5px; }
 .subtitle { font-size:14px; opacity:.8; }
 
@@ -30,60 +30,64 @@ body {
 }
 @media(max-width:960px){ .layout{ grid-template-columns:1fr; } }
 
-/* Card Preview */
 .preview { display:grid; place-items:center; }
 .hint { opacity:.7; font-size:13px; }
 .tilt-wrap { perspective:1000px; transform-style:preserve-3d; }
 
-/* --- Card Size --- */
+/* --- CARD --- */
 .card {
-  width: 540px;    /* increased width */
-  height: 320px;   /* increased height */
+  position: relative;
+  width: 540px;
+  height: 320px;
   border-radius: 24px;
   padding: 24px;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  border: 1px solid rgba(255,255,255,.1);
+  box-shadow: var(--shadow-xl);
+  transform-style: preserve-3d;
+  transition: transform .15s ease-out;
+  background-blend-mode: overlay;
 }
 
-/* --- Header Text --- */
+/* --- HEADER TEXT --- */
 .card-head {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
   flex-direction: column;
+  align-items: flex-start;
   margin-top: 5px;
   margin-left: 8px;
-}
-
-.brand-text {
-  line-height: 1;
+  z-index: 5;
 }
 
 .main-title {
   font-family: 'Acme', sans-serif;
-  font-size: 36px;         /* much larger */
+  font-size: 38px;
   font-weight: 900;
   letter-spacing: 1.5px;
   color: #fff;
   text-transform: uppercase;
-  text-shadow: 0 0 15px rgba(255,255,255,0.2);
+  text-shadow: 0 0 15px rgba(255,255,255,0.25);
 }
 
 .sub-title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
-  margin-top: 2px;
   color: #e0e0e0;
   letter-spacing: 1px;
+  margin-top: 2px;
 }
 
-/* Slogan */
+/* --- SLOGAN --- */
 .slogan {
-  font-size:13px;
-  background:linear-gradient(90deg,#9bd0ff,#caa7ff);
-  -webkit-background-clip:text;
-  color:transparent;
+  font-size: 13px;
+  background: linear-gradient(90deg,#9bd0ff,#caa7ff);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
-/* Avatar */
+/* --- AVATAR --- */
 .avatar { position:absolute; left:18px; bottom:18px; }
 .avatar-frame {
   position:relative;
@@ -100,12 +104,12 @@ body {
   background:rgba(0,0,0,.25); border-radius:50%; transition:opacity .3s ease;
 }
 
-/* Name */
+/* --- MEMBER NAME / ROLE --- */
 .card-bottom { position:absolute; left:120px; bottom:25px; }
 .name { font-size:20px; font-weight:700; text-shadow:0 2px 8px rgba(0,0,0,.4); }
 .role { font-size:13px; opacity:.8; letter-spacing:2px; }
 
-/* Control Panel */
+/* --- CONTROL PANEL --- */
 .controls {
   background:var(--panel);
   border:1px solid var(--panel-b);
@@ -123,13 +127,9 @@ body {
 }
 .ok { color:#71ff98; margin-top:5px; }
 
-/* Theme Buttons */
+/* --- THEME BUTTONS --- */
 .themes h3 { margin:10px 0; font-size:14px; }
-.theme-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
+.theme-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 .theme-btn {
   border:none; border-radius:12px; padding:14px;
   font-weight:700; cursor:pointer;
@@ -149,7 +149,7 @@ body {
 .theme-btn.black { background:linear-gradient(90deg,#2b2b2b,#1b1b1b); }
 .theme-btn.crimson { background:linear-gradient(90deg,#ff3d3d,#ff6b6b); }
 
-/* Glow */
+/* --- GLOW EFFECT --- */
 .card::after {
   content:"";
   position:absolute;
@@ -169,7 +169,38 @@ body {
 .theme-black::after { box-shadow:0 0 25px 8px rgba(255,255,255,.15); }
 .theme-crimson::after { box-shadow:0 0 25px 8px rgba(255,50,50,.6); }
 
-/* Buttons */
+/* --- THEME BACKGROUNDS --- */
+.theme-aqua   { background: linear-gradient(145deg, #009dff, #00c8ff); }
+.theme-emerald{ background: linear-gradient(145deg, #00c79f, #009970); }
+.theme-gold   { background: linear-gradient(145deg, #ffcf33, #ffb347); color:#111; }
+.theme-sunset { background: linear-gradient(145deg, #ff784f, #ffb37a); }
+.theme-violet { background: linear-gradient(145deg, #6a5eff, #b69cff); }
+.theme-neon   { background: linear-gradient(145deg, #00d4ff, #7f00ff); }
+.theme-rose   { background: linear-gradient(145deg, #ff7eb9, #ff4181); }
+.theme-silver { background: linear-gradient(145deg, #fafafa, #e0e0e0); color:#111; }
+.theme-black  { background: linear-gradient(145deg, #1c1c1c, #2d2d2d); }
+.theme-crimson{ background: linear-gradient(145deg, #ff3d3d, #ff6b6b); }
+
+/* --- LIGHT THEME TEXT COLOR FIX --- */
+.theme-gold,
+.theme-silver {
+  color:#111;
+}
+.theme-gold .main-title,
+.theme-silver .main-title,
+.theme-gold .sub-title,
+.theme-silver .sub-title,
+.theme-gold .slogan,
+.theme-silver .slogan,
+.theme-gold .name,
+.theme-silver .name,
+.theme-gold .role,
+.theme-silver .role {
+  color:#111 !important;
+  text-shadow:none;
+}
+
+/* --- ACTION BUTTONS --- */
 .actions { display:flex; gap:10px; margin-top:16px; }
 button.primary {
   background:linear-gradient(90deg,#4a9dff,#8f5bff);
@@ -185,14 +216,3 @@ button.ghost {
   padding:12px 14px;
   cursor:pointer;
 }
-
-.theme-aqua   { background: linear-gradient(145deg, #009dff, #00c8ff); }
-.theme-emerald{ background: linear-gradient(145deg, #00c79f, #009970); }
-.theme-gold   { background: linear-gradient(145deg, #ffcf33, #ffb347); color:#111; }
-.theme-sunset { background: linear-gradient(145deg, #ff784f, #ffb37a); }
-.theme-violet { background: linear-gradient(145deg, #6a5eff, #b69cff); }
-.theme-neon   { background: linear-gradient(145deg, #00d4ff, #7f00ff); }
-.theme-rose   { background: linear-gradient(145deg, #ff7eb9, #ff4181); }
-.theme-silver { background: linear-gradient(145deg, #fafafa, #e0e0e0); color:#111; }
-.theme-black  { background: linear-gradient(145deg, #1c1c1c, #2d2d2d); }
-.theme-crimson{ background: linear-gradient(145deg, #ff3d3d, #ff6b6b); }
