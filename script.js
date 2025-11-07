@@ -48,13 +48,9 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!f) return;
     const reader = new FileReader();
     reader.onload = () => {
-      scene.style.backgroundImage = `
-        radial-gradient(800px 420px at 62% 10%, var(--scene-accent), transparent 60%),
-        radial-gradient(900px 540px at 15% 85%, rgba(0,0,0,.35), rgba(0,0,0,.9) 70%),
-        url('${reader.result}')
-      `;
-      scene.style.backgroundSize = 'auto, auto, cover';
-      scene.style.backgroundPosition = 'center, center, center';
+      const imageURL = reader.result;
+      scene.dataset.bg = imageURL; // store for reuse
+      updateSceneBackground(imageURL);
       bgOk.hidden = false;
     };
     reader.readAsDataURL(f);
@@ -65,9 +61,26 @@ document.addEventListener("DOMContentLoaded", function() {
     btn.addEventListener('click', () => {
       const theme = btn.dataset.theme;
       scene.className = `scene theme-${theme}`;
-      card.animate([{opacity:0.94},{opacity:1}],{duration:200,fill:'forwards'});
+      card.animate([{opacity:0.9},{opacity:1}],{duration:200,fill:'forwards'});
+
+      // Keep background visible with new glow
+      const bg = scene.dataset.bg;
+      if (bg) updateSceneBackground(bg);
     });
   });
+
+  // Function to rebuild layered background with glow + image
+  function updateSceneBackground(imageURL) {
+    scene.style.transition = 'background 0.6s ease';
+    scene.style.backgroundImage = `
+      radial-gradient(800px 420px at 62% 10%, var(--scene-accent), transparent 60%),
+      radial-gradient(900px 540px at 15% 85%, rgba(0,0,0,.35), rgba(0,0,0,.9) 70%),
+      url('${imageURL}')
+    `;
+    scene.style.backgroundSize = 'auto, auto, cover';
+    scene.style.backgroundPosition = 'center, center, center';
+    scene.style.backgroundRepeat = 'no-repeat';
+  }
 
   // Reset
   resetBtn.addEventListener('click', () => {
@@ -83,9 +96,9 @@ document.addEventListener("DOMContentLoaded", function() {
     photoPlaceholder.style.opacity = '1';
     bgInput.value = '';
     bgOk.hidden = true;
-    const currentTheme = [...scene.classList].find(c => c.startsWith('theme-')) || 'theme-black';
-    scene.className = `scene ${currentTheme}`;
+    delete scene.dataset.bg;
     scene.style.backgroundImage = '';
+    scene.className = 'scene theme-black';
   });
 
   // 3D tilt
@@ -107,6 +120,7 @@ document.addEventListener("DOMContentLoaded", function() {
     card.style.setProperty('--shine-x', `${px}%`);
     card.style.setProperty('--shine-y', `${py}%`);
   });
+
   tiltWrap.addEventListener('mouseleave', () => {
     card.style.transform = 'rotateX(0) rotateY(0)';
     card.style.setProperty('--shine-x','50%');
