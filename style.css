@@ -168,21 +168,6 @@ button.share:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(40,140
   pointer-events: none;
 }
 
-/* Card background layer for uploaded image */
-.card { position: relative; overflow: hidden; }
-.card-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: inherit;
-  opacity: 0;
-  z-index: 0;
-  transition: opacity .4s ease;
-  filter: brightness(1.05) contrast(1.05);
-}
-
 /* Ensure all card content stays above image */
 .card > *:not(.card-bg) {
   position: relative;
