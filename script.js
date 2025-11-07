@@ -8,11 +8,10 @@ const downloadBtn = document.getElementById('downloadBtn');
 
 const card      = document.getElementById('card');
 const cardName  = document.getElementById('cardName');
-const cardRole  = document.getElementById('cardRole'); // role text kept for future use
 const avatarImg = document.getElementById('avatarImg');
 const tiltWrap  = document.getElementById('tiltWrap');
 
-// Live updates
+// Update name live
 nameInput.addEventListener('input', () => {
   cardName.textContent = nameInput.value.trim() || 'Member Name';
 });
@@ -40,11 +39,12 @@ photoInput.addEventListener('change', (e) => {
   reader.readAsDataURL(file);
 });
 
-// Theme buttons
+// Theme buttons — sync both card + page background
 document.querySelectorAll('.theme-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    const theme = btn.dataset.theme; // ocean | sunset | gold | forest | glass | neon
+    const theme = btn.dataset.theme;
     card.className = `card theme-${theme}`;
+    document.body.className = `theme-${theme}`; // sync page background
   });
 });
 
@@ -57,10 +57,11 @@ resetBtn.addEventListener('click', () => {
   cardName.textContent = 'Member Name';
   avatarImg.src = 'https://api.dicebear.com/9.x/identicon/svg?seed=RE';
   card.className = 'card theme-ocean';
+  document.body.className = 'theme-ocean'; // reset background too
   card.style.setProperty('--card-font', `'Inter', system-ui`);
 });
 
-// 3D tilt math
+// 3D tilt effect
 let rect = null;
 function updateRect(){ rect = tiltWrap.getBoundingClientRect(); }
 updateRect();
@@ -100,5 +101,6 @@ downloadBtn.addEventListener('click', async () => {
   }
 });
 
-// Init font var
+// Init
 card.style.setProperty('--card-font', `'Inter', system-ui`);
+document.body.className = 'theme-ocean'; // start with ocean theme
