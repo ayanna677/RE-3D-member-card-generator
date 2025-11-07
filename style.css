@@ -256,3 +256,49 @@ body.theme-black { background-color: #000; }
   background: linear-gradient(145deg, #ff3d3d, #ff6b6b);
 }
 body.theme-crimson { background-color: #380808; }
+
+/* === CARD GLOW EFFECTS === */
+.card {
+  position: relative;
+  overflow: hidden;
+}
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Glows for each theme */
+.theme-aqua::after {
+  box-shadow: 0 0 25px 5px rgba(0, 180, 255, 0.6);
+}
+.theme-emerald::after {
+  box-shadow: 0 0 25px 5px rgba(0, 230, 160, 0.6);
+}
+.theme-gold::after {
+  box-shadow: 0 0 25px 5px rgba(255, 200, 0, 0.6);
+}
+.theme-sunset::after {
+  box-shadow: 0 0 25px 5px rgba(255, 130, 70, 0.6);
+}
+.theme-violet::after {
+  box-shadow: 0 0 25px 5px rgba(160, 120, 255, 0.6);
+}
+.theme-neon::after {
+  box-shadow: 0 0 25px 5px rgba(120, 0, 255, 0.7);
+}
+.theme-rose::after {
+  box-shadow: 0 0 25px 5px rgba(255, 100, 150, 0.6);
+}
+.theme-silver::after {
+  box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.45);
+}
+.theme-black::after {
+  box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.12);
+}
+.theme-crimson::after {
+  box-shadow: 0 0 25px 5px rgba(255, 50, 50, 0.65);
+}
