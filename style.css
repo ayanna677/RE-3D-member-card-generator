@@ -1,138 +1,189 @@
-/* Base */
-body{
-  font-family:'Poppins',sans-serif;
-  margin:0;color:#fff;
-  background:radial-gradient(800px 420px at 62% 10%,rgba(90,120,255,.15),transparent 60%),#070a12;
-  background-repeat:no-repeat;
-  transition:background .6s ease;
-}
-.site-header{text-align:center;padding:25px 10px 5px}
-.site-header h1{font-size:28px;font-weight:800;margin-bottom:5px}
-.community-line{font-size:15px;color:#b0baff;opacity:.9;font-weight:500;margin-top:0}
+document.addEventListener("DOMContentLoaded", function () {
+  const nameInput = document.getElementById("nameInput");
+  const fontSelect = document.getElementById("fontSelect");
+  const photoInput = document.getElementById("photoInput");
+  const photoOk = document.getElementById("photoOk");
+  const bgInput = document.getElementById("bgInput");
+  const bgOk = document.getElementById("bgOk");
+  const resetBtn = document.getElementById("resetBtn");
+  const downloadBtn = document.getElementById("downloadBtn");
+  const shareBtn = document.getElementById("shareBtn");
 
-/* Layout */
-.layout{display:grid;grid-template-columns:1fr 380px;gap:25px;max-width:1100px;margin:auto;padding:20px}
-@media(max-width:900px){.layout{grid-template-columns:1fr}}
-.preview{display:grid;place-items:center}
-.hint{font-size:13px;opacity:.7;margin-top:10px}
-.tilt-wrap{perspective:1200px}
+  const card = document.getElementById("card");
+  const cardName = document.getElementById("cardName");
+  const avatarImg = document.getElementById("avatarImg");
+  const photoPlaceholder = document.getElementById("photoPlaceholder");
+  const tiltWrap = document.getElementById("tiltWrap");
+  const scene = document.body;
 
-/* Card */
-.card{
-  width:520px;height:310px;position:relative;border-radius:22px;overflow:hidden;
-  padding:20px;display:flex;flex-direction:column;justify-content:space-between;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.05) 38%, transparent 45%),
-    linear-gradient(145deg,#1e1e1e,#0d0d0d);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 30px 80px rgba(0,0,0,.55);
-  transition:transform .15s ease-out;
-}
-.card::before{
-  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-  box-shadow:inset 0 0 36px rgba(0,0,0,.36), inset 0 0 1px rgba(255,255,255,.12);
-  clip-path: inset(0 round 22px);
-}
-.card::after{
-  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-  background:linear-gradient(180deg, transparent 12%, rgba(255,255,255,.16) 50%, transparent 88%);
-  mix-blend-mode:screen;opacity:.45;clip-path: inset(0 round 22px);
-}
-/* brushed reflection */
-.brushed{
-  position:absolute;inset:-8%;border-radius:inherit;pointer-events:none;opacity:.35;
-  background:
-    linear-gradient(100deg,transparent 0%,rgba(255,255,255,.09) 30%,rgba(255,255,255,.16) 48%,rgba(255,255,255,.09) 66%,transparent 100%);
-  filter:blur(10px);
-  transform:translate(calc(var(--shine-x,50%) - 50%), calc(var(--shine-y,50%) - 50%));
-  transition:opacity .2s ease;
-}
-.card:hover .brushed{opacity:.5}
+  // Live update name
+  nameInput.addEventListener("input", () => {
+    cardName.textContent = nameInput.value.trim() || "LALA";
+  });
 
-/* top row */
-.card-top{display:flex;align-items:center;gap:12px;z-index:2}
-.card-logo{width:44px;height:44px;object-fit:contain}
-.card-titles{line-height:1}
-.main-title{font-weight:800;letter-spacing:1px;font-size:22px}
-.sub-title{font-weight:700;font-size:14px;opacity:.9}
+  // Font style
+  fontSelect.addEventListener("change", () => {
+    card.style.fontFamily = `'${fontSelect.value}', sans-serif`;
+  });
 
-/* avatar */
-.avatar{position:absolute;left:20px;bottom:25px;z-index:2}
-.avatar-frame{
-  width:80px;height:80px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;
-  background:radial-gradient(60% 60% at 50% 40%, rgba(255,255,255,.12), rgba(255,255,255,.05));
-  box-shadow:inset 0 0 0 2px rgba(255,255,255,.12), 0 12px 36px rgba(0,0,0,.35);
-}
-.avatar-frame img{
-  max-width:82%;max-height:82%;object-fit:contain;display:block;border-radius:50%;
-  background:transparent;mix-blend-mode:lighten;transition:transform .2s ease;
-}
-.avatar-frame img:hover{transform:scale(1.06)}
-.photo-placeholder{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-size:11px;letter-spacing:1px;color:#c2cadc;opacity:.75;pointer-events:none;
-}
+  // Upload photo / logo
+  photoInput.addEventListener("change", (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      avatarImg.src = r.result;
+      avatarImg.style.objectFit = "contain";
+      avatarImg.style.mixBlendMode = "lighten";
+      photoPlaceholder.style.opacity = "0";
+      photoOk.hidden = false;
+    };
+    r.readAsDataURL(f);
+  });
 
-/* name/role */
-.card-bottom{position:absolute;left:118px;bottom:30px;text-shadow:0 2px 6px rgba(0,0,0,.4)}
-.name{font-weight:700;font-size:19px}
-.role{font-size:12.5px;letter-spacing:2px;opacity:.92}
+  // Upload background
+  bgInput.addEventListener("change", (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      const imageURL = r.result;
+      scene.dataset.bg = imageURL;
+      updateSceneBackground(imageURL);
+      bgOk.hidden = false;
+    };
+    r.readAsDataURL(f);
+  });
 
-/* Controls box */
-.controls{
-  background:#0f1421;border:1px solid #20283a;border-radius:16px;padding:18px;
-  box-shadow:0 16px 36px rgba(0,0,0,.35)
-}
-.control{display:grid;gap:6px;margin-bottom:12px;font-size:13px}
-.control input,.control select{
-  background:#0d1320;color:#e7edff;border:1px solid #222a3b;border-radius:10px;padding:10px
-}
-.ok{color:#71ff98;font-size:12px}
+  // Update scene background (with optional image)
+  function updateSceneBackground(imageURL) {
+    const accent =
+      getComputedStyle(document.documentElement).getPropertyValue("--scene-accent").trim() ||
+      "rgba(90,120,255,.18)";
+    scene.style.background = `
+      radial-gradient(1000px 600px at 60% 10%, ${accent}, transparent 65%),
+      ${imageURL ? `url('${imageURL}') center/cover no-repeat,` : ""}
+      #070a12`;
+  }
 
-/* Actions + Buttons (RE style) */
-.actions{display:flex;justify-content:space-between;gap:12px;margin-top:18px;align-items:center}
-.right-actions{display:flex;gap:10px}
+  // Glow color mapping
+  const glowMap = {
+    black: "rgba(180,180,200,.20)",
+    silver: "rgba(255,255,255,.32)",
+    gold: "rgba(255,210,120,.30)",
+    aqua: "rgba(90,160,255,.30)",
+    violet: "rgba(170,130,255,.28)",
+    neon: "rgba(120,170,255,.30)",
+    emerald: "rgba(90,255,190,.28)",
+    crimson: "rgba(255,110,110,.30)",
+    rose: "rgba(255,155,200,.30)",
+    sunset: "rgba(255,160,110,.30)"
+  };
 
-button{cursor:pointer;border:none;border-radius:14px;font-weight:700;padding:12px 16px;
-  font-size:14px;letter-spacing:.5px;transition:all .25s ease;position:relative;overflow:hidden}
-button.primary{background:linear-gradient(135deg,#3a7bff,#875bff);color:#fff;box-shadow:0 6px 18px rgba(120,150,255,.35)}
-button.primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(120,150,255,.45)}
-button.ghost{background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-  border:1px solid rgba(255,255,255,.15);color:#cfe0ff}
-button.ghost:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.3)}
-button.share{background:linear-gradient(135deg,#111827,#0b77e3);color:#fff;border:1px solid rgba(255,255,255,.15)}
-button.share:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(40,140,255,.35)}
+  // Apply theme to card + sync background
+  document.querySelectorAll(".theme-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const theme = btn.dataset.theme;
 
-/* Theme buttons */
-.themes h3{margin:10px 0 8px;font-size:14px}
-.theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.theme-btn{
-  border:none;border-radius:12px;padding:12px;font-weight:700;color:#fff;
-  box-shadow:0 8px 22px rgba(0,0,0,.25);cursor:pointer;transition:all .25s ease;position:relative;overflow:hidden
-}
-.theme-btn:hover{transform:translateY(-2px) scale(1.02)}
-.theme-btn.black{background:linear-gradient(145deg,#2b2b2b,#1b1b1b)}
-.theme-btn.silver{background:linear-gradient(145deg,#e3e3e3,#cfcfcf);color:#111}
-.theme-btn.gold{background:linear-gradient(145deg,#ffd76a,#dba400);color:#111}
-.theme-btn.aqua{background:linear-gradient(145deg,#00aaff,#006aff)}
-.theme-btn.violet{background:linear-gradient(145deg,#775cff,#b39cff)}
-.theme-btn.neon{background:linear-gradient(145deg,#00d4ff,#7f00ff)}
-.theme-btn.emerald{background:linear-gradient(145deg,#00c79f,#009970)}
-.theme-btn.crimson{background:linear-gradient(145deg,#ff3d3d,#ff6b6b)}
-.theme-btn.rose{background:linear-gradient(145deg,#ff7eb9,#ff4181)}
-.theme-btn.sunset{background:linear-gradient(145deg,#ff784f,#ffb37a)}
+      // remove old themes
+      card.classList.remove(
+        "theme-aqua", "theme-emerald", "theme-gold", "theme-sunset",
+        "theme-violet", "theme-neon", "theme-rose", "theme-silver",
+        "theme-black", "theme-crimson"
+      );
 
-/* Footer */
-.footer-text{text-align:center;font-size:13px;opacity:.75;margin-top:25px;padding:15px 0;border-top:1px solid rgba(255,255,255,.1)}
+      // add new card theme
+      card.classList.add(`theme-${theme}`);
 
-/* CARD COLOR THEMES */
-.theme-aqua { background: linear-gradient(145deg, #009dff, #00c8ff); }
-.theme-emerald { background: linear-gradient(145deg, #00c79f, #009970); }
-.theme-gold { background: linear-gradient(145deg, #ffcf33, #ffb347); color:#111; }
-.theme-sunset { background: linear-gradient(145deg, #ff784f, #ffb37a); }
-.theme-violet { background: linear-gradient(145deg, #6a5eff, #b69cff); }
-.theme-neon { background: linear-gradient(145deg, #00d4ff, #7f00ff); }
-.theme-rose { background: linear-gradient(145deg, #ff7eb9, #ff4181); }
-.theme-silver { background: linear-gradient(145deg, #fafafa, #e0e0e0); color:#111; }
-.theme-black { background: linear-gradient(145deg, #1c1c1c, #2d2d2d); }
-.theme-crimson { background: linear-gradient(145deg, #ff3d3d, #ff6b6b); }
+      // update glow color to match theme
+      const glowColor = glowMap[theme] || "rgba(150,160,200,.18)";
+      document.documentElement.style.setProperty("--scene-accent", glowColor);
+
+      // fix text color contrast for light themes
+      const lightThemes = ["silver", "gold"];
+      card.querySelectorAll(".main-title, .sub-title, .name, .role").forEach((el) => {
+        if (lightThemes.includes(theme)) {
+          el.style.color = "#111";
+          el.style.textShadow = "none";
+        } else {
+          el.style.color = "#fff";
+          el.style.textShadow = "0 2px 8px rgba(0,0,0,.4)";
+        }
+      });
+
+      // sync background (apply glow + image)
+      const bg = scene.dataset.bg;
+      updateSceneBackground(bg || null);
+    });
+  });
+
+  // Reset
+  resetBtn.addEventListener("click", () => {
+    nameInput.value = "LALA";
+    cardName.textContent = "LALA";
+    fontSelect.value = "Poppins";
+    card.style.fontFamily = "";
+    photoInput.value = "";
+    photoOk.hidden = true;
+    avatarImg.src = "https://api.dicebear.com/9.x/identicon/svg?seed=RE";
+    avatarImg.style.objectFit = "contain";
+    avatarImg.style.mixBlendMode = "lighten";
+    photoPlaceholder.style.opacity = "1";
+    bgInput.value = "";
+    bgOk.hidden = true;
+    delete scene.dataset.bg;
+
+    card.className = "card theme-black";
+    scene.className = "scene theme-black";
+
+    document.documentElement.style.setProperty("--scene-accent", "rgba(150,160,200,.18)");
+    updateSceneBackground(null);
+    shareBtn.hidden = true;
+  });
+
+  // 3D Tilt
+  let rect = null;
+  function updateRect() {
+    rect = tiltWrap.getBoundingClientRect();
+  }
+  updateRect();
+  window.addEventListener("resize", updateRect);
+
+  tiltWrap.addEventListener("mousemove", (e) => {
+    if (!rect) return;
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    const max = 12;
+    card.style.transform = `rotateX(${(-dy * max).toFixed(2)}deg) rotateY(${(dx * max).toFixed(2)}deg)`;
+  });
+
+  tiltWrap.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateX(0) rotateY(0)";
+  });
+
+  // Download card + reveal share button
+  downloadBtn.addEventListener("click", async () => {
+    downloadBtn.disabled = true;
+    downloadBtn.textContent = "Rendering…";
+    try {
+      const canvas = await html2canvas(card, { backgroundColor: null, scale: 2, useCORS: true });
+      const a = document.createElement("a");
+      a.href = canvas.toDataURL("image/png");
+      a.download = `${nameInput.value || "RE_Member"}.png`;
+      a.click();
+      shareBtn.hidden = false;
+    } finally {
+      downloadBtn.disabled = false;
+      downloadBtn.textContent = "Download PNG";
+    }
+  });
+
+  // Share on X (Twitter)
+  shareBtn.addEventListener("click", () => {
+    const shareText = `Just generated my RE 3D MEMBER CARD\nYou can make your own card here: https://re-3d-member-card-generator.vercel.app/`;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  });
+});
