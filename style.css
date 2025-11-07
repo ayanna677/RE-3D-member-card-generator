@@ -1,3 +1,4 @@
+/* Base */
 body{
   font-family:'Poppins',sans-serif;
   margin:0;color:#fff;
@@ -14,40 +15,73 @@ body{
 @media(max-width:900px){.layout{grid-template-columns:1fr}}
 .preview{display:grid;place-items:center}
 .hint{font-size:13px;opacity:.7;margin-top:10px}
+.tilt-wrap{perspective:1200px}
 
 /* Card */
 .card{
   width:520px;height:310px;position:relative;border-radius:22px;overflow:hidden;
   padding:20px;display:flex;flex-direction:column;justify-content:space-between;
-  background:linear-gradient(145deg,#1e1e1e,#0d0d0d);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.05) 38%, transparent 45%),
+    linear-gradient(145deg,#1e1e1e,#0d0d0d);
+  border:1px solid rgba(255,255,255,.12);
   box-shadow:0 30px 80px rgba(0,0,0,.55);
   transition:transform .15s ease-out;
 }
+.card::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  box-shadow:inset 0 0 36px rgba(0,0,0,.36), inset 0 0 1px rgba(255,255,255,.12);
+  clip-path: inset(0 round 22px);
+}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(180deg, transparent 12%, rgba(255,255,255,.16) 50%, transparent 88%);
+  mix-blend-mode:screen;opacity:.45;clip-path: inset(0 round 22px);
+}
+/* brushed reflection */
 .brushed{
-  position:absolute;inset:-8%;pointer-events:none;border-radius:inherit;opacity:.3;
-  background:linear-gradient(100deg,transparent,rgba(255,255,255,.1) 30%,rgba(255,255,255,.2) 50%,transparent 70%);
-  filter:blur(12px);
+  position:absolute;inset:-8%;border-radius:inherit;pointer-events:none;opacity:.35;
+  background:
+    linear-gradient(100deg,transparent 0%,rgba(255,255,255,.09) 30%,rgba(255,255,255,.16) 48%,rgba(255,255,255,.09) 66%,transparent 100%);
+  filter:blur(10px);
+  transform:translate(calc(var(--shine-x,50%) - 50%), calc(var(--shine-y,50%) - 50%));
+  transition:opacity .2s ease;
 }
-.card-top{display:flex;align-items:center;gap:10px;z-index:2}
-.card-logo{width:45px;height:45px;object-fit:contain}
+.card:hover .brushed{opacity:.5}
+
+/* top row */
+.card-top{display:flex;align-items:center;gap:12px;z-index:2}
+.card-logo{width:44px;height:44px;object-fit:contain}
 .card-titles{line-height:1}
-.main-title{font-weight:800;font-size:22px;letter-spacing:1px}
+.main-title{font-weight:800;letter-spacing:1px;font-size:22px}
 .sub-title{font-weight:700;font-size:14px;opacity:.9}
-.avatar{position:absolute;left:20px;bottom:25px}
+
+/* avatar */
+.avatar{position:absolute;left:20px;bottom:25px;z-index:2}
 .avatar-frame{
-  width:80px;height:80px;border-radius:50%;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 2px rgba(255,255,255,.1)
+  width:80px;height:80px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(60% 60% at 50% 40%, rgba(255,255,255,.12), rgba(255,255,255,.05));
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.12), 0 12px 36px rgba(0,0,0,.35);
 }
-.avatar-frame img{width:80%;height:80%;object-fit:contain;mix-blend-mode:lighten}
-.card-bottom{position:absolute;left:120px;bottom:30px;text-shadow:0 2px 6px rgba(0,0,0,.4)}
+.avatar-frame img{
+  max-width:82%;max-height:82%;object-fit:contain;display:block;border-radius:50%;
+  background:transparent;mix-blend-mode:lighten;transition:transform .2s ease;
+}
+.avatar-frame img:hover{transform:scale(1.06)}
+.photo-placeholder{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:11px;letter-spacing:1px;color:#c2cadc;opacity:.75;pointer-events:none;
+}
+
+/* name/role */
+.card-bottom{position:absolute;left:118px;bottom:30px;text-shadow:0 2px 6px rgba(0,0,0,.4)}
 .name{font-weight:700;font-size:19px}
-.role{font-size:13px;letter-spacing:2px;opacity:.9}
+.role{font-size:12.5px;letter-spacing:2px;opacity:.92}
 
 /* Controls box */
 .controls{
-  background:#0f1421;border:1px solid #20283a;border-radius:16px;
-  padding:18px;box-shadow:0 16px 36px rgba(0,0,0,.35)
+  background:#0f1421;border:1px solid #20283a;border-radius:16px;padding:18px;
+  box-shadow:0 16px 36px rgba(0,0,0,.35)
 }
 .control{display:grid;gap:6px;margin-bottom:12px;font-size:13px}
 .control input,.control select{
@@ -55,7 +89,10 @@ body{
 }
 .ok{color:#71ff98;font-size:12px}
 
-/* RE buttons */
+/* Actions + Buttons (RE style) */
+.actions{display:flex;justify-content:space-between;gap:12px;margin-top:18px;align-items:center}
+.right-actions{display:flex;gap:10px}
+
 button{cursor:pointer;border:none;border-radius:14px;font-weight:700;padding:12px 16px;
   font-size:14px;letter-spacing:.5px;transition:all .25s ease;position:relative;overflow:hidden}
 button.primary{background:linear-gradient(135deg,#3a7bff,#875bff);color:#fff;box-shadow:0 6px 18px rgba(120,150,255,.35)}
@@ -63,10 +100,12 @@ button.primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(120,
 button.ghost{background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
   border:1px solid rgba(255,255,255,.15);color:#cfe0ff}
 button.ghost:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.3)}
-.actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+button.share{background:linear-gradient(135deg,#111827,#0b77e3);color:#fff;border:1px solid rgba(255,255,255,.15)}
+button.share:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(40,140,255,.35)}
 
 /* Theme buttons */
-.theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.themes h3{margin:10px 0 8px;font-size:14px}
+.theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .theme-btn{
   border:none;border-radius:12px;padding:12px;font-weight:700;color:#fff;
   box-shadow:0 8px 22px rgba(0,0,0,.25);cursor:pointer;transition:all .25s ease;position:relative;overflow:hidden
@@ -82,3 +121,6 @@ button.ghost:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.3)}
 .theme-btn.crimson{background:linear-gradient(145deg,#ff3d3d,#ff6b6b)}
 .theme-btn.rose{background:linear-gradient(145deg,#ff7eb9,#ff4181)}
 .theme-btn.sunset{background:linear-gradient(145deg,#ff784f,#ffb37a)}
+
+/* Footer */
+.footer-text{text-align:center;font-size:13px;opacity:.75;margin-top:25px;padding:15px 0;border-top:1px solid rgba(255,255,255,.1)}
