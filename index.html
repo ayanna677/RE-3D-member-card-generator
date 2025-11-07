@@ -25,23 +25,26 @@
         <div id="card" class="card theme-aqua" aria-label="RE Member Card">
           
           <!-- CARD HEADER -->
-          <header class="card-head">
+          <div class="card-head">
             <div class="brand">
+              <!-- ✅ Logo fixed -->
               <img src="logo.png" alt="RE Logo" class="brand-logo" />
               <div class="brand-text">
                 <div class="main-title">MEMBER PASS</div>
                 <div class="sub-title">RE</div>
               </div>
             </div>
-          </header>
+          </div>
 
           <!-- SLOGAN -->
-          <div class="slogan">Earn Like An Insurer</div>
+          <p class="slogan">Earn Like An Insurer</p>
 
-          <!-- AVATAR -->
+          <!-- ✅ AVATAR SECTION FIXED -->
           <div class="avatar">
             <div class="avatar-frame">
-              <img id="avatarImg" src="https://api.dicebear.com/9.x/identicon/svg?seed=RE" alt="Member photo" />
+              <img id="avatarImg"
+                   src="https://api.dicebear.com/9.x/identicon/svg?seed=RE"
+                   alt="Member photo" />
               <div class="photo-placeholder" id="photoPlaceholder">PHOTO</div>
             </div>
           </div>
@@ -52,7 +55,7 @@
             <div id="cardRole" class="role">MEMBER</div>
           </div>
 
-          <!-- EFFECTS -->
+          <!-- Decorative Effects -->
           <div class="rim"></div>
           <div class="sweep"></div>
         </div>
@@ -101,6 +104,20 @@
           <button class="theme-btn black" data-theme="black">Midnight Black</button>
           <button class="theme-btn crimson" data-theme="crimson">Crimson Red</button>
         </div>
+      </div>
+
+      <div class="actions">
+        <button id="resetBtn" type="button" class="ghost">Reset</button>
+        <button id="downloadBtn" type="button" class="primary">Download as PNG</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- JS Files -->
+  <script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html        </div>
       </div>
 
       <div class="actions">
