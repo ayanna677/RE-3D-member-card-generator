@@ -192,3 +192,67 @@ button.ghost{
 /* Inputs focus */
 input,select,button{ outline:none }
 input:focus,select:focus{ box-shadow:0 0 0 2px #4da3ff55; border-color:#4da3ffcc }
+
+/* === THEMES (CARD + FRAME COLOR MATCH) === */
+
+/* 1. Aqua Blue */
+.card.theme-aqua {
+  background: linear-gradient(145deg, #0d6efd, #00b4ff);
+}
+body.theme-aqua { background-color: #0b284a; }
+
+/* 2. Emerald Green */
+.card.theme-emerald {
+  background: linear-gradient(145deg, #00b894, #009970);
+}
+body.theme-emerald { background-color: #0a3027; }
+
+/* 3. Royal Gold */
+.card.theme-gold {
+  background: linear-gradient(145deg, #ffcc00, #ffb03b);
+}
+body.theme-gold { background-color: #3d2c00; }
+
+/* 4. Sunset Coral */
+.card.theme-sunset {
+  background: linear-gradient(145deg, #ff7a4f, #ffb37a);
+}
+body.theme-sunset { background-color: #3f160a; }
+
+/* 5. Violet Dream */
+.card.theme-violet {
+  background: linear-gradient(145deg, #7a5cff, #b28dff);
+}
+body.theme-violet { background-color: #241a47; }
+
+/* 6. Cyber Neon */
+.card.theme-neon {
+  background: linear-gradient(145deg, #00d4ff, #6f00ff);
+}
+body.theme-neon { background-color: #0d0033; }
+
+/* 7. Rose Blush */
+.card.theme-rose {
+  background: linear-gradient(145deg, #ff7eb9, #ff65a3);
+}
+body.theme-rose { background-color: #3b0f2a; }
+
+/* 8. Arctic Silver */
+.card.theme-silver {
+  background: linear-gradient(145deg, #e0e0e0, #ffffff);
+  color: #111;
+
+body.theme-silver { background-color: #bfc2c4; }
+
+/* 9. Midnight Black */
+.card.theme-black {
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  color: #e9e9e9;
+}
+body.theme-black { background-color: #000; }
+
+/* 10. Crimson Red */
+.card.theme-crimson {
+  background: linear-gradient(145deg, #ff3d3d, #ff6b6b);
+}
+body.theme-crimson { background-color: #380808; }
