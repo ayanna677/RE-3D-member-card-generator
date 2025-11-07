@@ -88,6 +88,225 @@ body {
 }
 
 /* --- AVATAR --- */
+.avatar {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+}
+.avatar-frame {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255,255,255,.08);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.1);
+}
+
+/* ✅ Fixed avatar image behavior */
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* keep full logo visible */
+  border-radius: 50%;
+  background: transparent;
+  mix-blend-mode: lighten; /* hides black bg visually */
+  display: block;
+  transition: transform .25s ease;
+}
+.avatar img:hover {
+  transform: scale(1.05); /* slight hover zoom for depth */
+}
+
+/* fallback text when no image uploaded */
+.photo-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,.6);
+  font-size: 12px;
+  letter-spacing: 1px;
+  background: rgba(0,0,0,.25);
+  border-radius: 50%;
+  transition: opacity .3s ease;
+}
+
+/* --- MEMBER NAME / ROLE --- */
+.card-bottom { position: absolute; left: 120px; bottom: 25px; }
+.name { font-size: 20px; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
+.role { font-size: 13px; opacity: .8; letter-spacing: 2px; }
+
+/* --- CONTROL PANEL --- */
+.controls {
+  background: var(--panel);
+  border: 1px solid var(--panel-b);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: var(--shadow-md);
+}
+.control { display: grid; gap: 6px; margin-bottom: 12px; font-size: 13px; }
+.control input, .control select {
+  background: #0d1320;
+  color: #e7edff;
+  border: 1px solid #222a3b;
+  border-radius: 10px;
+  padding: 10px;
+}
+.ok { color: #71ff98; margin-top: 5px; }
+
+/* --- THEME BUTTONS --- */
+.themes h3 { margin: 10px 0; font-size: 14px; }
+.theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.theme-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(0,0,0,.25);
+  transition: all .2s ease;
+}
+.theme-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+/* --- GLOW COLORS --- */
+.theme-btn.aqua { background: linear-gradient(90deg,#00aaff,#007bff); }
+.theme-btn.emerald { background: linear-gradient(90deg,#00c79f,#009870); }
+.theme-btn.gold { background: linear-gradient(90deg,#ffd954,#ffb347); color:#111; }
+.theme-btn.sunset { background: linear-gradient(90deg,#ff784f,#ffb37a); }
+.theme-btn.violet { background: linear-gradient(90deg,#7a5cff,#b28dff); }
+.theme-btn.neon { background: linear-gradient(90deg,#00d4ff,#7f00ff); }
+.theme-btn.rose { background: linear-gradient(90deg,#ff7eb9,#ff4181); }
+.theme-btn.silver { background: linear-gradient(90deg,#e0e0e0,#ffffff); color:#111; }
+.theme-btn.black { background: linear-gradient(90deg,#2b2b2b,#1b1b1b); }
+.theme-btn.crimson { background: linear-gradient(90deg,#ff3d3d,#ff6b6b); }
+
+/* --- CARD GLOW --- */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: box-shadow .3s ease;
+}
+.theme-aqua::after { box-shadow: 0 0 25px 8px rgba(0,180,255,.6); }
+.theme-emerald::after { box-shadow: 0 0 25px 8px rgba(0,230,160,.6); }
+.theme-gold::after { box-shadow: 0 0 25px 8px rgba(255,200,0,.6); }
+.theme-sunset::after { box-shadow: 0 0 25px 8px rgba(255,130,70,.6); }
+.theme-violet::after { box-shadow: 0 0 25px 8px rgba(150,100,255,.6); }
+.theme-neon::after { box-shadow: 0 0 25px 8px rgba(120,0,255,.7); }
+.theme-rose::after { box-shadow: 0 0 25px 8px rgba(255,100,150,.6); }
+.theme-silver::after { box-shadow: 0 0 25px 8px rgba(255,255,255,.4); }
+.theme-black::after { box-shadow: 0 0 25px 8px rgba(255,255,255,.15); }
+.theme-crimson::after { box-shadow: 0 0 25px 8px rgba(255,50,50,.6); }
+
+/* --- THEME BACKGROUNDS --- */
+.theme-aqua   { background: linear-gradient(145deg, #009dff, #00c8ff); }
+.theme-emerald{ background: linear-gradient(145deg, #00c79f, #009970); }
+.theme-gold   { background: linear-gradient(145deg, #ffcf33, #ffb347); color:#111; }
+.theme-sunset { background: linear-gradient(145deg, #ff784f, #ffb37a); }
+.theme-violet { background: linear-gradient(145deg, #6a5eff, #b69cff); }
+.theme-neon   { background: linear-gradient(145deg, #00d4ff, #7f00ff); }
+.theme-rose   { background: linear-gradient(145deg, #ff7eb9, #ff4181); }
+.theme-silver { background: linear-gradient(145deg, #fafafa, #e0e0e0); color:#111; }
+.theme-black  { background: linear-gradient(145deg, #1c1c1c, #2d2d2d); }
+.theme-crimson{ background: linear-gradient(145deg, #ff3d3d, #ff6b6b); }
+
+/* --- LIGHT THEME TEXT FIX --- */
+.theme-gold,
+.theme-silver {
+  color: #111;
+}
+.theme-gold .main-title,
+.theme-silver .main-title,
+.theme-gold .sub-title,
+.theme-silver .sub-title,
+.theme-gold .slogan,
+.theme-silver .slogan,
+.theme-gold .name,
+.theme-silver .name,
+.theme-gold .role,
+.theme-silver .role {
+  color: #111 !important;
+  text-shadow: none;
+}
+
+/* --- ACTION BUTTONS --- */
+.actions { display: flex; gap: 10px; margin-top: 16px; }
+button.primary {
+  background: linear-gradient(90deg,#4a9dff,#8f5bff);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  padding: 12px 14px;
+  font-weight: 700;
+  box-shadow: 0 16px 32px rgba(90,100,255,.35);
+  cursor: pointer;
+}
+button.ghost {
+  background: #0d1320;
+  color: #cfe0ff;
+  border: 1px solid #26314a;
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+}/* --- CARD --- */
+.card {
+  position: relative;
+  width: 540px;
+  height: 320px;
+  border-radius: 24px;
+  padding: 24px;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  border: 1px solid rgba(255,255,255,.1);
+  box-shadow: var(--shadow-xl);
+  transform-style: preserve-3d;
+  transition: transform .15s ease-out;
+  background-blend-mode: overlay;
+}
+
+/* --- HEADER TEXT --- */
+.card-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 5px;
+  margin-left: 8px;
+  z-index: 5;
+}
+
+.main-title {
+  font-family: 'Acme', sans-serif;
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(255,255,255,0.25);
+}
+
+.sub-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #e0e0e0;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* --- SLOGAN --- */
+.slogan {
+  font-size: 13px;
+  background: linear-gradient(90deg,#9bd0ff,#caa7ff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* --- AVATAR --- */
 .avatar { position:absolute; left:18px; bottom:18px; }
 .avatar-frame {
   position:relative;
