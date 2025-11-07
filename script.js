@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     cardName.textContent = nameInput.value.trim() || 'LALA';
   });
 
-  // Font
+  // Font change
   fontSelect.addEventListener('change', () => {
     const f = fontSelect.value;
     card.style.fontFamily = `'${f}', system-ui, sans-serif`;
@@ -49,27 +49,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const reader = new FileReader();
     reader.onload = () => {
       const imageURL = reader.result;
-      scene.dataset.bg = imageURL; // store for reuse
+      scene.dataset.bg = imageURL;
       updateSceneBackground(imageURL);
       bgOk.hidden = false;
     };
     reader.readAsDataURL(f);
   });
 
-  // Theme buttons
-  document.querySelectorAll('.theme-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const theme = btn.dataset.theme;
-      scene.className = `scene theme-${theme}`;
-      card.animate([{opacity:0.9},{opacity:1}],{duration:200,fill:'forwards'});
-
-      // Keep background visible with new glow
-      const bg = scene.dataset.bg;
-      if (bg) updateSceneBackground(bg);
-    });
-  });
-
-  // Function to rebuild layered background with glow + image
+  // Update background + glow
   function updateSceneBackground(imageURL) {
     scene.style.transition = 'background 0.6s ease';
     scene.style.backgroundImage = `
@@ -81,6 +68,35 @@ document.addEventListener("DOMContentLoaded", function() {
     scene.style.backgroundPosition = 'center, center, center';
     scene.style.backgroundRepeat = 'no-repeat';
   }
+
+  // Theme switching
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const theme = btn.dataset.theme;
+      scene.className = `scene theme-${theme}`;
+      card.animate([{opacity:0.9},{opacity:1}],{duration:200,fill:'forwards'});
+
+      // Keep uploaded background visible
+      const bg = scene.dataset.bg;
+      if (bg) updateSceneBackground(bg);
+
+      // Adjust text color for light themes
+      const lightThemes = ['silver', 'gold'];
+      if (lightThemes.includes(theme)) {
+        card.style.color = '#111';
+        card.querySelectorAll('.main-title, .sub-title, .name, .role').forEach(el=>{
+          el.style.color = '#111';
+          el.style.textShadow = 'none';
+        });
+      } else {
+        card.style.color = '#fff';
+        card.querySelectorAll('.main-title, .sub-title, .name, .role').forEach(el=>{
+          el.style.color = '#fff';
+          el.style.textShadow = '0 2px 8px rgba(0,0,0,.4)';
+        });
+      }
+    });
+  });
 
   // Reset
   resetBtn.addEventListener('click', () => {
