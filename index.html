@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>RE 3D Member Card Generator</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
+<body class="scene theme-black">
   <header class="site-header">
-    <h1>3D Member Card Generator</h1>
-    <p class="subtitle">Create stunning RE 3D Member Passes easily</p>
+    <h1>RE 3D Member Card Generator</h1>
+    <p class="subtitle">Metallic 3D card with theme-synced background</p>
   </header>
 
   <main class="layout">
-    <!-- Card Preview -->
+    <!-- PREVIEW -->
     <section class="preview">
       <div id="tiltWrap" class="tilt-wrap">
-        <div id="card" class="card theme-black">
+        <div id="card" class="card">
+          <!-- light sweep (moves with hover/tilt) -->
+          <div class="sweep" aria-hidden="true"></div>
+
           <div class="card-top">
-            <img src="logo.png" alt="RE Logo" class="card-logo">
+            <img src="logo.png" alt="RE Logo" class="card-logo" />
             <div class="card-titles">
               <div class="main-title">MEMBER PASS</div>
               <div class="sub-title">RE</div>
@@ -29,7 +33,7 @@
 
           <div class="avatar">
             <div class="avatar-frame">
-              <img id="avatarImg" src="https://api.dicebear.com/9.x/identicon/svg?seed=RE" alt="Member Photo">
+              <img id="avatarImg" src="https://api.dicebear.com/9.x/identicon/svg?seed=RE" alt="Member photo" />
               <div class="photo-placeholder" id="photoPlaceholder">PHOTO</div>
             </div>
           </div>
@@ -40,18 +44,18 @@
           </div>
         </div>
       </div>
-      <p class="hint">Hover over the card to see the 3D effect</p>
+      <p class="hint">Hover / move mouse over card to see 3D shine</p>
     </section>
 
-    <!-- Control Panel -->
+    <!-- CONTROLS -->
     <aside class="controls">
       <label class="control">
         <span>Member Name</span>
-        <input id="nameInput" type="text" placeholder="Enter name" value="LALA" />
+        <input id="nameInput" type="text" value="LALA" placeholder="Enter name" />
       </label>
 
       <label class="control">
-        <span>Font Style</span>
+        <span>Font</span>
         <select id="fontSelect">
           <option value="Poppins" selected>Poppins</option>
           <option value="Inter">Inter</option>
@@ -59,30 +63,36 @@
       </label>
 
       <label class="control">
-        <span>Member Photo</span>
+        <span>Photo / Logo</span>
         <input id="photoInput" type="file" accept="image/*" />
-        <small id="photoOk" hidden>✓ Photo uploaded successfully</small>
+        <small id="photoOk" hidden>✓ Photo uploaded</small>
+      </label>
+
+      <label class="control">
+        <span>Background Image (page)</span>
+        <input id="bgInput" type="file" accept="image/*" />
+        <small id="bgOk" hidden>✓ Background image set</small>
       </label>
 
       <div class="themes">
-        <h3>Choose Theme</h3>
+        <h3>Metallic Themes</h3>
         <div class="theme-grid">
-          <button class="theme-btn black" data-theme="black">Black</button>
-          <button class="theme-btn silver" data-theme="silver">Silver</button>
-          <button class="theme-btn gold" data-theme="gold">Gold</button>
-          <button class="theme-btn aqua" data-theme="aqua">Aqua</button>
-          <button class="theme-btn violet" data-theme="violet">Violet</button>
-          <button class="theme-btn neon" data-theme="neon">Neon</button>
-          <button class="theme-btn crimson" data-theme="crimson">Crimson</button>
-          <button class="theme-btn rose" data-theme="rose">Rose</button>
+          <button class="theme-btn black"   data-theme="black">Black</button>
+          <button class="theme-btn silver"  data-theme="silver">Silver</button>
+          <button class="theme-btn gold"    data-theme="gold">Gold</button>
+          <button class="theme-btn aqua"    data-theme="aqua">Aqua</button>
+          <button class="theme-btn violet"  data-theme="violet">Violet</button>
+          <button class="theme-btn neon"    data-theme="neon">Neon</button>
           <button class="theme-btn emerald" data-theme="emerald">Emerald</button>
-          <button class="theme-btn sunset" data-theme="sunset">Sunset</button>
+          <button class="theme-btn crimson" data-theme="crimson">Crimson</button>
+          <button class="theme-btn rose"    data-theme="rose">Rose</button>
+          <button class="theme-btn sunset"  data-theme="sunset">Sunset</button>
         </div>
       </div>
 
       <div class="actions">
         <button id="resetBtn" class="ghost">Reset</button>
-        <button id="downloadBtn" class="primary">Download Card</button>
+        <button id="downloadBtn" class="primary">Download PNG</button>
       </div>
     </aside>
   </main>
