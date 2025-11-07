@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const fontSelect = document.getElementById("fontSelect");
   const photoInput = document.getElementById("photoInput");
   const photoOk = document.getElementById("photoOk");
-  const bgInput = document.getElementById("bgInput");
-  const bgOk = document.getElementById("bgOk");
+  const cardBgInput = document.getElementById("cardBgInput");
+  const cardBgOk = document.getElementById("cardBgOk");
   const resetBtn = document.getElementById("resetBtn");
   const downloadBtn = document.getElementById("downloadBtn");
   const shareBtn = document.getElementById("shareBtn");
@@ -15,12 +15,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const photoPlaceholder = document.getElementById("photoPlaceholder");
   const tiltWrap = document.getElementById("tiltWrap");
   const scene = document.body;
+  const cardBg = document.getElementById("cardBg");
 
-  // Default theme setup
+  // Default background glow
   document.documentElement.style.setProperty("--scene-accent", "rgba(120,120,120,.15)");
   scene.style.background = `radial-gradient(900px 600px at 60% 10%, rgba(120,120,120,.15), transparent 60%), #0d0d0d`;
 
-  // Update card name
+  // Update name
   nameInput.addEventListener("input", () => {
     cardName.textContent = nameInput.value.trim() || "LALA";
   });
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     card.style.fontFamily = `'${fontSelect.value}', sans-serif`;
   });
 
-  // Upload avatar / logo
+  // Upload logo/photo
   photoInput.addEventListener("change", (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -45,64 +46,50 @@ document.addEventListener("DOMContentLoaded", function () {
     reader.readAsDataURL(file);
   });
 
-  // Upload background image for the page
-  bgInput.addEventListener("change", (e) => {
+  // Upload card background (inside card only)
+  cardBgInput.addEventListener("change", (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () => {
-      const imageURL = reader.result;
-      scene.dataset.bg = imageURL;
-      updateBackgroundGlow(imageURL);
-      bgOk.hidden = false;
+      const url = reader.result;
+      cardBg.style.backgroundImage = `url('${url}')`;
+      cardBg.style.opacity = "1";
+      cardBgOk.hidden = false;
     };
     reader.readAsDataURL(file);
   });
 
-  // Update page background with current accent
-  function updateBackgroundGlow(imageURL) {
-    const accent = getComputedStyle(document.documentElement)
-      .getPropertyValue("--scene-accent")
-      .trim();
-    scene.style.background = `
-      radial-gradient(900px 600px at 60% 10%, ${accent}, transparent 65%),
-      ${imageURL ? `url('${imageURL}') center/cover no-repeat,` : ""}
-      #0d0d0d`;
-  }
-
-  // RE glow colors for each theme
+  // Glow color map
   const glowMap = {
-    titanium: "rgba(160,160,160,.22)",
-    silver: "rgba(240,240,255,.28)",
+    black: "rgba(180,180,200,.20)",
+    silver: "rgba(255,255,255,.25)",
     gold: "rgba(255,230,150,.3)",
     aqua: "rgba(120,190,255,.28)",
-    emerald: "rgba(90,255,190,.25)",
     violet: "rgba(200,150,255,.25)",
-    rose: "rgba(255,170,190,.28)",
-    crimson: "rgba(255,120,120,.3)",
-    sunset: "rgba(255,180,120,.3)",
     neon: "rgba(120,180,255,.3)",
-    default: "rgba(120,120,120,.18)"
+    emerald: "rgba(90,255,190,.25)",
+    crimson: "rgba(255,120,120,.3)",
+    rose: "rgba(255,170,190,.28)",
+    sunset: "rgba(255,180,120,.3)",
+    default: "rgba(120,120,120,.18)",
   };
 
-  // Apply color theme to card
+  // Apply theme colors
   document.querySelectorAll(".theme-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const theme = btn.dataset.theme;
 
-      // Remove old card themes
+      // Remove old themes
       card.className = "card";
-
       // Add new one
       card.classList.add(`theme-${theme}`);
 
-      // Set accent glow for background
-      const glowColor = glowMap[theme] || glowMap.default;
-      document.documentElement.style.setProperty("--scene-accent", glowColor);
-
-      // Update glow on the page
-      const bg = scene.dataset.bg;
-      updateBackgroundGlow(bg || null);
+      // Update accent glow
+      const glow = glowMap[theme] || glowMap.default;
+      document.documentElement.style.setProperty("--scene-accent", glow);
+      scene.style.background = `
+        radial-gradient(900px 600px at 60% 10%, ${glow}, transparent 60%), #0d0d0d`;
 
       // Adjust text color for visibility
       const lightThemes = ["gold", "silver"];
@@ -118,28 +105,27 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Reset everything
+  // Reset button
   resetBtn.addEventListener("click", () => {
     nameInput.value = "LALA";
     cardName.textContent = "LALA";
     fontSelect.value = "Poppins";
     photoInput.value = "";
-    bgInput.value = "";
+    cardBgInput.value = "";
     photoOk.hidden = true;
-    bgOk.hidden = true;
+    cardBgOk.hidden = true;
     avatarImg.src = "https://api.dicebear.com/9.x/identicon/svg?seed=RE";
-    avatarImg.style.objectFit = "contain";
     avatarImg.style.mixBlendMode = "lighten";
     photoPlaceholder.style.opacity = "1";
-    delete scene.dataset.bg;
+    cardBg.style.backgroundImage = "";
 
     card.className = "card theme-default";
     document.documentElement.style.setProperty("--scene-accent", "rgba(120,120,120,.15)");
-    updateBackgroundGlow(null);
+    scene.style.background = `radial-gradient(900px 600px at 60% 10%, rgba(120,120,120,.15), transparent 60%), #0d0d0d`;
     shareBtn.hidden = true;
   });
 
-  // 3D tilt
+  // 3D Tilt
   let rect = null;
   function updateRect() {
     rect = tiltWrap.getBoundingClientRect();
@@ -156,12 +142,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const max = 12;
     card.style.transform = `rotateX(${(-dy * max).toFixed(2)}deg) rotateY(${(dx * max).toFixed(2)}deg)`;
   });
-
   tiltWrap.addEventListener("mouseleave", () => {
     card.style.transform = "rotateX(0) rotateY(0)";
   });
 
-  // Download + reveal Share button
+  // Download PNG + Show Share
   downloadBtn.addEventListener("click", async () => {
     downloadBtn.disabled = true;
     downloadBtn.textContent = "Rendering…";
@@ -178,10 +163,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Share on Twitter
+  // Share on X
   shareBtn.addEventListener("click", () => {
-    const shareText = `Just generated my RE 3D MEMBER CARD\nYou can make your own card here: https://re-3d-member-card-generator.vercel.app/`;
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+    const text = `Just generated my RE 3D MEMBER CARD\nYou can make your own card here: https://re-3d-member-card-generator.vercel.app/`;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank", "noopener,noreferrer");
   });
 });
