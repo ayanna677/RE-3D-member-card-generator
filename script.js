@@ -1,32 +1,31 @@
-// Elements
-const nameInput   = document.getElementById('nameInput');
-const fontSelect  = document.getElementById('fontSelect');
-const photoInput  = document.getElementById('photoInput');
-const photoOk     = document.getElementById('photoOk');
-const bgInput     = document.getElementById('bgInput');
-const bgOk        = document.getElementById('bgOk');
-const resetBtn    = document.getElementById('resetBtn');
+const nameInput = document.getElementById('nameInput');
+const fontSelect = document.getElementById('fontSelect');
+const photoInput = document.getElementById('photoInput');
+const photoOk = document.getElementById('photoOk');
+const bgInput = document.getElementById('bgInput');
+const bgOk = document.getElementById('bgOk');
+const resetBtn = document.getElementById('resetBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 
-const card      = document.getElementById('card');
-const cardName  = document.getElementById('cardName');
+const card = document.getElementById('card');
+const cardName = document.getElementById('cardName');
 const avatarImg = document.getElementById('avatarImg');
-const tiltWrap  = document.getElementById('tiltWrap');
+const tiltWrap = document.getElementById('tiltWrap');
 const photoPlaceholder = document.getElementById('photoPlaceholder');
 
-// Live updates
+// Name
 nameInput.addEventListener('input', () => {
   cardName.textContent = nameInput.value.trim() || 'LALA';
 });
 
-// Font switch
+// Font
 fontSelect.addEventListener('change', () => {
   const f = fontSelect.value;
   card.style.setProperty('--card-font', `'${f}', system-ui`);
 });
 
-// Photo upload
-photoInput.addEventListener('change', (e) => {
+// Photo Upload
+photoInput.addEventListener('change', e => {
   const file = e.target.files?.[0];
   if (!file) return;
   const reader = new FileReader();
@@ -38,8 +37,8 @@ photoInput.addEventListener('change', (e) => {
   reader.readAsDataURL(file);
 });
 
-// Background upload
-bgInput.addEventListener('change', (e) => {
+// Background Upload
+bgInput.addEventListener('change', e => {
   const file = e.target.files?.[0];
   if (!file) return;
   const reader = new FileReader();
@@ -47,16 +46,16 @@ bgInput.addEventListener('change', (e) => {
     card.style.backgroundImage = `url('${reader.result}')`;
     card.style.backgroundSize = 'cover';
     card.style.backgroundPosition = 'center';
-    card.style.backgroundBlendMode = 'overlay';
     bgOk.hidden = false;
   };
   reader.readAsDataURL(file);
 });
 
-// Theme buttons
+// Themes
 document.querySelectorAll('.theme-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const theme = btn.dataset.theme;
+    card.style.backgroundImage = 'none';
     card.className = `card theme-${theme}`;
     document.body.className = `theme-${theme}`;
   });
@@ -65,7 +64,7 @@ document.querySelectorAll('.theme-btn').forEach(btn => {
 // Reset
 resetBtn.addEventListener('click', () => {
   nameInput.value = 'LALA';
-  fontSelect.value = 'Inter';
+  fontSelect.value = 'Poppins';
   photoInput.value = '';
   bgInput.value = '';
   photoOk.hidden = true;
@@ -76,7 +75,6 @@ resetBtn.addEventListener('click', () => {
   card.style.backgroundImage = 'none';
   card.className = 'card theme-aqua';
   document.body.className = 'theme-aqua';
-  card.style.setProperty('--card-font', `'Inter', system-ui`);
 });
 
 // 3D Tilt
@@ -85,7 +83,7 @@ function updateRect(){ rect = tiltWrap.getBoundingClientRect(); }
 updateRect();
 window.addEventListener('resize', updateRect);
 
-tiltWrap.addEventListener('mousemove', (e) => {
+tiltWrap.addEventListener('mousemove', e => {
   if (!rect) return;
   const cx = rect.left + rect.width / 2;
   const cy = rect.top + rect.height / 2;
@@ -96,29 +94,21 @@ tiltWrap.addEventListener('mousemove', (e) => {
 });
 tiltWrap.addEventListener('mouseleave', ()=> card.style.transform = 'rotateX(0) rotateY(0)');
 
-// Download PNG
+// Download
 downloadBtn.addEventListener('click', async () => {
   downloadBtn.disabled = true;
   downloadBtn.textContent = 'Rendering…';
-  try{
+  try {
     const prev = card.style.boxShadow;
     card.style.boxShadow = 'none';
     const canvas = await html2canvas(card, { backgroundColor: null, scale: 2, useCORS: true });
-    card.style.boxShadow = prev || '';
-    const url = canvas.toDataURL('image/png');
+    card.style.boxShadow = prev;
     const a = document.createElement('a');
-    a.href = url;
-    a.download = (nameInput.value || 'RE_Member').replace(/[^a-z0-9_-]+/gi,'_') + '.png';
-    document.body.appendChild(a); a.click(); a.remove();
-  }catch(err){
-    alert('Could not create PNG. Try again.');
-    console.error(err);
-  }finally{
+    a.href = canvas.toDataURL('image/png');
+    a.download = `${nameInput.value || 'RE_Member'}.png`;
+    a.click();
+  } finally {
     downloadBtn.disabled = false;
     downloadBtn.textContent = 'Download as PNG';
   }
 });
-
-// Init
-card.style.setProperty('--card-font', `'Inter', system-ui`);
-document.body.className = 'theme-aqua';
