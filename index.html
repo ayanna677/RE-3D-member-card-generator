@@ -3,78 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RE Member Card</title>
+  <title>3D Member Card Generator</title>
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@400;600;800&family=Orbitron:wght@500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="page">
-    <section class="panel">
-      <h1>RE Member Card</h1>
+  <header class="site-header">
+    <h1>3D Member Card Generator</h1>
+    <p class="subtitle">Create stunning 3D member cards with gradient themes</p>
+  </header>
 
-      <div class="controls">
-        <label class="control">
-          <span>Member name</span>
-          <input id="nameInput" type="text" placeholder="Type name…" value="Member Name" />
-        </label>
-
-        <label class="control">
-          <span>Role</span>
-          <input id="roleInput" type="text" placeholder="Type role…" value="Member" />
-        </label>
-
-        <label class="control">
-          <span>Photo (PNG/JPG)</span>
-          <input id="photoInput" type="file" accept="image/*" />
-        </label>
-
-        <label class="control">
-          <span>Theme</span>
-          <select id="themeSelect">
-            <option value="dark" selected>Dark</option>
-            <option value="neon">Neon</option>
-            <option value="gold">Gold</option>
-            <option value="glass">Glass</option>
-          </select>
-        </label>
-
-        <label class="toggle">
-          <input id="brandingToggle" type="checkbox" checked />
-          <span>Add RE branding</span>
-        </label>
-
-        <div class="buttons">
-          <button id="resetBtn" type="button">Reset</button>
-          <button id="downloadBtn" type="button">Download PNG</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="stage">
-      <!-- background banner vibe -->
-      <div class="brand-bg"></div>
-
-      <!-- perspective wrapper -->
-      <div class="tilt-wrap" id="tiltWrap">
-        <!-- Card -->
-        <div id="card" class="card theme-dark" aria-label="RE Member Card">
+  <main class="layout">
+    <!-- LEFT: Card Preview -->
+    <section class="preview">
+      <div id="tiltWrap" class="tilt-wrap">
+        <div id="card" class="card theme-ocean" aria-label="RE Member Card">
           <header class="card-head">
-            <!-- inline SVG logo (white “re”) -->
+            <!-- Inline “re” logo -->
             <div class="re-logo" aria-label="RE logo">
-              <svg viewBox="0 0 100 60" width="56" height="34" role="img" aria-hidden="true">
-                <rect width="100" height="60" fill="none"></rect>
-                <path fill="#fff"
-                  d="M14 47V13h10.8v9.4c2.4-6.4 8.2-10.3 16.2-10.3 11.8 0 20 8.6 20 22.2V47H50.6V35.1c0-7.6-4.1-12.2-10.8-12.2-6.5 0-10.8 4.8-10.8 12.4V47H14zm67.8 0H57.2V39h24.1c-.8-4.7-5.1-7.6-11.2-7.6-6.7 0-11.4 3.6-12.5 9.3h-8.9c1.8-10.7 10.7-17.6 22.1-17.6 12 0 20.2 7.4 20.2 18.4 0 1.8-.1 3.2-.4 4.5z" />
+              <svg viewBox="0 0 100 60" width="58" height="36" role="img" aria-hidden="true">
+                <path fill="#fff" d="M14 47V13h10.8v9.4c2.4-6.4 8.2-10.3 16.2-10.3 11.8 0 20 8.6 20 22.2V47H50.6V35.1c0-7.6-4.1-12.2-10.8-12.2-6.5 0-10.8 4.8-10.8 12.4V47H14zm67.8 0H57.2V39h24.1c-.8-4.7-5.1-7.6-11.2-7.6-6.7 0-11.4 3.6-12.5 9.3h-8.9c1.8-10.7 10.7-17.6 22.1-17.6 12 0 20.2 7.4 20.2 18.4 0 1.8-.1 3.2-.4 4.5z"/>
               </svg>
             </div>
-
             <div class="org">RE</div>
           </header>
 
-          <div class="slogan">Earn Like An Insurer — <strong>app.re.xyz</strong></div>
+          <div class="slogan">Earn Like An Insurer</div>
 
           <div class="avatar">
             <img id="avatarImg" src="https://api.dicebear.com/9.x/identicon/svg?seed=RE" alt="Member photo" />
@@ -85,12 +42,54 @@
             <div id="cardRole" class="role">Member</div>
           </div>
 
-          <!-- subtle light sweeps -->
+          <!-- decorative lights -->
           <div class="rim"></div>
           <div class="sweep"></div>
         </div>
       </div>
+      <p class="hint">Hover over the card to see the 3D effect</p>
     </section>
+
+    <!-- RIGHT: Controls -->
+    <aside class="controls">
+      <label class="control">
+        <span>Member Name</span>
+        <input id="nameInput" type="text" placeholder="Enter member name" value="Member Name" />
+      </label>
+
+      <label class="control">
+        <span>Font Style</span>
+        <select id="fontSelect">
+          <option value="Inter" selected>Inter</option>
+          <option value="Poppins">Poppins</option>
+          <option value="Orbitron">Orbitron</option>
+          <option value="Playfair Display">Playfair</option>
+        </select>
+      </label>
+
+      <label class="control">
+        <span>Member Photo</span>
+        <input id="photoInput" type="file" accept="image/*" />
+        <small class="ok" id="photoOk" hidden>✓ Photo uploaded successfully</small>
+      </label>
+
+      <div class="themes">
+        <h3>Choose Theme</h3>
+        <div class="theme-grid">
+          <button class="theme-btn ocean" data-theme="ocean">Ocean Gradient</button>
+          <button class="theme-btn sunset" data-theme="sunset">Sunset Aurora</button>
+          <button class="theme-btn gold" data-theme="gold">Royal Gold</button>
+          <button class="theme-btn forest" data-theme="forest">Emerald Forest</button>
+          <button class="theme-btn glass" data-theme="glass">Midnight Glass</button>
+          <button class="theme-btn neon" data-theme="neon">Cyber Neon</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="resetBtn" type="button" class="ghost">Reset</button>
+        <button id="downloadBtn" type="button" class="primary">Download as PNG</button>
+      </div>
+    </aside>
   </main>
 
   <script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
