@@ -11,7 +11,9 @@ body {
   color: #fff;
   font-family: "Poppins", sans-serif;
   background: radial-gradient(900px 600px at 60% 10%, var(--accent), transparent 62%), var(--bg);
+  background-repeat: no-repeat;
   transition: background 0.6s ease;
+  overflow-x: hidden;
 }
 
 /* HEADER */
@@ -58,6 +60,7 @@ body {
   border: 1px solid rgba(255,255,255,.08);
   box-shadow: 0 30px 80px rgba(0,0,0,.55);
   transition: transform .15s ease, background .4s ease;
+  transform-style: preserve-3d;
 }
 
 /* INTERNAL BACKGROUND */
@@ -83,13 +86,14 @@ body {
   opacity: .25;
   background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,.12) 38%, rgba(255,255,255,.2) 54%, transparent 72%);
   filter: blur(8px);
+  mix-blend-mode: screen;
 }
 
 /* --- LOGO + MEMBER PASS --- */
 .card-top {
   position: absolute;
   top: 22px;
-  left: 28px;
+  left: 26px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -106,8 +110,8 @@ body {
 }
 .main-title {
   font-weight: 800;
-  font-size: 24px;
-  letter-spacing: 1.2px;
+  font-size: 23px;
+  letter-spacing: 1.3px;
   margin: 0;
 }
 .sub-title {
@@ -117,11 +121,11 @@ body {
   margin-top: 2px;
 }
 
-/* --- AVATAR --- */
+/* --- AVATAR + NAME + ROLE --- */
 .avatar {
   position: absolute;
   bottom: 34px;
-  left: 32px;
+  left: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,26 +148,23 @@ body {
   mix-blend-mode: lighten;
 }
 
-/* --- NAME + ROLE --- */
 .card-bottom {
   position: absolute;
-  bottom: 48px;
-  left: 140px;
+  bottom: 50px;
+  left: 145px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 .name {
-  font-size: 21px;
+  font-size: 22px;
   font-weight: 800;
   letter-spacing: 0.6px;
-  margin: 0;
 }
 .role {
   font-size: 13px;
-  letter-spacing: 1.8px;
+  letter-spacing: 2px;
   opacity: 0.88;
-  margin: 0;
 }
 
 /* CONTROLS PANEL */
@@ -207,7 +208,7 @@ body {
 }
 .theme-btn:hover { transform: translateY(-2px) scale(1.02); }
 
-/* --- BUTTON COLORS --- */
+/* --- 10 RE Metallic Colors --- */
 .theme-btn.black{background:linear-gradient(145deg,#2b2b2b,#1b1b1b)}
 .theme-btn.silver{background:linear-gradient(145deg,#e3e3e3,#cfcfcf);color:#111}
 .theme-btn.gold{background:linear-gradient(145deg,#ffd76a,#dba400);color:#111}
@@ -219,7 +220,19 @@ body {
 .theme-btn.rose{background:linear-gradient(145deg,#ff7eb9,#ff4181)}
 .theme-btn.sunset{background:linear-gradient(145deg,#ff784f,#ffb37a)}
 
-/* ACTION BUTTONS */
+/* --- SYNC PAGE BACKGROUND --- */
+body.theme-black  { background: radial-gradient(circle at 70% 0%, rgba(50,50,50,.2), transparent 60%), #0a0a0a; }
+body.theme-silver { background: radial-gradient(circle at 70% 0%, rgba(255,255,255,.25), transparent 60%), #e3e3e3; color:#111; }
+body.theme-gold   { background: radial-gradient(circle at 70% 0%, rgba(255,220,90,.2), transparent 60%), #cfa400; }
+body.theme-aqua   { background: radial-gradient(circle at 70% 0%, rgba(0,180,255,.15), transparent 60%), #021628; }
+body.theme-violet { background: radial-gradient(circle at 70% 0%, rgba(150,120,255,.2), transparent 60%), #1b0f2d; }
+body.theme-neon   { background: radial-gradient(circle at 70% 0%, rgba(0,200,255,.2), transparent 60%), #0b0220; }
+body.theme-emerald{ background: radial-gradient(circle at 70% 0%, rgba(0,230,160,.2), transparent 60%), #00231a; }
+body.theme-crimson{ background: radial-gradient(circle at 70% 0%, rgba(255,60,60,.2), transparent 60%), #250000; }
+body.theme-rose   { background: radial-gradient(circle at 70% 0%, rgba(255,120,180,.2), transparent 60%), #2b0012; }
+body.theme-sunset { background: radial-gradient(circle at 70% 0%, rgba(255,130,70,.2), transparent 60%), #230a00; }
+
+/* BUTTONS */
 .actions {
   display: flex;
   justify-content: space-between;
@@ -250,40 +263,3 @@ button {
   border-top: 1px solid rgba(255,255,255,.08);
   margin-top: 12px;
 }
-
-/* THEMES */
-.card.theme-default { background: linear-gradient(145deg,#bfbfbf,#a8a8a8); color: #111; }
-.card.theme-black  { background: linear-gradient(145deg,#2a2a2a,#1a1a1a); color: #fff; }
-.card.theme-aqua   { background: linear-gradient(145deg,#00a2ff,#66ccff); color: #fff; }
-.card.theme-violet { background: linear-gradient(145deg,#8b5cf6,#c084fc); color: #fff; }
-.card.theme-neon   { background: linear-gradient(145deg,#00d4ff,#9b59ff); color: #fff; }
-.card.theme-emerald{ background: linear-gradient(145deg,#00c79f,#22e3b9); color: #fff; }
-.card.theme-crimson{ background: linear-gradient(145deg,#e63946,#ff6f61); color: #fff; }
-.card.theme-rose   { background: linear-gradient(145deg,#ff7eb9,#ffb3d9); color: #fff; }
-.card.theme-sunset { background: linear-gradient(145deg,#ff784f,#ffb37a); color: #fff; }
-.card.theme-silver { background: linear-gradient(145deg,#f0f0f0,#d7d7d7); color: #111; }
-.card.theme-gold   { background: linear-gradient(145deg,#ffcf33,#ffb347); color: #111; }
-
-.card.theme-silver .main-title,
-.card.theme-silver .sub-title,
-.card.theme-silver .name,
-.card.theme-silver .role,
-.card.theme-gold   .main-title,
-.card.theme-gold   .sub-title,
-.card.theme-gold   .name,
-.card.theme-gold   .role {
-  color:#111 !important;
-  text-shadow:none;
-}
-
-/* --- PAGE SYNC COLORS --- */
-body.theme-black  { background: radial-gradient(circle at 70% 0%, rgba(50,50,50,.2), transparent 60%), #0a0a0a; }
-body.theme-silver { background: radial-gradient(circle at 70% 0%, rgba(255,255,255,.25), transparent 60%), #e3e3e3; color:#111; }
-body.theme-gold   { background: radial-gradient(circle at 70% 0%, rgba(255,220,90,.2), transparent 60%), #cfa400; }
-body.theme-aqua   { background: radial-gradient(circle at 70% 0%, rgba(0,180,255,.15), transparent 60%), #021628; }
-body.theme-violet { background: radial-gradient(circle at 70% 0%, rgba(150,120,255,.2), transparent 60%), #1b0f2d; }
-body.theme-neon   { background: radial-gradient(circle at 70% 0%, rgba(0,200,255,.2), transparent 60%), #0b0220; }
-body.theme-emerald{ background: radial-gradient(circle at 70% 0%, rgba(0,230,160,.2), transparent 60%), #00231a; }
-body.theme-crimson{ background: radial-gradient(circle at 70% 0%, rgba(255,60,60,.2), transparent 60%), #250000; }
-body.theme-rose   { background: radial-gradient(circle at 70% 0%, rgba(255,120,180,.2), transparent 60%), #2b0012; }
-body.theme-sunset { background: radial-gradient(circle at 70% 0%, rgba(255,130,70,.2), transparent 60%), #230a00; }
