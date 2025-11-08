@@ -21,80 +21,142 @@ body {
 .community-line { margin:0; opacity:.85; color:#c9d1ff; }
 
 /* LAYOUT */
-.layout { max-width:1100px; margin:auto; padding:18px; display:grid; gap:24px; grid-template-columns:1fr 370px; }
+.layout {
+  max-width:1100px;
+  margin:auto;
+  padding:18px;
+  display:grid;
+  gap:24px;
+  grid-template-columns:1fr 370px;
+}
 @media (max-width:900px){ .layout{ grid-template-columns:1fr; } }
 .preview { display:grid; place-items:center; }
 .hint { font-size:12px; opacity:.75; margin-top:8px; }
 
 /* CARD */
-.tilt-wrap { perspective:1200px; }
-.card{
-  position:relative; width:520px; height:310px; border-radius:22px; overflow:hidden;
-  background:linear-gradient(145deg,#bfbfbf,#a8a8a8);
+.tilt-wrap {
+  perspective:1200px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.card {
+  position:relative;
+  width:520px;
+  height:310px;
+  border-radius:22px;
+  overflow:hidden;
   border:1px solid rgba(255,255,255,.08);
   box-shadow:0 30px 80px rgba(0,0,0,.55);
-  transition:transform .15s ease, background .4s ease;
+  transition:transform .15s ease;
+  transform-style:preserve-3d;
   will-change: transform;
 }
-.card * { color:inherit; text-shadow:0 1px 3px rgba(0,0,0,0.25); }
 
 /* Background inside card */
 .card-bg{
-  position:absolute; inset:0; border-radius:inherit; z-index:0;
-  background-size:cover; background-position:center; opacity:0; transition:opacity .35s ease;
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  z-index:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:opacity .35s ease;
   filter:brightness(1.05) contrast(1.05) saturate(1.05);
 }
-.card > *:not(.card-bg){ position:relative; z-index:1; }
+.card > *:not(.card-bg){ position:relative; z-index:2; }
 
 /* Brushed reflection overlay */
 .brushed{
-  position:absolute; inset:-10%; border-radius:inherit; pointer-events:none; opacity:.25;
+  position:absolute;
+  inset:-10%;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:.25;
   background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.15) 38%,rgba(255,255,255,.25) 54%,transparent 72%);
   filter:blur(10px);
+  z-index:3;
+  mix-blend-mode:screen;
 }
 
 /* Top: Logo + Titles */
-.card-top{ position:absolute; top:22px; left:28px; display:flex; align-items:center; gap:12px; }
+.card-top{
+  position:absolute;
+  top:22px;
+  left:28px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 .card-logo{ width:48px; height:48px; object-fit:contain; }
 .card-titles{ display:flex; flex-direction:column; line-height:1.1; }
 .main-title{ font-weight:800; font-size:22px; letter-spacing:1.2px; margin:0; }
 .sub-title{ font-size:14px; font-weight:700; opacity:.95; margin-top:2px; }
 
 /* Avatar + Name + Role */
-.avatar{ position:absolute; bottom:36px; left:34px; display:flex; align-items:center; justify-content:center; }
+.avatar{
+  position:absolute;
+  bottom:36px;
+  left:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 .avatar-frame{
-  width:86px; height:86px; border-radius:50%; overflow:hidden;
+  width:86px; height:86px; border-radius:50%;
   background:rgba(255,255,255,0.1);
   box-shadow:inset 0 0 0 2px rgba(255,255,255,0.15);
+  overflow:hidden;
   display:flex; align-items:center; justify-content:center;
 }
-.avatar-frame img{ width:80%; height:80%; object-fit:contain; mix-blend-mode:lighten; }
-.photo-placeholder{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12px; letter-spacing:.8px; color:rgba(255,255,255,.7); }
+.avatar-frame img{
+  width:80%; height:80%;
+  object-fit:contain;
+  mix-blend-mode:lighten;
+}
+.photo-placeholder{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  letter-spacing:.8px;
+  color:rgba(255,255,255,.7);
+}
 
-.card-bottom{ position:absolute; bottom:50px; left:145px; display:flex; flex-direction:column; gap:4px; }
+.card-bottom{
+  position:absolute;
+  bottom:50px;
+  left:145px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
 .name{ font-size:21px; font-weight:800; letter-spacing:.6px; margin:0; }
 .role{ font-size:13px; letter-spacing:1.8px; opacity:.9; margin:0; }
 
 /* CONTROLS */
-.controls{ background:#0e1320; border:1px solid #1e2740; border-radius:16px; padding:16px; box-shadow:0 16px 36px rgba(0,0,0,.35); }
+.controls{
+  background:#0e1320;
+  border:1px solid #1e2740;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 16px 36px rgba(0,0,0,.35);
+}
 .control{ display:grid; gap:6px; margin-bottom:12px; font-size:13px; }
-.control input,.control select{ background:#0c1220; color:#e9efff; border:1px solid #222a3b; border-radius:10px; padding:10px; }
+.control input,.control select{
+  background:#0c1220;
+  color:#e9efff;
+  border:1px solid #222a3b;
+  border-radius:10px;
+  padding:10px;
+}
 
 /* Font dropdown previews */
 #fontSelect{ font-family:'Poppins',sans-serif; font-weight:600; background:#0f1528; color:#fff; border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:10px; width:100%; cursor:pointer; }
 #fontSelect option{ background:#0f1528; color:#fff; padding:8px; }
-#fontSelect option[value="Poppins"]{font-family:'Poppins',sans-serif;}
-#fontSelect option[value="Orbitron"]{font-family:'Orbitron',sans-serif;}
-#fontSelect option[value="Montserrat"]{font-family:'Montserrat',sans-serif;}
-#fontSelect option[value="Raleway"]{font-family:'Raleway',sans-serif;}
-#fontSelect option[value="Exo 2"]{font-family:'Exo 2',sans-serif;}
-#fontSelect option[value="Rajdhani"]{font-family:'Rajdhani',sans-serif;}
-#fontSelect option[value="Cinzel"]{font-family:'Cinzel',serif;}
-#fontSelect option[value="Rubik"]{font-family:'Rubik',sans-serif;}
-#fontSelect option[value="Outfit"]{font-family:'Outfit',sans-serif;}
-#fontSelect option[value="Zen Dots"]{font-family:'Zen Dots',cursive;}
-#fontSelect option[value="Bebas Neue"]{font-family:'Bebas Neue',sans-serif;}
-#fontSelect option[value="Teko"]{font-family:'Teko',sans-serif;}
 
 /* Themes selector */
 .themes h3{ margin:8px 0; font-size:14px; }
@@ -105,7 +167,7 @@ body {
 }
 .theme-btn:hover{ transform:translateY(-2px) scale(1.02); }
 
-/* Button chips */
+/* Buttons palette */
 .theme-btn.black{background:linear-gradient(145deg,#2b2b2b,#1b1b1b)}
 .theme-btn.silver{background:linear-gradient(145deg,#e3e3e3,#cfcfcf); color:#111}
 .theme-btn.gold{background:linear-gradient(145deg,#ffd76a,#dba400); color:#111}
@@ -127,146 +189,45 @@ button{ cursor:pointer; border:none; border-radius:14px; font-weight:700; paddin
 .share{ background:linear-gradient(135deg,#111827,#0b77e3); color:#fff; }
 
 /* FOOTER */
-.footer-text{ text-align:center; opacity:.75; font-size:13px; padding:18px 0; border-top:1px solid rgba(255,255,255,.08); margin-top:12px; }
-
-/* CARD THEMES */
-.card.theme-default{ background:linear-gradient(145deg,#bfbfbf,#a8a8a8); color:#111; }
-.card.theme-black  { background:linear-gradient(145deg,#2a2a2a,#1a1a1a); color:#fff; }
-.card.theme-aqua   { background:linear-gradient(145deg,#00a2ff,#66ccff); color:#fff; }
-.card.theme-violet { background:linear-gradient(145deg,#8b5cf6,#c084fc); color:#fff; }
-.card.theme-neon   { background:linear-gradient(145deg,#00d4ff,#9b59ff); color:#fff; }
-.card.theme-emerald{ background:linear-gradient(145deg,#00c79f,#22e3b9); color:#fff; }
-.card.theme-crimson{ background:linear-gradient(145deg,#e63946,#ff6f61); color:#fff; }
-.card.theme-rose   { background:linear-gradient(145deg,#ff7eb9,#ffb3d9); color:#fff; }
-.card.theme-sunset { background:linear-gradient(145deg,#ff784f,#ffb37a); color:#fff; }
-.card.theme-silver { background:linear-gradient(145deg,#f0f0f0,#d7d7d7); color:#111; }
-.card.theme-gold   { background:linear-gradient(145deg,#ffcf33,#ffb347); color:#111; }
-
-/* Force readable text on silver/gold */
-.card.theme-silver *,.card.theme-gold *{ color:#111 !important; text-shadow:none !important; }
-
-/* SYNC PAGE BACKGROUND */
-body.theme-black  { background: radial-gradient(circle at 70% 0%, rgba(50,50,50,.2), transparent 60%), #0a0a0a; }
-body.theme-silver { background: radial-gradient(circle at 70% 0%, rgba(255,255,255,.25), transparent 60%), #e3e3e3; color:#111; }
-body.theme-gold   { background: radial-gradient(circle at 70% 0%, rgba(255,220,90,.2), transparent 60%), #cfa400; }
-body.theme-aqua   { background: radial-gradient(circle at 70% 0%, rgba(0,180,255,.15), transparent 60%), #021628; }
-body.theme-violet { background: radial-gradient(circle at 70% 0%, rgba(150,120,255,.2), transparent 60%), #1b0f2d; }
-body.theme-neon   { background: radial-gradient(circle at 70% 0%, rgba(0,200,255,.2), transparent 60%), #0b0220; }
-body.theme-emerald{ background: radial-gradient(circle at 70% 0%, rgba(0,230,160,.2), transparent 60%), #00231a; }
-body.theme-crimson{ background: radial-gradient(circle at 70% 0%, rgba(255,60,60,.2), transparent 60%), #250000; }
-body.theme-rose   { background: radial-gradient(circle at 70% 0%, rgba(255,120,180,.2), transparent 60%), #2b0012; }
-body.theme-sunset { background: radial-gradient(circle at 70% 0%, rgba(255,130,70,.2), transparent 60%), #230a00; }
-
-/* ==========================================================
-   🧩 FINAL FIX — Prevent theme background resets or layout shifts
-   Keeps RE 3D Member Card layout stable for all 15 themes
-   ========================================================== */
-
-/* Main card base remains a neutral canvas */
-.card {
-  position: relative;
-  overflow: hidden;
-  z-index: 5;
-  border-radius: 22px;
-  transform-style: preserve-3d;
-  background: none !important; /* remove direct backgrounds */
+.footer-text{
+  text-align:center;
+  opacity:.75;
+  font-size:13px;
+  padding:18px 0;
+  border-top:1px solid rgba(255,255,255,.08);
+  margin-top:12px;
 }
 
-/* Create a background layer (theme-controlled) */
+/* =====================================================
+   ✅ FINAL FIX — NO-SHIFT THEMES VIA ::BEFORE LAYER
+   ===================================================== */
 .card::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
   background: var(--theme-bg, linear-gradient(145deg,#bfbfbf,#a8a8a8));
-  z-index: 0;
+  z-index: 1;
   transition: background 0.6s ease;
 }
 
-/* Ensure real content always stays above background */
-.card > * {
-  position: relative;
-  z-index: 2;
-}
+/* --- THEME COLORS VIA VARIABLES --- */
 
-/* Maintain reflection layer correctly */
-.brushed {
-  z-index: 3;
-  mix-blend-mode: screen;
-}
-
-/* Avatar, logo, and text positions locked */
-.card-top {
-  position: absolute;
-  top: 22px;
-  left: 28px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.card-logo { width: 48px; height: 48px; object-fit: contain; }
-.card-titles { line-height: 1.1; }
-.main-title { font-weight: 800; font-size: 22px; letter-spacing: 1.2px; margin: 0; }
-.sub-title { font-size: 14px; font-weight: 700; margin-top: 2px; opacity: .95; }
-
-.avatar {
-  position: absolute;
-  bottom: 36px;
-  left: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.avatar-frame {
-  width: 86px; height: 86px; border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.15);
-  overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-}
-.avatar-frame img {
-  width: 80%; height: 80%; object-fit: contain; mix-blend-mode: lighten;
-}
-.card-bottom {
-  position: absolute;
-  bottom: 50px;
-  left: 145px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.name {
-  font-size: 21px;
-  font-weight: 800;
-  letter-spacing: .6px;
-}
-.role {
-  font-size: 13px;
-  letter-spacing: 1.8px;
-  opacity: .9;
-}
-
-/* Mobile tweak */
-@media (max-width:600px) {
-  .card { width: 90%; height: auto; }
-  .card-top { top: 18px; left: 20px; }
-  .avatar { bottom: 28px; left: 24px; }
-  .card-bottom { bottom: 38px; left: 120px; }
-}
-
-/* 🎨 NEW: Assign theme colors via CSS variables instead of direct backgrounds */
+/* Metallic */
 .theme-black  { --theme-bg: linear-gradient(145deg,#2b2b2b,#1b1b1b); color:#fff; }
 .theme-silver { --theme-bg: linear-gradient(145deg,#f0f0f0,#d7d7d7); color:#111; }
 .theme-gold   { --theme-bg: linear-gradient(145deg,#ffd76a,#dba400); color:#111; }
 .theme-emerald{ --theme-bg: linear-gradient(145deg,#00c79f,#22e3b9); color:#fff; }
 .theme-neon   { --theme-bg: linear-gradient(145deg,#00d4ff,#7f00ff); color:#fff; }
 
+/* Anime */
 .theme-gojo   { --theme-bg: linear-gradient(145deg,#89f7fe,#66a6ff); color:#111; }
 .theme-sakura { --theme-bg: linear-gradient(145deg,#ffb7ce,#ffcde3); color:#111; }
 .theme-zenitsu{ --theme-bg: linear-gradient(145deg,#ffe259,#ffa751); color:#111; }
 .theme-tanjiro{ --theme-bg: linear-gradient(145deg,#00b4db,#0083b0); color:#fff; }
 .theme-rinnegan{--theme-bg: linear-gradient(145deg,#4b0082,#8a2be2); color:#fff; }
 
+/* Cosmic */
 .theme-astralnova{--theme-bg:linear-gradient(145deg,#1a2a6c,#b21f1f,#fdbb2d); color:#fff;}
 .theme-phoenix{--theme-bg:linear-gradient(145deg,#ff512f,#dd2476); color:#fff;}
 .theme-lunarfrost{--theme-bg:linear-gradient(145deg,#83a4d4,#b6fbff); color:#111;}
