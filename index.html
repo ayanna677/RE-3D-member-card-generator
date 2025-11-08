@@ -4,10 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>3D Member Card Generator</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="script.js?v=9"></script>
+
+  <!-- ✅ Corrected stylesheet link -->
+  <link rel="stylesheet" href="style.css?v=9" />
+
+  <!-- Scripts -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script defer src="script.js?v=11"></script>
 </head>
+
 <body>
   <header class="site-header">
     <h1>3D Member Card Generator</h1>
@@ -23,7 +31,7 @@
           <div class="brushed"></div>
 
           <div class="card-top">
-            <img src="logo.png" alt="RE Logo" class="card-logo">
+            <img src="logo.png" alt="RE Logo" class="card-logo" />
             <div class="card-titles">
               <div class="main-title">MEMBER PASS</div>
               <div class="sub-title">RE</div>
@@ -32,7 +40,7 @@
 
           <div class="avatar">
             <div class="avatar-frame">
-              <img id="avatarImg" src="https://api.dicebear.com/9.x/identicon/svg?seed=RE" alt="Avatar">
+              <img id="avatarImg" src="https://api.dicebear.com/9.x/identicon/svg?seed=RE" alt="Avatar" />
               <div id="photoPlaceholder" class="photo-placeholder">PHOTO</div>
             </div>
           </div>
@@ -50,7 +58,7 @@
     <aside class="controls">
       <label class="control">
         <span>Member Name</span>
-        <input id="nameInput" type="text" placeholder="Enter name" value="LALA">
+        <input id="nameInput" type="text" placeholder="Enter name" value="LALA" />
       </label>
 
       <label class="control">
@@ -66,13 +74,13 @@
 
       <label class="control">
         <span>Photo / Logo</span>
-        <input id="photoInput" type="file" accept="image/*">
+        <input id="photoInput" type="file" accept="image/*" />
         <small id="photoOk" hidden>✓ Photo uploaded</small>
       </label>
 
       <label class="control">
         <span>Card Background</span>
-        <input id="cardBgInput" type="file" accept="image/*">
+        <input id="cardBgInput" type="file" accept="image/*" />
         <small id="cardBgOk" hidden>✓ Background set</small>
       </label>
 
@@ -103,8 +111,5 @@
   </main>
 
   <footer class="footer-text">© 2025 RE Community</footer>
-
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="script.js?v=11"></script>
 </body>
 </html>
