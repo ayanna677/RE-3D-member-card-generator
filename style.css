@@ -157,9 +157,45 @@ body.theme-crimson{ background: radial-gradient(circle at 70% 0%, rgba(255,60,60
 body.theme-rose   { background: radial-gradient(circle at 70% 0%, rgba(255,120,180,.2), transparent 60%), #2b0012; }
 body.theme-sunset { background: radial-gradient(circle at 70% 0%, rgba(255,130,70,.2), transparent 60%), #230a00; }
 
-/* --- FIX: RE 3D Card Position Alignment (Final Stable Layout) --- */
+/* ==========================================================
+   🧩 FINAL FIX — Prevent theme background resets or layout shifts
+   Keeps RE 3D Member Card layout stable for all 15 themes
+   ========================================================== */
 
-/* Top section (Logo + Member Pass + RE) */
+/* Main card base remains a neutral canvas */
+.card {
+  position: relative;
+  overflow: hidden;
+  z-index: 5;
+  border-radius: 22px;
+  transform-style: preserve-3d;
+  background: none !important; /* remove direct backgrounds */
+}
+
+/* Create a background layer (theme-controlled) */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--theme-bg, linear-gradient(145deg,#bfbfbf,#a8a8a8));
+  z-index: 0;
+  transition: background 0.6s ease;
+}
+
+/* Ensure real content always stays above background */
+.card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Maintain reflection layer correctly */
+.brushed {
+  z-index: 3;
+  mix-blend-mode: screen;
+}
+
+/* Avatar, logo, and text positions locked */
 .card-top {
   position: absolute;
   top: 22px;
@@ -167,36 +203,12 @@ body.theme-sunset { background: radial-gradient(circle at 70% 0%, rgba(255,130,7
   display: flex;
   align-items: center;
   gap: 12px;
-  z-index: 5;
 }
+.card-logo { width: 48px; height: 48px; object-fit: contain; }
+.card-titles { line-height: 1.1; }
+.main-title { font-weight: 800; font-size: 22px; letter-spacing: 1.2px; margin: 0; }
+.sub-title { font-size: 14px; font-weight: 700; margin-top: 2px; opacity: .95; }
 
-.card-logo {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-}
-
-.card-titles {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-}
-
-.main-title {
-  font-weight: 800;
-  font-size: 22px;
-  letter-spacing: 1.2px;
-  margin: 0;
-}
-
-.sub-title {
-  font-size: 14px;
-  font-weight: 700;
-  opacity: 0.95;
-  margin-top: 2px;
-}
-
-/* Avatar and frame (bottom left corner) */
 .avatar {
   position: absolute;
   bottom: 36px;
@@ -204,29 +216,17 @@ body.theme-sunset { background: radial-gradient(circle at 70% 0%, rgba(255,130,7
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 5;
 }
-
 .avatar-frame {
-  width: 86px;
-  height: 86px;
-  border-radius: 50%;
-  overflow: hidden;
+  width: 86px; height: 86px; border-radius: 50%;
   background: rgba(255,255,255,0.1);
   box-shadow: inset 0 0 0 2px rgba(255,255,255,0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
 }
-
 .avatar-frame img {
-  width: 80%;
-  height: 80%;
-  object-fit: contain;
-  mix-blend-mode: lighten;
+  width: 80%; height: 80%; object-fit: contain; mix-blend-mode: lighten;
 }
-
-/* Name + Role (bottom right of avatar) */
 .card-bottom {
   position: absolute;
   bottom: 50px;
@@ -234,51 +234,41 @@ body.theme-sunset { background: radial-gradient(circle at 70% 0%, rgba(255,130,7
   display: flex;
   flex-direction: column;
   gap: 4px;
-  z-index: 5;
 }
-
 .name {
   font-size: 21px;
   font-weight: 800;
-  letter-spacing: 0.6px;
-  margin: 0;
+  letter-spacing: .6px;
 }
-
 .role {
   font-size: 13px;
   letter-spacing: 1.8px;
-  opacity: 0.9;
-  margin: 0;
+  opacity: .9;
 }
 
-/* Ensure these positions don't get shifted by new backgrounds */
-.card > * {
-  position: relative;
-  z-index: 5;
+/* Mobile tweak */
+@media (max-width:600px) {
+  .card { width: 90%; height: auto; }
+  .card-top { top: 18px; left: 20px; }
+  .avatar { bottom: 28px; left: 24px; }
+  .card-bottom { bottom: 38px; left: 120px; }
 }
 
-.card-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
+/* 🎨 NEW: Assign theme colors via CSS variables instead of direct backgrounds */
+.theme-black  { --theme-bg: linear-gradient(145deg,#2b2b2b,#1b1b1b); color:#fff; }
+.theme-silver { --theme-bg: linear-gradient(145deg,#f0f0f0,#d7d7d7); color:#111; }
+.theme-gold   { --theme-bg: linear-gradient(145deg,#ffd76a,#dba400); color:#111; }
+.theme-emerald{ --theme-bg: linear-gradient(145deg,#00c79f,#22e3b9); color:#fff; }
+.theme-neon   { --theme-bg: linear-gradient(145deg,#00d4ff,#7f00ff); color:#fff; }
 
-/* Mobile adjustment */
-@media (max-width: 600px) {
-  .card {
-    width: 90%;
-    height: 280px;
-  }
-  .card-top {
-    top: 18px;
-    left: 20px;
-  }
-  .avatar {
-    bottom: 28px;
-    left: 24px;
-  }
-  .card-bottom {
-    bottom: 38px;
-    left: 120px;
-  }
-}
+.theme-gojo   { --theme-bg: linear-gradient(145deg,#89f7fe,#66a6ff); color:#111; }
+.theme-sakura { --theme-bg: linear-gradient(145deg,#ffb7ce,#ffcde3); color:#111; }
+.theme-zenitsu{ --theme-bg: linear-gradient(145deg,#ffe259,#ffa751); color:#111; }
+.theme-tanjiro{ --theme-bg: linear-gradient(145deg,#00b4db,#0083b0); color:#fff; }
+.theme-rinnegan{--theme-bg: linear-gradient(145deg,#4b0082,#8a2be2); color:#fff; }
+
+.theme-astralnova{--theme-bg:linear-gradient(145deg,#1a2a6c,#b21f1f,#fdbb2d); color:#fff;}
+.theme-phoenix{--theme-bg:linear-gradient(145deg,#ff512f,#dd2476); color:#fff;}
+.theme-lunarfrost{--theme-bg:linear-gradient(145deg,#83a4d4,#b6fbff); color:#111;}
+.theme-abyss{--theme-bg:linear-gradient(145deg,#000000,#434343); color:#fff;}
+.theme-aurora{--theme-bg:linear-gradient(145deg,#00c6ff,#0072ff); color:#fff;}
