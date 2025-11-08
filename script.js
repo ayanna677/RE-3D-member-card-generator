@@ -21,20 +21,30 @@ window.addEventListener("load", () => {
   const THEMES = ["default","black","silver","gold","aqua","violet","neon","emerald","crimson","rose","sunset"];
 
   function applyTheme(theme) {
-    // 1) update card style
-    card.className = `card theme-${theme}`;
+  // 1️⃣ Update card class
+  card.className = `card theme-${theme}`;
 
-    // 2) sync body background
-    document.body.classList.remove(...THEMES.map(t => `theme-${t}`));
-    document.body.classList.add(`theme-${theme}`);
+  // 2️⃣ Sync body background
+  document.body.classList.remove(...THEMES.map(t => `theme-${t}`));
+  document.body.classList.add(`theme-${theme}`);
 
-    // 3) fix contrast for light themes
-    const isLight = (theme === "silver" || theme === "gold");
-    card.querySelectorAll(".main-title,.sub-title,.name,.role").forEach(el => {
-      el.style.color = isLight ? "#111" : "#fff";
-      el.style.textShadow = isLight ? "none" : "0 2px 6px rgba(0,0,0,.45)";
-    });
+  // 3️⃣ Detect if light theme (for better contrast)
+  const isLight = theme === "silver" || theme === "gold";
+
+  // 4️⃣ Set text color & shadow contrast
+  card.querySelectorAll(".main-title, .sub-title, .name, .role").forEach(el => {
+    el.style.color = isLight ? "#111" : "#fff";
+    el.style.textShadow = isLight ? "none" : "0 2px 6px rgba(0,0,0,.45)";
+  });
+
+  // 5️⃣ Optional: adjust avatar ring color for light themes
+  const avatarFrame = document.querySelector(".avatar-frame");
+  if (avatarFrame) {
+    avatarFrame.style.boxShadow = isLight
+      ? "inset 0 0 0 2px rgba(0,0,0,0.2)"
+      : "inset 0 0 0 2px rgba(255,255,255,0.15)";
   }
+}
 
   // Name
   nameInput.addEventListener("input", () => {
