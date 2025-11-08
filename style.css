@@ -85,8 +85,44 @@ body {
   filter: blur(8px);
 }
 
-/* --- LOGO + MEMBER PASS --- */
+/* --- LOGO + MEMBER PASS + RE --- */
 .card-top {
+  position: absolute;
+  top: 26px;
+  left: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.card-logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  margin-bottom: 4px;
+}
+
+.card-titles {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.main-title {
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 1.2px;
+  margin: 0;
+}
+
+.sub-title {
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.9;
+  margin-top: 1px;
+}
+
   position: absolute;
   top: 22px;
   left: 28px;
@@ -120,50 +156,56 @@ body {
 /* --- AVATAR --- */
 .avatar {
   position: absolute;
-  bottom: 34px;
-  left: 32px;
+  bottom: 40px;
+  left: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .avatar-frame {
-  width: 86px;
-  height: 86px;
-  border-radius: 50%;
+  width: 78px;
+  height: 78px;
+  border-radius: 10px;
   overflow: hidden;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.12);
   box-shadow: inset 0 0 0 2px rgba(255,255,255,0.15);
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .avatar-frame img {
-  width: 80%;
-  height: 80%;
-  object-fit: contain;
-  mix-blend-mode: lighten;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* --- NAME + ROLE --- */
 .card-bottom {
   position: absolute;
-  bottom: 48px;
-  left: 140px;
+  bottom: 50px;
+  left: 130px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: flex-start;
+  justify-content: center;
 }
+
 .name {
-  font-size: 21px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 700;
   letter-spacing: 0.6px;
   margin: 0;
+  color: #fff;
 }
+
 .role {
   font-size: 13px;
-  letter-spacing: 1.8px;
+  letter-spacing: 2px;
   opacity: 0.88;
-  margin: 0;
+  margin-top: 2px;
+  color: #fff;
 }
 
 /* CONTROLS PANEL */
