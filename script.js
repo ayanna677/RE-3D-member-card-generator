@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
+  console.log("✅ JS Loaded"); // check in console to confirm script runs
+
   const nameInput   = document.getElementById("nameInput");
   const fontSelect  = document.getElementById("fontSelect");
   const photoInput  = document.getElementById("photoInput");
@@ -18,47 +20,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const THEMES = ["default","black","silver","gold","aqua","violet","neon","emerald","crimson","rose","sunset"];
 
-  // === Apply theme & sync background ===
-  const applyTheme = (theme) => {
-    card.className = `card theme-${theme}`;
-    document.body.classList.remove(...THEMES.map(t => `theme-${t}`));
-    document.body.classList.add(`theme-${theme}`);
+  function applyTheme(theme) {
+  // 1️⃣ Update card class
+  card.className = `card theme-${theme}`;
 
-    // Text contrast for light themes
-    const isLight = (theme === "silver" || theme === "gold");
-    card.querySelectorAll(".main-title,.sub-title,.name,.role").forEach(el => {
-      el.style.color = isLight ? "#111" : "#fff";
-      el.style.textShadow = isLight ? "none" : "0 2px 6px rgba(0,0,0,.45)";
-    });
-  };
+  // 2️⃣ Sync body background
+  document.body.classList.remove(...THEMES.map(t => `theme-${t}`));
+  document.body.classList.add(`theme-${theme}`);
 
-  // === Member Name ===
+  // 3️⃣ Detect if light theme (for better contrast)
+  const isLight = theme === "silver" || theme === "gold";
+
+  // 4️⃣ Set text color & shadow contrast
+  card.querySelectorAll(".main-title, .sub-title, .name, .role").forEach(el => {
+    el.style.color = isLight ? "#111" : "#fff";
+    el.style.textShadow = isLight ? "none" : "0 2px 6px rgba(0,0,0,.45)";
+  });
+
+  // 5️⃣ Optional: adjust avatar ring color for light themes
+  const avatarFrame = document.querySelector(".avatar-frame");
+  if (avatarFrame) {
+    avatarFrame.style.boxShadow = isLight
+      ? "inset 0 0 0 2px rgba(0,0,0,0.2)"
+      : "inset 0 0 0 2px rgba(255,255,255,0.15)";
+  }
+}
+
+  // Name
   nameInput.addEventListener("input", () => {
     cardName.textContent = nameInput.value.trim() || "LALA";
   });
 
-  // === Font Change ===
+  // Font
   fontSelect.addEventListener("change", () => {
     card.style.fontFamily = `'${fontSelect.value}', sans-serif`;
   });
 
-  // === Photo Upload ===
+  // Photo upload
   photoInput.addEventListener("change", (e) => {
-    const f = e.target.files?.[0]; if (!f) return;
+    const f = e.target.files?.[0];
+    if (!f) return;
     const r = new FileReader();
     r.onload = () => {
       avatarImg.src = r.result;
-      avatarImg.style.objectFit = "contain";
-      avatarImg.style.mixBlendMode = "lighten";
       placeholder.style.opacity = "0";
       photoOk.hidden = false;
     };
     r.readAsDataURL(f);
   });
 
-  // === Inside-Card Background ===
+  // Card background
   cardBgInput.addEventListener("change", (e) => {
-    const f = e.target.files?.[0]; if (!f) return;
+    const f = e.target.files?.[0];
+    if (!f) return;
     const r = new FileReader();
     r.onload = () => {
       cardBg.style.backgroundImage = `url('${r.result}')`;
@@ -68,53 +82,51 @@ document.addEventListener("DOMContentLoaded", () => {
     r.readAsDataURL(f);
   });
 
-  // === Theme Buttons ===
+  // Theme buttons
   document.querySelectorAll(".theme-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      applyTheme(btn.dataset.theme);
-    });
+    btn.addEventListener("click", () => applyTheme(btn.dataset.theme));
   });
 
-  // === Surprise Me Button (random theme) ===
-  const surprise = document.createElement("button");
-  surprise.textContent = "🎨 Surprise Me";
-  surprise.className = "theme-btn random";
-  document.querySelector(".theme-grid").appendChild(surprise);
-  surprise.addEventListener("click", () => {
-    const randomTheme = THEMES[Math.floor(Math.random() * THEMES.length)];
-    applyTheme(randomTheme);
-  });
-
-  // === Reset ===
+  // Reset
   resetBtn.addEventListener("click", () => {
-    nameInput.value = "LALA"; cardName.textContent = "LALA";
-    fontSelect.value = "Poppins"; card.style.fontFamily = "";
-    photoInput.value = ""; photoOk.hidden = true; placeholder.style.opacity = "1";
+    nameInput.value = "LALA";
+    cardName.textContent = "LALA";
+    fontSelect.value = "Poppins";
+    card.style.fontFamily = "";
+    photoInput.value = "";
+    photoOk.hidden = true;
+    placeholder.style.opacity = "1";
     avatarImg.src = "https://api.dicebear.com/9.x/identicon/svg?seed=RE";
-    cardBgInput.value = ""; cardBgOk.hidden = true; cardBg.style.backgroundImage = ""; cardBg.style.opacity = "0";
+    cardBgInput.value = "";
+    cardBgOk.hidden = true;
+    cardBg.style.backgroundImage = "";
+    cardBg.style.opacity = "0";
     applyTheme("default");
     shareBtn.hidden = true;
   });
 
-  // === 3D Tilt ===
-  let rect = null; 
-  const recalc = () => rect = tiltWrap.getBoundingClientRect(); 
+  // 3D tilt
+  let rect = null;
+  const recalc = () => rect = tiltWrap.getBoundingClientRect();
   recalc();
   addEventListener("resize", recalc);
+
   tiltWrap.addEventListener("mousemove", (e) => {
     if (!rect) return;
-    const cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
-    const dx = (e.clientX - cx) / (rect.width/2);
-    const dy = (e.clientY - cy) / (rect.height/2);
-    card.style.transform = `rotateX(${(-dy*12).toFixed(2)}deg) rotateY(${(dx*12).toFixed(2)}deg)`;
-  });
-  tiltWrap.addEventListener("mouseleave", () => { 
-    card.style.transform = "rotateX(0) rotateY(0)"; 
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    card.style.transform = `rotateX(${(-dy * 12).toFixed(2)}deg) rotateY(${(dx * 12).toFixed(2)}deg)`;
   });
 
-  // === Download PNG + Show Share ===
+  tiltWrap.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateX(0) rotateY(0)";
+  });
+
+  // Download + Share
   downloadBtn.addEventListener("click", async () => {
-    downloadBtn.disabled = true; 
+    downloadBtn.disabled = true;
     downloadBtn.textContent = "Rendering…";
     try {
       const canvas = await html2canvas(card, { backgroundColor: null, scale: 2, useCORS: true });
@@ -124,28 +136,16 @@ document.addEventListener("DOMContentLoaded", () => {
       a.click();
       shareBtn.hidden = false;
     } finally {
-      downloadBtn.disabled = false; 
+      downloadBtn.disabled = false;
       downloadBtn.textContent = "Download PNG";
     }
   });
 
-  // === Share on X (Twitter) ===
   shareBtn.addEventListener("click", () => {
     const text = `Just generated my RE 3D MEMBER CARD\nYou can make your own card here: https://re-3d-member-card-generator.vercel.app/`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   });
 
-  // === Copy Link Button (appears after share) ===
-  const copyBtn = document.createElement("button");
-  copyBtn.textContent = "📋 Copy Site Link";
-  copyBtn.className = "ghost";
-  document.querySelector(".right-actions").appendChild(copyBtn);
-  copyBtn.addEventListener("click", () => {
-    navigator.clipboard.writeText("https://re-3d-member-card-generator.vercel.app/");
-    copyBtn.textContent = "✅ Link Copied!";
-    setTimeout(() => (copyBtn.textContent = "📋 Copy Site Link"), 2000);
-  });
-
-  // === Initial Theme ===
+  // Start with default theme
   applyTheme("default");
 });
