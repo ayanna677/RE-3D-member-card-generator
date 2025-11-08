@@ -5,7 +5,6 @@
 
 /* GLOBAL */
 * { box-sizing: border-box; }
-
 body {
   margin: 0;
   color: #fff;
@@ -17,39 +16,18 @@ body {
 }
 
 /* HEADER */
-.site-header {
-  text-align: center;
-  padding: 24px 10px 6px;
-}
-.site-header h1 {
-  margin: 0 0 6px;
-  font-size: 28px;
-  font-weight: 800;
-}
-.community-line {
-  margin: 0;
-  opacity: .85;
-  color: #c9d1ff;
-}
+.site-header { text-align:center; padding:24px 10px 6px; }
+.site-header h1 { margin:0 0 6px; font-size:28px; font-weight:800; letter-spacing:.8px; }
+.community-line { margin:0; opacity:.85; color:#c9d1ff; }
 
 /* LAYOUT */
-.layout {
-  max-width: 1100px;
-  margin: auto;
-  padding: 18px;
-  display: grid;
-  gap: 24px;
-  grid-template-columns: 1fr 370px;
-}
-@media (max-width:900px) {
-  .layout { grid-template-columns: 1fr; }
-}
-.preview { display: grid; place-items: center; }
-.hint { font-size: 12px; opacity: .75; margin-top: 8px; }
+.layout { max-width:1100px; margin:auto; padding:18px; display:grid; gap:24px; grid-template-columns:1fr 370px; }
+@media (max-width:900px){ .layout{ grid-template-columns:1fr; } }
+.preview { display:grid; place-items:center; }
+.hint { font-size:12px; opacity:.75; margin-top:8px; }
 
-/* -------- CARD -------- */
-.tilt-wrap { perspective: 1200px; }
-
+/* CARD */
+.tilt-wrap { perspective:1200px; }
 .card {
   position: relative;
   width: 520px;
@@ -60,24 +38,22 @@ body {
   border: 1px solid rgba(255,255,255,.08);
   box-shadow: 0 30px 80px rgba(0,0,0,.55);
   transition: transform .15s ease, background .4s ease;
-  transform-style: preserve-3d;
 }
+.card > * { position: relative; z-index: 1; }
 
-/* INTERNAL BACKGROUND */
+/* Background inside card */
 .card-bg {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  z-index: 0;
   background-size: cover;
   background-position: center;
   opacity: 0;
   transition: opacity .35s ease;
-  filter: brightness(1.05) contrast(1.05) saturate(1.05);
+  z-index: 0;
 }
-.card > *:not(.card-bg) { position: relative; z-index: 1; }
 
-/* BRUSHED REFLECTION */
+/* Brushed reflection */
 .brushed {
   position: absolute;
   inset: -10%;
@@ -86,14 +62,13 @@ body {
   opacity: .25;
   background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,.12) 38%, rgba(255,255,255,.2) 54%, transparent 72%);
   filter: blur(8px);
-  mix-blend-mode: screen;
 }
 
-/* --- LOGO + MEMBER PASS --- */
+/* --- TOP SECTION --- */
 .card-top {
   position: absolute;
-  top: 22px;
-  left: 26px;
+  top: 24px;
+  left: 28px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -106,12 +81,12 @@ body {
 .card-titles {
   display: flex;
   flex-direction: column;
-  line-height: 1.15;
+  line-height: 1.1;
 }
 .main-title {
   font-weight: 800;
-  font-size: 23px;
-  letter-spacing: 1.3px;
+  font-size: 24px;
+  letter-spacing: 1.2px;
   margin: 0;
 }
 .sub-title {
@@ -121,11 +96,11 @@ body {
   margin-top: 2px;
 }
 
-/* --- AVATAR + NAME + ROLE --- */
+/* --- AVATAR --- */
 .avatar {
   position: absolute;
   bottom: 34px;
-  left: 34px;
+  left: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,26 +123,29 @@ body {
   mix-blend-mode: lighten;
 }
 
+/* --- NAME + ROLE --- */
 .card-bottom {
   position: absolute;
   bottom: 50px;
-  left: 145px;
+  left: 140px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 .name {
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 800;
   letter-spacing: 0.6px;
+  margin: 0;
 }
 .role {
   font-size: 13px;
-  letter-spacing: 2px;
+  letter-spacing: 1.8px;
   opacity: 0.88;
+  margin: 0;
 }
 
-/* CONTROLS PANEL */
+/* CONTROLS */
 .controls {
   background: #0e1320;
   border: 1px solid #1e2740;
@@ -208,7 +186,7 @@ body {
 }
 .theme-btn:hover { transform: translateY(-2px) scale(1.02); }
 
-/* --- 10 RE Metallic Colors --- */
+/* COLORS */
 .theme-btn.black{background:linear-gradient(145deg,#2b2b2b,#1b1b1b)}
 .theme-btn.silver{background:linear-gradient(145deg,#e3e3e3,#cfcfcf);color:#111}
 .theme-btn.gold{background:linear-gradient(145deg,#ffd76a,#dba400);color:#111}
@@ -220,19 +198,7 @@ body {
 .theme-btn.rose{background:linear-gradient(145deg,#ff7eb9,#ff4181)}
 .theme-btn.sunset{background:linear-gradient(145deg,#ff784f,#ffb37a)}
 
-/* --- SYNC PAGE BACKGROUND --- */
-body.theme-black  { background: radial-gradient(circle at 70% 0%, rgba(50,50,50,.2), transparent 60%), #0a0a0a; }
-body.theme-silver { background: radial-gradient(circle at 70% 0%, rgba(255,255,255,.25), transparent 60%), #e3e3e3; color:#111; }
-body.theme-gold   { background: radial-gradient(circle at 70% 0%, rgba(255,220,90,.2), transparent 60%), #cfa400; }
-body.theme-aqua   { background: radial-gradient(circle at 70% 0%, rgba(0,180,255,.15), transparent 60%), #021628; }
-body.theme-violet { background: radial-gradient(circle at 70% 0%, rgba(150,120,255,.2), transparent 60%), #1b0f2d; }
-body.theme-neon   { background: radial-gradient(circle at 70% 0%, rgba(0,200,255,.2), transparent 60%), #0b0220; }
-body.theme-emerald{ background: radial-gradient(circle at 70% 0%, rgba(0,230,160,.2), transparent 60%), #00231a; }
-body.theme-crimson{ background: radial-gradient(circle at 70% 0%, rgba(255,60,60,.2), transparent 60%), #250000; }
-body.theme-rose   { background: radial-gradient(circle at 70% 0%, rgba(255,120,180,.2), transparent 60%), #2b0012; }
-body.theme-sunset { background: radial-gradient(circle at 70% 0%, rgba(255,130,70,.2), transparent 60%), #230a00; }
-
-/* BUTTONS */
+/* ACTION BUTTONS */
 .actions {
   display: flex;
   justify-content: space-between;
@@ -263,3 +229,34 @@ button {
   border-top: 1px solid rgba(255,255,255,.08);
   margin-top: 12px;
 }
+
+/* CARD THEMES + SYNC BACKGROUNDS */
+.card.theme-black  { background: linear-gradient(145deg,#2a2a2a,#1a1a1a); color:#fff; }
+body.theme-black  { background: radial-gradient(circle at 70% 0%, rgba(50,50,50,.2), transparent 60%), #0a0a0a; }
+
+.card.theme-silver { background: linear-gradient(145deg,#f0f0f0,#d7d7d7); color:#111; }
+body.theme-silver { background: radial-gradient(circle at 70% 0%, rgba(255,255,255,.25), transparent 60%), #e3e3e3; }
+
+.card.theme-gold   { background: linear-gradient(145deg,#ffd76a,#dba400); color:#111; }
+body.theme-gold   { background: radial-gradient(circle at 70% 0%, rgba(255,220,90,.25), transparent 60%), #cfa400; }
+
+.card.theme-aqua   { background: linear-gradient(145deg,#00a2ff,#66ccff); color:#fff; }
+body.theme-aqua   { background: radial-gradient(circle at 70% 0%, rgba(0,180,255,.15), transparent 60%), #021628; }
+
+.card.theme-violet { background: linear-gradient(145deg,#8b5cf6,#c084fc); color:#fff; }
+body.theme-violet { background: radial-gradient(circle at 70% 0%, rgba(150,120,255,.2), transparent 60%), #1b0f2d; }
+
+.card.theme-neon   { background: linear-gradient(145deg,#00d4ff,#9b59ff); color:#fff; }
+body.theme-neon   { background: radial-gradient(circle at 70% 0%, rgba(0,200,255,.2), transparent 60%), #0b0220; }
+
+.card.theme-emerald{ background: linear-gradient(145deg,#00c79f,#22e3b9); color:#fff; }
+body.theme-emerald{ background: radial-gradient(circle at 70% 0%, rgba(0,230,160,.2), transparent 60%), #00231a; }
+
+.card.theme-crimson{ background: linear-gradient(145deg,#e63946,#ff6f61); color:#fff; }
+body.theme-crimson{ background: radial-gradient(circle at 70% 0%, rgba(255,60,60,.2), transparent 60%), #250000; }
+
+.card.theme-rose   { background: linear-gradient(145deg,#ff7eb9,#ffb3d9); color:#fff; }
+body.theme-rose   { background: radial-gradient(circle at 70% 0%, rgba(255,120,180,.2), transparent 60%), #2b0012; }
+
+.card.theme-sunset { background: linear-gradient(145deg,#ff784f,#ffb37a); color:#fff; }
+body.theme-sunset { background: radial-gradient(circle at 70% 0%, rgba(255,130,70,.2), transparent 60%), #230a00; }
