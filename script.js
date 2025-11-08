@@ -118,6 +118,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const text = `Just generated my RE 3D MEMBER CARD\nYou can make your own card here: https://re-3d-member-card-generator.vercel.app/`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   });
+// put near the top of script.js
+const THEMES = ["default","black","silver","gold","aqua","violet","neon","emerald","crimson","rose","sunset"];
+
+function applyTheme(theme){
+  // 1) card theme
+  card.className = `card theme-${theme}`;
+
+  // 2) page background sync
+  document.body.classList.remove(...THEMES.map(t => `theme-${t}`));
+  document.body.classList.add(`theme-${theme}`);
+
+  // 3) readable text on light cards
+  const isLight = (theme === "silver" || theme === "gold");
+  card.querySelectorAll(".main-title,.sub-title,.name,.role").forEach(el=>{
+    el.style.color = isLight ? "#111" : "#fff";
+    el.style.textShadow = isLight ? "none" : "0 2px 6px rgba(0,0,0,.45)";
+  });
+}
+
+// hook buttons (unchanged)
+document.querySelectorAll(".theme-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=> applyTheme(btn.dataset.theme));
+});
 
   // initial state
   applyTheme("default");
