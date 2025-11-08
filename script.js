@@ -1,53 +1,56 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const nameInput    = document.getElementById("nameInput");
-  const fontSelect   = document.getElementById("fontSelect");
-  const photoInput   = document.getElementById("photoInput");
-  const photoOk      = document.getElementById("photoOk");
-  const cardBgInput  = document.getElementById("cardBgInput");
-  const cardBgOk     = document.getElementById("cardBgOk");
-  const resetBtn     = document.getElementById("resetBtn");
-  const downloadBtn  = document.getElementById("downloadBtn");
-  const shareBtn     = document.getElementById("shareBtn");
+  const nameInput = document.getElementById("nameInput");
+  const fontSelect = document.getElementById("fontSelect");
+  const photoInput = document.getElementById("photoInput");
+  const photoOk = document.getElementById("photoOk");
+  const cardBgInput = document.getElementById("cardBgInput");
+  const cardBgOk = document.getElementById("cardBgOk");
+  const resetBtn = document.getElementById("resetBtn");
+  const downloadBtn = document.getElementById("downloadBtn");
+  const shareBtn = document.getElementById("shareBtn");
 
-  const card         = document.getElementById("card");
-  const cardBg       = document.getElementById("cardBg");
-  const cardName     = document.getElementById("cardName");
-  const avatarImg    = document.getElementById("avatarImg");
-  const placeholder  = document.getElementById("photoPlaceholder");
-  const tiltWrap     = document.getElementById("tiltWrap");
+  const card = document.getElementById("card");
+  const cardBg = document.getElementById("cardBg");
+  const cardName = document.getElementById("cardName");
+  const avatarImg = document.getElementById("avatarImg");
+  const placeholder = document.getElementById("photoPlaceholder");
+  const tiltWrap = document.getElementById("tiltWrap");
 
-  // === Page Glow Sync Map ===
+  // Accent colors for glow & background sync
   const glowMap = {
-    default:"rgba(120,120,120,.18)",
-    black:"rgba(180,180,200,.22)",
-    silver:"rgba(255,255,255,.28)",
-    gold:"rgba(255,230,150,.28)",
-    aqua:"rgba(120,190,255,.28)",
-    violet:"rgba(200,150,255,.26)",
-    neon:"rgba(140,170,255,.30)",
-    emerald:"rgba(90,255,190,.26)",
-    crimson:"rgba(255,120,120,.30)",
-    rose:"rgba(255,170,190,.30)",
-    sunset:"rgba(255,180,120,.30)"
+    default: "rgba(120,120,120,.18)",
+    black: "rgba(180,180,200,.22)",
+    silver: "rgba(255,255,255,.28)",
+    gold: "rgba(255,230,150,.28)",
+    aqua: "rgba(120,190,255,.28)",
+    violet: "rgba(200,150,255,.26)",
+    neon: "rgba(140,170,255,.30)",
+    emerald: "rgba(90,255,190,.26)",
+    crimson: "rgba(255,120,120,.30)",
+    rose: "rgba(255,170,190,.30)",
+    sunset: "rgba(255,180,120,.30)"
   };
-  const setAccent = (theme) => {
+
+  const setTheme = (theme) => {
+    document.body.className = `theme-${theme}`;
     const accent = glowMap[theme] || glowMap.default;
     document.documentElement.style.setProperty("--accent", accent);
   };
 
-  // === Name Input ===
+  // === Name ===
   nameInput.addEventListener("input", () => {
     cardName.textContent = nameInput.value.trim() || "LALA";
   });
 
-  // === Font Change ===
+  // === Font ===
   fontSelect.addEventListener("change", () => {
     card.style.fontFamily = `'${fontSelect.value}', sans-serif`;
   });
 
   // === Photo Upload ===
   photoInput.addEventListener("change", (e) => {
-    const f = e.target.files?.[0]; if (!f) return;
+    const f = e.target.files?.[0];
+    if (!f) return;
     const r = new FileReader();
     r.onload = () => {
       avatarImg.src = r.result;
@@ -59,9 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
     r.readAsDataURL(f);
   });
 
-  // === Card Background Upload (inside card only) ===
+  // === Card Background Upload ===
   cardBgInput.addEventListener("change", (e) => {
-    const f = e.target.files?.[0]; if (!f) return;
+    const f = e.target.files?.[0];
+    if (!f) return;
     const r = new FileReader();
     r.onload = () => {
       cardBg.style.backgroundImage = `url('${r.result}')`;
@@ -71,14 +75,14 @@ document.addEventListener("DOMContentLoaded", () => {
     r.readAsDataURL(f);
   });
 
-  // === Theme Buttons (color + background sync) ===
+  // === Theme Buttons ===
   document.querySelectorAll(".theme-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const theme = btn.dataset.theme;
       card.className = `card theme-${theme}`;
-      setAccent(theme);
+      setTheme(theme);
 
-      // Text contrast for light cards
+      // Text contrast fix for light cards
       const isLight = (theme === "silver" || theme === "gold");
       card.querySelectorAll(".main-title,.sub-title,.name,.role").forEach(el => {
         el.style.color = isLight ? "#111" : "#fff";
@@ -87,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // === Reset Button ===
+  // === Reset ===
   resetBtn.addEventListener("click", () => {
     nameInput.value = "LALA";
     cardName.textContent = "LALA";
@@ -102,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cardBg.style.backgroundImage = "";
     cardBg.style.opacity = "0";
     card.className = "card theme-default";
-    setAccent("default");
+    setTheme("default");
     shareBtn.hidden = true;
   });
 
@@ -120,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const dy = (e.clientY - cy) / (rect.height / 2);
     card.style.transform = `rotateX(${(-dy * 12).toFixed(2)}deg) rotateY(${(dx * 12).toFixed(2)}deg)`;
   });
+
   tiltWrap.addEventListener("mouseleave", () => {
     card.style.transform = "rotateX(0) rotateY(0)";
   });
