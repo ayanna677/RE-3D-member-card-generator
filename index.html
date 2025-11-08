@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>3D Member Card Generator</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
@@ -14,17 +14,15 @@
   </header>
 
   <main class="layout">
-    <!-- Preview -->
+    <!-- PREVIEW -->
     <section class="preview">
       <div id="tiltWrap" class="tilt-wrap">
-        <div id="card" class="card theme-default" aria-label="RE Member Card">
-          <!-- Card image layer -->
+        <div id="card" class="card theme-default">
           <div id="cardBg" class="card-bg"></div>
-          <!-- Brushed sweep -->
-          <div class="brushed" aria-hidden="true"></div>
+          <div class="brushed"></div>
 
           <div class="card-top">
-            <img src="logo.png" alt="RE Logo" class="card-logo" />
+            <img src="logo.png" alt="RE Logo" class="card-logo">
             <div class="card-titles">
               <div class="main-title">MEMBER PASS</div>
               <div class="sub-title">RE</div>
@@ -33,8 +31,8 @@
 
           <div class="avatar">
             <div class="avatar-frame">
-              <img id="avatarImg" src="https://api.dicebear.com/9.x/identicon/svg?seed=RE" alt="Member photo" />
-              <div class="photo-placeholder" id="photoPlaceholder">PHOTO</div>
+              <img id="avatarImg" src="https://api.dicebear.com/9.x/identicon/svg?seed=RE" alt="Avatar">
+              <div id="photoPlaceholder" class="photo-placeholder">PHOTO</div>
             </div>
           </div>
 
@@ -44,57 +42,52 @@
           </div>
         </div>
       </div>
-      <p class="hint">Hover / move mouse to see brushed reflection ✨</p>
+      <p class="hint">Hover / move mouse to see 3D reflection ✨</p>
     </section>
 
-    <!-- Controls -->
+    <!-- CONTROLS -->
     <aside class="controls">
       <label class="control">
         <span>Member Name</span>
-        <input id="nameInput" type="text" value="LALA" placeholder="Enter name" />
+        <input id="nameInput" type="text" placeholder="Enter name" value="LALA">
       </label>
 
       <label class="control">
         <span>Font</span>
         <select id="fontSelect">
           <option>Poppins</option>
-          <option>Inter</option>
-          <option>Outfit</option>
           <option>Orbitron</option>
-          <option>Exo 2</option>
           <option>Montserrat</option>
-          <option>Rajdhani</option>
           <option>Raleway</option>
-          <option>Rubik</option>
-          <option>Cinzel</option>
+          <option>Exo 2</option>
         </select>
       </label>
 
       <label class="control">
         <span>Photo / Logo</span>
-        <input id="photoInput" type="file" accept="image/*" />
+        <input id="photoInput" type="file" accept="image/*">
         <small id="photoOk" hidden>✓ Photo uploaded</small>
       </label>
 
       <label class="control">
-        <span>Card Background (inside card)</span>
-        <input id="cardBgInput" type="file" accept="image/*" />
-        <small id="cardBgOk" hidden>✓ Card background set</small>
+        <span>Card Background</span>
+        <input id="cardBgInput" type="file" accept="image/*">
+        <small id="cardBgOk" hidden>✓ Background set</small>
       </label>
 
       <div class="themes">
         <h3>RE Metallic Themes</h3>
         <div class="theme-grid">
-          <button class="theme-btn black"   data-theme="black">Titanium Black</button>
-          <button class="theme-btn silver"  data-theme="silver">Platinum Silver</button>
-          <button class="theme-btn gold"    data-theme="gold">Royal Gold</button>
-          <button class="theme-btn aqua"    data-theme="aqua">Azure Pulse</button>
-          <button class="theme-btn violet"  data-theme="violet">Amethyst Mist</button>
-          <button class="theme-btn neon"    data-theme="neon">Cyber Neon</button>
+          <button class="theme-btn black" data-theme="black">Titanium Black</button>
+          <button class="theme-btn silver" data-theme="silver">Platinum Silver</button>
+          <button class="theme-btn gold" data-theme="gold">Royal Gold</button>
+          <button class="theme-btn aqua" data-theme="aqua">Azure Pulse</button>
+          <button class="theme-btn violet" data-theme="violet">Amethyst Mist</button>
+          <button class="theme-btn neon" data-theme="neon">Cyber Neon</button>
           <button class="theme-btn emerald" data-theme="emerald">Emerald Blaze</button>
           <button class="theme-btn crimson" data-theme="crimson">Crimson Flare</button>
-          <button class="theme-btn rose"    data-theme="rose">Rose Quartz</button>
-          <button class="theme-btn sunset"  data-theme="sunset">Sunset Ember</button>
+          <button class="theme-btn rose" data-theme="rose">Rose Quartz</button>
+          <button class="theme-btn sunset" data-theme="sunset">Sunset Ember</button>
         </div>
       </div>
 
@@ -113,4 +106,4 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="script.js"></script>
 </body>
-  </html>
+</html>
