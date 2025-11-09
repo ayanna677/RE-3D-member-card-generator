@@ -236,36 +236,49 @@ button {
   margin-top: 12px;
 }
 
-/* CARD THEMES + SYNC BACKGROUNDS */
-.card.theme-black  { background: linear-gradient(145deg,#2a2a2a,#1a1a1a); color:#fff; }
-body.theme-black  { background: radial-gradient(circle at 70% 0%, rgba(50,50,50,.2), transparent 60%), #0a0a0a; }
+/* ===========================================
+   🌈 RE Soft Glow Background Sync for All Themes
+   =========================================== */
 
-.card.theme-silver { background: linear-gradient(145deg,#f0f0f0,#d7d7d7); color:#111; }
-body.theme-silver { background: radial-gradient(circle at 70% 0%, rgba(255,255,255,.25), transparent 60%), #e3e3e3; }
+/* --- Metallic Themes --- */
+body.theme-black  { background: radial-gradient(circle at 60% 10%, rgba(50,50,50,0.25), transparent 60%), #0a0a0a; }
+body.theme-silver { background: radial-gradient(circle at 60% 10%, rgba(255,255,255,0.25), transparent 60%), #d8d8d8; color:#111; }
+body.theme-gold   { background: radial-gradient(circle at 60% 10%, rgba(255,210,100,0.25), transparent 60%), #caa200; }
+body.theme-aqua   { background: radial-gradient(circle at 60% 10%, rgba(0,180,255,0.25), transparent 60%), #02233c; }
+body.theme-violet { background: radial-gradient(circle at 60% 10%, rgba(150,120,255,0.25), transparent 60%), #231541; }
+body.theme-neon   { background: radial-gradient(circle at 60% 10%, rgba(0,200,255,0.25), transparent 60%), #0c0422; }
+body.theme-emerald{ background: radial-gradient(circle at 60% 10%, rgba(0,230,160,0.25), transparent 60%), #03281e; }
+body.theme-crimson{ background: radial-gradient(circle at 60% 10%, rgba(255,80,80,0.25), transparent 60%), #2b0000; }
+body.theme-rose   { background: radial-gradient(circle at 60% 10%, rgba(255,120,180,0.25), transparent 60%), #3a0014; }
+body.theme-sunset { background: radial-gradient(circle at 60% 10%, rgba(255,140,80,0.25), transparent 60%), #2e0d00; }
 
-.card.theme-gold   { background: linear-gradient(145deg,#ffd76a,#dba400); color:#111; }
-body.theme-gold   { background: radial-gradient(circle at 70% 0%, rgba(255,220,90,.25), transparent 60%), #cfa400; }
+/* --- Anime Themes --- */
+body.theme-gojo {
+  background: radial-gradient(circle at 60% 10%, rgba(120,190,255,0.25), transparent 60%), #0b1a29;
+}
+body.theme-sakura {
+  background: radial-gradient(circle at 60% 10%, rgba(255,180,210,0.25), transparent 60%), #2a1017;
+}
+body.theme-zenitsu {
+  background: radial-gradient(circle at 60% 10%, rgba(255,220,120,0.25), transparent 60%), #1c1300;
+}
+body.theme-tanjiro {
+  background: radial-gradient(circle at 60% 10%, rgba(0,180,220,0.25), transparent 60%), #001b22;
+}
+body.theme-rinnegan {
+  background: radial-gradient(circle at 60% 10%, rgba(140,90,255,0.25), transparent 60%), #1a0828;
+}
 
-.card.theme-aqua   { background: linear-gradient(145deg,#00a2ff,#66ccff); color:#fff; }
-body.theme-aqua   { background: radial-gradient(circle at 70% 0%, rgba(0,180,255,.15), transparent 60%), #021628; }
-
-.card.theme-violet { background: linear-gradient(145deg,#8b5cf6,#c084fc); color:#fff; }
-body.theme-violet { background: radial-gradient(circle at 70% 0%, rgba(150,120,255,.2), transparent 60%), #1b0f2d; }
-
-.card.theme-neon   { background: linear-gradient(145deg,#00d4ff,#9b59ff); color:#fff; }
-body.theme-neon   { background: radial-gradient(circle at 70% 0%, rgba(0,200,255,.2), transparent 60%), #0b0220; }
-
-.card.theme-emerald{ background: linear-gradient(145deg,#00c79f,#22e3b9); color:#fff; }
-body.theme-emerald{ background: radial-gradient(circle at 70% 0%, rgba(0,230,160,.2), transparent 60%), #00231a; }
-
-.card.theme-crimson{ background: linear-gradient(145deg,#e63946,#ff6f61); color:#fff; }
-body.theme-crimson{ background: radial-gradient(circle at 70% 0%, rgba(255,60,60,.2), transparent 60%), #250000; }
-
-.card.theme-rose   { background: linear-gradient(145deg,#ff7eb9,#ffb3d9); color:#fff; }
-body.theme-rose   { background: radial-gradient(circle at 70% 0%, rgba(255,120,180,.2), transparent 60%), #2b0012; }
-
-.card.theme-sunset { background: linear-gradient(145deg,#ff784f,#ffb37a); color:#fff; }
-body.theme-sunset { background: radial-gradient(circle at 70% 0%, rgba(255,130,70,.2), transparent 60%), #230a00; }
+/* --- Granite Themes --- */
+body.theme-ashstone {
+  background: radial-gradient(circle at 60% 10%, rgba(90,90,90,0.25), transparent 60%), #0f0f0f;
+}
+body.theme-moonrock {
+  background: radial-gradient(circle at 60% 10%, rgba(180,180,180,0.25), transparent 60%), #cfcfcf;
+}
+body.theme-pearlgray {
+  background: radial-gradient(circle at 60% 10%, rgba(240,240,240,0.25), transparent 60%), #e8e8e8;
+}
 
 /* ===============================
    🌸  RE × Anime Theme Collection
