@@ -377,3 +377,174 @@ body.theme-moonrock {
 body.theme-pearlgray {
   background: radial-gradient(circle at 70% 0%, rgba(240,240,240,.25), transparent 60%), #ececec;
 }
+
+/* =======================================================
+   ⚙️  RE Metallic + 🪨 Granite Edition with BG Sync
+   ======================================================= */
+
+/* --- TITANIUM BLACK --- */
+.theme-btn.black {
+  background: linear-gradient(145deg,#2b2b2b,#1b1b1b);
+}
+.card.theme-black {
+  background: linear-gradient(145deg,#2b2b2b,#1b1b1b);
+  color:#fff;
+}
+body.theme-black {
+  background: radial-gradient(circle at 70% 0%, rgba(50,50,50,.25), transparent 60%), #0a0a0a;
+}
+
+/* --- PLATINUM SILVER --- */
+.theme-btn.silver {
+  background: linear-gradient(145deg,#e3e3e3,#cfcfcf);
+  color:#111;
+}
+.card.theme-silver {
+  background: linear-gradient(145deg,#e3e3e3,#cfcfcf);
+  color:#111;
+}
+body.theme-silver {
+  background: radial-gradient(circle at 70% 0%, rgba(240,240,240,.35), transparent 60%), #dcdcdc;
+}
+
+/* --- ROYAL GOLD --- */
+.theme-btn.gold {
+  background: linear-gradient(145deg,#ffd76a,#dba400);
+  color:#111;
+}
+.card.theme-gold {
+  background: linear-gradient(145deg,#ffd76a,#dba400);
+  color:#111;
+}
+body.theme-gold {
+  background: radial-gradient(circle at 70% 0%, rgba(255,220,90,.3), transparent 60%), #cfa400;
+}
+
+/* --- AZURE PULSE --- */
+.theme-btn.aqua {
+  background: linear-gradient(145deg,#00aaff,#007bff);
+}
+.card.theme-aqua {
+  background: linear-gradient(145deg,#00aaff,#007bff);
+  color:#fff;
+}
+body.theme-aqua {
+  background: radial-gradient(circle at 70% 0%, rgba(0,180,255,.3), transparent 60%), #021628;
+}
+
+/* --- AMETHYST MIST --- */
+.theme-btn.violet {
+  background: linear-gradient(145deg,#775cff,#b39cff);
+}
+.card.theme-violet {
+  background: linear-gradient(145deg,#775cff,#b39cff);
+  color:#fff;
+}
+body.theme-violet {
+  background: radial-gradient(circle at 70% 0%, rgba(150,120,255,.3), transparent 60%), #1b0f2d;
+}
+
+/* --- CYBER NEON --- */
+.theme-btn.neon {
+  background: linear-gradient(145deg,#00d4ff,#7f00ff);
+}
+.card.theme-neon {
+  background: linear-gradient(145deg,#00d4ff,#7f00ff);
+  color:#fff;
+}
+body.theme-neon {
+  background: radial-gradient(circle at 70% 0%, rgba(0,200,255,.3), transparent 60%), #0b0220;
+}
+
+/* --- EMERALD BLAZE --- */
+.theme-btn.emerald {
+  background: linear-gradient(145deg,#00c79f,#009970);
+}
+.card.theme-emerald {
+  background: linear-gradient(145deg,#00c79f,#009970);
+  color:#fff;
+}
+body.theme-emerald {
+  background: radial-gradient(circle at 70% 0%, rgba(0,230,160,.3), transparent 60%), #00231a;
+}
+
+/* --- CRIMSON FLARE --- */
+.theme-btn.crimson {
+  background: linear-gradient(145deg,#ff3d3d,#ff6b6b);
+}
+.card.theme-crimson {
+  background: linear-gradient(145deg,#ff3d3d,#ff6b6b);
+  color:#fff;
+}
+body.theme-crimson {
+  background: radial-gradient(circle at 70% 0%, rgba(255,60,60,.3), transparent 60%), #250000;
+}
+
+/* --- ROSE QUARTZ --- */
+.theme-btn.rose {
+  background: linear-gradient(145deg,#ff7eb9,#ff4181);
+}
+.card.theme-rose {
+  background: linear-gradient(145deg,#ff7eb9,#ff4181);
+  color:#fff;
+}
+body.theme-rose {
+  background: radial-gradient(circle at 70% 0%, rgba(255,120,180,.3), transparent 60%), #2b0012;
+}
+
+/* --- SUNSET EMBER --- */
+.theme-btn.sunset {
+  background: linear-gradient(145deg,#ff784f,#ffb37a);
+}
+.card.theme-sunset {
+  background: linear-gradient(145deg,#ff784f,#ffb37a);
+  color:#fff;
+}
+body.theme-sunset {
+  background: radial-gradient(circle at 70% 0%, rgba(255,130,70,.3), transparent 60%), #230a00;
+}
+
+/* =============================================
+   🪨 Granite Edition Themes with BG Sync
+   ============================================= */
+
+/* --- ASH STONE --- */
+.theme-btn.ashstone {
+  background: linear-gradient(145deg,#3b3b3b,#2a2a2a);
+}
+.card.theme-ashstone {
+  background: linear-gradient(145deg,#3b3b3b,#2a2a2a);
+  color:#fff;
+  box-shadow: 0 25px 80px rgba(0,0,0,.65);
+}
+body.theme-ashstone {
+  background: radial-gradient(circle at 70% 0%, rgba(90,90,90,.3), transparent 60%), #0e0e0e;
+}
+
+/* --- MOON ROCK --- */
+.theme-btn.moonrock {
+  background: linear-gradient(145deg,#bcbcbc,#9d9d9d);
+  color:#111;
+}
+.card.theme-moonrock {
+  background: linear-gradient(145deg,#bcbcbc,#9d9d9d);
+  color:#111;
+  box-shadow: 0 25px 80px rgba(0,0,0,.45);
+}
+body.theme-moonrock {
+  background: radial-gradient(circle at 70% 0%, rgba(180,180,180,.3), transparent 60%), #d3d3d3;
+}
+
+/* --- PEARL GRAY --- */
+.theme-btn.pearlgray {
+  background: linear-gradient(145deg,#f6f6f6,#dcdcdc);
+  color:#111;
+}
+.card.theme-pearlgray {
+  background: linear-gradient(145deg,#f6f6f6,#dcdcdc);
+  color:#111;
+  box-shadow: 0 25px 80px rgba(0,0,0,.3);
+}
+body.theme-pearlgray {
+  background: radial-gradient(circle at 70% 0%, rgba(240,240,240,.3), transparent 60%), #ececec;
+}
