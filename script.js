@@ -18,7 +18,11 @@ window.addEventListener("load", () => {
   const placeholder = document.getElementById("photoPlaceholder");
   const tiltWrap    = document.getElementById("tiltWrap");
 
-  const THEMES = ["default","black","silver","gold","aqua","violet","neon","emerald","crimson","rose","sunset"];
+ const THEMES = [
+  "default","black","silver","gold","aqua","violet","neon","emerald","crimson","rose","sunset",
+  "gojo","sakura","zenitsu","tanjiro","rinnegan",
+  "ashstone","moonrock","pearlgray"
+];
 
   function applyTheme(theme) {
   // 1️⃣ Update card class
