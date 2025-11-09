@@ -21,16 +21,11 @@
     <section class="preview">
       <div id="tiltWrap" class="tilt-wrap">
         <div id="card" class="card theme-default" aria-label="RE Member Card">
-
           <!-- Card background (inside card only) -->
           <div id="cardBg" class="card-bg"></div>
-
           <!-- Brushed reflection -->
           <div class="brushed" aria-hidden="true"></div>
 
-          <!-- Rank Badge (Dynamic Single Badge) -->
-          <div class="rank-badge newbie">NEWBIE</div>
-          
           <!-- Top: Logo + Titles -->
           <div class="card-top">
             <img src="logo.png" alt="RE Logo" class="card-logo" />
@@ -52,8 +47,6 @@
           <div class="card-bottom">
             <div id="cardName" class="name">LALA</div>
             <div class="role">MEMBER</div>
-
-            <!-- XP bar and Level -->
             <div class="xp-bar">
               <div class="xp-fill" style="width: 70%;"></div>
             </div>
@@ -64,8 +57,8 @@
           <div class="qr">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://re.community/member" alt="QR Code">
           </div>
-
-        </div> <!-- end .card -->
+        </div> <!-- 👈 this closes the .card -->
+        </div>
       </div>
       <p class="hint">Hover / move mouse to see 3D reflection ✨</p>
     </section>
@@ -77,6 +70,7 @@
         <input id="nameInput" type="text" placeholder="Enter name" value="LALA" />
       </label>
 
+      <!-- ✅ Add this new block here -->
       <label class="control">
         <span>Member Level</span>
         <input id="levelInput" type="number" min="1" max="10" value="3" />
@@ -151,4 +145,4 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script defer src="script.js?v=12"></script>
 </body>
-</html>
+  </html>
