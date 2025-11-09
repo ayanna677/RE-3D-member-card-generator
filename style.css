@@ -184,6 +184,20 @@ body {
   border-radius: inherit;
   transition: width .4s ease;
 }
+
+/* XP Glow Animation */
+@keyframes xpGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(0,255,200,0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(0,200,255,0.9));
+  }
+}
+
+.xp-fill {
+  animation: xpGlow 2s ease-in-out infinite;
+}
 .rank {
   font-size: 11px;
   letter-spacing: 1.2px;
