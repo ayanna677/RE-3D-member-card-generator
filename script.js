@@ -158,35 +158,14 @@ window.addEventListener("load", () => {
   const xpFill = document.querySelector(".xp-fill");
   const rank = document.querySelector(".rank");
 
-  const rankBadge = document.querySelector(".rank-badge");
-  
   levelInput.addEventListener("input", () => {
-  const level = parseInt(levelInput.value) || 1;
-  const percent = Math.min(level * 10, 100);
-  xpFill.style.width = `${percent}%`;
-  rank.textContent = `LEVEL ${level}`;
-    
+    const level = parseInt(levelInput.value) || 1;
+    const percent = Math.min(level * 10, 100);
+    xpFill.style.width = `${percent}%`;
+    rank.textContent = `LEVEL ${level}`;
     // ✨ Trigger level-up animation
     rank.classList.remove("level-up");
     void rank.offsetWidth; // restart animation
     rank.classList.add("level-up");
-    
-    // 🏅 Auto badge update based on level
-    if (rankBadge) {
-      rankBadge.classList.remove("newbie", "pro", "elite");
-      rankBadge.removeAttribute("hidden");
-      
-      if (level < 5) {
-        rankBadge.textContent = "NEWBIE";
-        rankBadge.classList.add("newbie");
-      } else if (level < 8) {
-        rankBadge.textContent = "PRO";
-        rankBadge.classList.add("pro");
-      } else {
-        rankBadge.textContent = "ELITE";
-        rankBadge.classList.add("elite");
-      }
-    }
   });
-
-  
+});
