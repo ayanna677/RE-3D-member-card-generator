@@ -597,3 +597,15 @@ body.theme-moonrock {
 body.theme-pearlgray {
   background: radial-gradient(circle at 70% 0%, rgba(240,240,240,.3), transparent 60%), #ececec;
 }
+
+/* ==========================================
+   🌟 Subtle Animated Background Pulse Effect
+   ========================================== */
+@keyframes bgPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.15); }
+}
+
+body[class*="theme-"] {
+  animation: bgPulse 8s ease-in-out infinite;
+}
