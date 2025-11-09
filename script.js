@@ -163,5 +163,9 @@ window.addEventListener("load", () => {
     const percent = Math.min(level * 10, 100);
     xpFill.style.width = `${percent}%`;
     rank.textContent = `LEVEL ${level}`;
+    // ✨ Trigger level-up animation
+    rank.classList.remove("level-up");
+    void rank.offsetWidth; // restart animation
+    rank.classList.add("level-up");
   });
 });
