@@ -152,4 +152,16 @@ window.addEventListener("load", () => {
 
   // Start with default theme
   applyTheme("default");
+  
+  // 🆕 XP Level System
+  const levelInput = document.getElementById("levelInput");
+  const xpFill = document.querySelector(".xp-fill");
+  const rank = document.querySelector(".rank");
+
+  levelInput.addEventListener("input", () => {
+    const level = parseInt(levelInput.value) || 1;
+    const percent = Math.min(level * 10, 100);
+    xpFill.style.width = `${percent}%`;
+    rank.textContent = `LEVEL ${level}`;
+  });
 });
