@@ -266,3 +266,69 @@ body.theme-rose   { background: radial-gradient(circle at 70% 0%, rgba(255,120,1
 
 .card.theme-sunset { background: linear-gradient(145deg,#ff784f,#ffb37a); color:#fff; }
 body.theme-sunset { background: radial-gradient(circle at 70% 0%, rgba(255,130,70,.2), transparent 60%), #230a00; }
+
+/* ===============================
+   🌸  RE × Anime Theme Collection
+   =============================== */
+
+/* Gojo Blue (Jujutsu Kaisen) */
+.theme-btn.gojo {
+  background: linear-gradient(145deg,#89f7fe,#66a6ff);
+}
+.card.theme-gojo {
+  background: linear-gradient(145deg,#89f7fe,#66a6ff);
+  color:#111;
+}
+body.theme-gojo {
+  background: radial-gradient(circle at 70% 0%, rgba(100,180,255,.25), transparent 60%), #091522;
+}
+
+/* Sakura Bloom (Naruto) */
+.theme-btn.sakura {
+  background: linear-gradient(145deg,#ffb7ce,#ffcde3);
+  color:#111;
+}
+.card.theme-sakura {
+  background: linear-gradient(145deg,#ffb7ce,#ffcde3);
+  color:#111;
+}
+body.theme-sakura {
+  background: radial-gradient(circle at 70% 0%, rgba(255,200,230,.25), transparent 60%), #2b1018;
+}
+
+/* Zenitsu Bolt (Demon Slayer) */
+.theme-btn.zenitsu {
+  background: linear-gradient(145deg,#ffe259,#ffa751);
+  color:#111;
+}
+.card.theme-zenitsu {
+  background: linear-gradient(145deg,#ffe259,#ffa751);
+  color:#111;
+}
+body.theme-zenitsu {
+  background: radial-gradient(circle at 70% 0%, rgba(255,220,120,.25), transparent 60%), #201500;
+}
+
+/* Tanjiro Mist (Demon Slayer) */
+.theme-btn.tanjiro {
+  background: linear-gradient(145deg,#00b4db,#0083b0);
+}
+.card.theme-tanjiro {
+  background: linear-gradient(145deg,#00b4db,#0083b0);
+  color:#fff;
+}
+body.theme-tanjiro {
+  background: radial-gradient(circle at 70% 0%, rgba(0,180,220,.25), transparent 60%), #001e24;
+}
+
+/* Rinnegan Void (Naruto) */
+.theme-btn.rinnegan {
+  background: linear-gradient(145deg,#4b0082,#8a2be2);
+}
+.card.theme-rinnegan {
+  background: linear-gradient(145deg,#4b0082,#8a2be2);
+  color:#fff;
+}
+body.theme-rinnegan {
+  background: radial-gradient(circle at 70% 0%, rgba(140,80,255,.25), transparent 60%), #16001f;
+}
