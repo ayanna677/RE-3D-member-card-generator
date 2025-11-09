@@ -83,6 +83,20 @@ body {
   100% { background-position: 200px; }
 }
 
+/* --- Dynamic Badge Colors --- */
+.rank-badge.newbie {
+  background: linear-gradient(145deg,#b0bec5,#90a4ae);
+  color:#111;
+}
+.rank-badge.pro {
+  background: linear-gradient(145deg,#42a5f5,#1e88e5);
+  color:#fff;
+}
+.rank-badge.elite {
+  background: linear-gradient(145deg,#ffd76a,#ffb347);
+  color:#111;
+}
+
 /* ✨ Animated Glow Reflection */
 .card::after {
   content: "";
