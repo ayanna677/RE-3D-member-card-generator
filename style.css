@@ -64,39 +64,6 @@ body {
   filter: blur(8px);
 }
 
-/* 🔰 Rank Badge (top-right corner) */
-.rank-badge {
-  position: absolute;
-  top: 22px;
-  right: 28px;
-  background: linear-gradient(145deg,#ffd76a,#ffb347);
-  color: #111;
-  font-weight: 800;
-  font-size: 13px;
-  padding: 6px 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,.3);
-  animation: shimmer 3s linear infinite;
-}
-@keyframes shimmer {
-  0% { background-position: -100px; }
-  100% { background-position: 200px; }
-}
-
-/* --- Dynamic Badge Colors --- */
-.rank-badge.newbie {
-  background: linear-gradient(145deg,#b0bec5,#90a4ae);
-  color:#111;
-}
-.rank-badge.pro {
-  background: linear-gradient(145deg,#42a5f5,#1e88e5);
-  color:#fff;
-}
-.rank-badge.elite {
-  background: linear-gradient(145deg,#ffd76a,#ffb347);
-  color:#111;
-}
-
 /* ✨ Animated Glow Reflection */
 .card::after {
   content: "";
