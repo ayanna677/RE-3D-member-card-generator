@@ -122,6 +122,13 @@ window.addEventListener("load", () => {
     const dx = (e.clientX - cx) / (rect.width / 2);
     const dy = (e.clientY - cy) / (rect.height / 2);
     card.style.transform = `rotateX(${(-dy * 12).toFixed(2)}deg) rotateY(${(dx * 12).toFixed(2)}deg)`;
+
+      // ✨ Energy Core Glow position
+    const rectGlow = card.getBoundingClientRect();
+    const x = ((e.clientX - rectGlow.left) / rectGlow.width) * 100;
+    const y = ((e.clientY - rectGlow.top) / rectGlow.height) * 100;
+    card.style.setProperty("--x", `${x}%`);
+    card.style.setProperty("--y", `${y}%`);
   });
 
   tiltWrap.addEventListener("mouseleave", () => {
