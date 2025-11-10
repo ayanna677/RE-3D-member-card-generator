@@ -729,3 +729,16 @@ body[class*="theme-"] {
     opacity: 0;
   }
 }
+
+/* 🌈 Theme Synced Particle Colors */
+body.theme-gojo   .particle { background: radial-gradient(circle, rgba(120,190,255,0.9), transparent 70%); }
+body.theme-sakura .particle { background: radial-gradient(circle, rgba(255,180,210,0.9), transparent 70%); }
+body.theme-zenitsu .particle { background: radial-gradient(circle, rgba(255,220,120,0.9), transparent 70%); }
+body.theme-tanjiro .particle { background: radial-gradient(circle, rgba(0,180,220,0.9), transparent 70%); }
+body.theme-rinnegan .particle { background: radial-gradient(circle, rgba(180,130,255,0.9), transparent 70%); }
+
+body.theme-gold   .particle { background: radial-gradient(circle, rgba(255,220,90,0.9), transparent 70%); }
+body.theme-aqua   .particle { background: radial-gradient(circle, rgba(80,200,255,0.9), transparent 70%); }
+body.theme-emerald .particle { background: radial-gradient(circle, rgba(0,255,200,0.9), transparent 70%); }
+body.theme-crimson .particle { background: radial-gradient(circle, rgba(255,100,100,0.9), transparent 70%); }
+body.theme-violet  .particle { background: radial-gradient(circle, rgba(180,120,255,0.9), transparent 70%); }
