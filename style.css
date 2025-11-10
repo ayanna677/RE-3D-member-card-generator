@@ -39,6 +39,18 @@ body {
   box-shadow: 0 30px 80px rgba(0,0,0,.55);
   transition: transform .15s ease, background .4s ease;
 }
+
+/* ⚡ Energy Core Glow Effect */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.15), transparent 60%);
+  transition: background 0.1s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .card > * { position: relative; z-index: 1; }
 
 /* Background inside card */
