@@ -40,17 +40,29 @@ body {
   transition: transform .15s ease, background .4s ease;
 }
 
-/* ⚡ Energy Core Glow Effect */
-.card::before {
+/* ✨ Holographic Overlay Effect */
+.card::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.15), transparent 60%);
-  transition: background 0.1s ease;
+  border-radius: inherit;
   pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.55;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    #ff00ff,
+    #00ffff,
+    #ffff00,
+    #ff00ff
+  );
+  transition: opacity 0.3s ease;
   z-index: 0;
 }
 
+.card:hover::after {
+  opacity: 0.9;
+}
 .card > * { position: relative; z-index: 1; }
 
 /* Background inside card */
