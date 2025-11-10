@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-  console.log("✅ JS Loaded"); // check in console to confirm script runs
+  console.log("✅ JS Loaded");
 
   const nameInput   = document.getElementById("nameInput");
   const fontSelect  = document.getElementById("fontSelect");
@@ -18,49 +18,40 @@ window.addEventListener("load", () => {
   const placeholder = document.getElementById("photoPlaceholder");
   const tiltWrap    = document.getElementById("tiltWrap");
 
- const THEMES = [
-  "default","black","silver","gold","aqua","violet","neon","emerald","crimson","rose","sunset",
-  "gojo","sakura","zenitsu","tanjiro","rinnegan",
-  "ashstone","moonrock","pearlgray"
-];
+  const THEMES = [
+    "default","black","silver","gold","aqua","violet","neon","emerald","crimson","rose","sunset",
+    "gojo","sakura","zenitsu","tanjiro","rinnegan",
+    "ashstone","moonrock","pearlgray"
+  ];
 
   function applyTheme(theme) {
-  // 1️⃣ Update card class
-  card.className = `card theme-${theme}`;
+    card.className = `card theme-${theme}`;
+    document.body.classList.remove(...THEMES.map(t => `theme-${t}`));
+    document.body.classList.add(`theme-${theme}`);
 
-  // 2️⃣ Sync body background
-  document.body.classList.remove(...THEMES.map(t => `theme-${t}`));
-  document.body.classList.add(`theme-${theme}`);
+    const isLight = theme === "silver" || theme === "gold";
+    card.querySelectorAll(".main-title, .sub-title, .name, .role").forEach(el => {
+      el.style.color = isLight ? "#111" : "#fff";
+      el.style.textShadow = isLight ? "none" : "0 2px 6px rgba(0,0,0,.45)";
+    });
 
-  // 3️⃣ Detect if light theme (for better contrast)
-  const isLight = theme === "silver" || theme === "gold";
-
-  // 4️⃣ Set text color & shadow contrast
-  card.querySelectorAll(".main-title, .sub-title, .name, .role").forEach(el => {
-    el.style.color = isLight ? "#111" : "#fff";
-    el.style.textShadow = isLight ? "none" : "0 2px 6px rgba(0,0,0,.45)";
-  });
-
-  // 5️⃣ Optional: adjust avatar ring color for light themes
-  const avatarFrame = document.querySelector(".avatar-frame");
-  if (avatarFrame) {
-    avatarFrame.style.boxShadow = isLight
-      ? "inset 0 0 0 2px rgba(0,0,0,0.2)"
-      : "inset 0 0 0 2px rgba(255,255,255,0.15)";
+    const avatarFrame = document.querySelector(".avatar-frame");
+    if (avatarFrame) {
+      avatarFrame.style.boxShadow = isLight
+        ? "inset 0 0 0 2px rgba(0,0,0,0.2)"
+        : "inset 0 0 0 2px rgba(255,255,255,0.15)";
+    }
   }
-}
 
-  // Name
+  // ✏️ Name + Font
   nameInput.addEventListener("input", () => {
     cardName.textContent = nameInput.value.trim() || "LALA";
   });
-
-  // Font
   fontSelect.addEventListener("change", () => {
     card.style.fontFamily = `'${fontSelect.value}', sans-serif`;
   });
 
-  // Photo upload
+  // 📸 Photo Upload
   photoInput.addEventListener("change", (e) => {
     const f = e.target.files?.[0];
     if (!f) return;
@@ -73,7 +64,7 @@ window.addEventListener("load", () => {
     r.readAsDataURL(f);
   });
 
-  // Card background
+  // 🖼️ Card Background Upload
   cardBgInput.addEventListener("change", (e) => {
     const f = e.target.files?.[0];
     if (!f) return;
@@ -86,12 +77,12 @@ window.addEventListener("load", () => {
     r.readAsDataURL(f);
   });
 
-  // Theme buttons
+  // 🎨 Theme Buttons
   document.querySelectorAll(".theme-btn").forEach(btn => {
     btn.addEventListener("click", () => applyTheme(btn.dataset.theme));
   });
 
-  // Reset
+  // 🔄 Reset
   resetBtn.addEventListener("click", () => {
     nameInput.value = "LALA";
     cardName.textContent = "LALA";
@@ -109,9 +100,9 @@ window.addEventListener("load", () => {
     shareBtn.hidden = true;
   });
 
-  // 3D tilt
+  // 🎯 3D Tilt + Holographic + Light Reflection
   let rect = null;
-  const recalc = () => rect = tiltWrap.getBoundingClientRect();
+  const recalc = () => (rect = tiltWrap.getBoundingClientRect());
   recalc();
   addEventListener("resize", recalc);
 
@@ -121,25 +112,26 @@ window.addEventListener("load", () => {
     const cy = rect.top + rect.height / 2;
     const dx = (e.clientX - cx) / (rect.width / 2);
     const dy = (e.clientY - cy) / (rect.height / 2);
+
+    // Rotation
     card.style.transform = `rotateX(${(-dy * 12).toFixed(2)}deg) rotateY(${(dx * 12).toFixed(2)}deg)`;
-    
-    // ✨ Holographic shine rotation
+
+    // Holographic shine
     const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 180;
     card.style.setProperty("--angle", `${angle}deg`);
-  });
 
-  // 💡 Dynamic light reflection (follows cursor)
-  const mx = ((e.clientX - rect.left) / rect.width) * 100;
-  const my = ((e.clientY - rect.top) / rect.height) * 100;
-  card.style.setProperty("--mx", `${mx}%`);
-  card.style.setProperty("--my", `${my}%`);
-});
+    // Light reflection
+    const mx = ((e.clientX - rect.left) / rect.width) * 100;
+    const my = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty("--mx", `${mx}%`);
+    card.style.setProperty("--my", `${my}%`);
+  });
 
   tiltWrap.addEventListener("mouseleave", () => {
     card.style.transform = "rotateX(0) rotateY(0)";
   });
 
-  // Download + Share
+  // 📥 Download + Share
   downloadBtn.addEventListener("click", async () => {
     downloadBtn.disabled = true;
     downloadBtn.textContent = "Rendering…";
@@ -158,13 +150,10 @@ window.addEventListener("load", () => {
 
   shareBtn.addEventListener("click", () => {
     const text = `Just generated my RE 3D MEMBER CARD\nYou can make your own card here: https://re-3d-member-card-generator.vercel.app/`;
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
   });
 
-  // Start with default theme
-  applyTheme("default");
-  
-  // 🆕 XP Level System
+  // 🧠 Level System
   const levelInput = document.getElementById("levelInput");
   const xpFill = document.querySelector(".xp-fill");
   const rank = document.querySelector(".rank");
@@ -174,11 +163,11 @@ window.addEventListener("load", () => {
     const percent = Math.min(level * 10, 100);
     xpFill.style.width = `${percent}%`;
     rank.textContent = `LEVEL ${level}`;
-    // ✨ Trigger level-up animation
     rank.classList.remove("level-up");
-    void rank.offsetWidth; // restart animation
+    void rank.offsetWidth;
     rank.classList.add("level-up");
   });
+
   // 🌌 Floating Particle Aura
   const particleLayer = document.querySelector(".particle-layer");
   for (let i = 0; i < 25; i++) {
@@ -190,5 +179,7 @@ window.addEventListener("load", () => {
     p.style.animationDelay = `${Math.random() * 6}s`;
     particleLayer.appendChild(p);
   }
-  
+
+  // Start with default theme
+  applyTheme("default");
 });
