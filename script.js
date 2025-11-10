@@ -122,6 +122,10 @@ window.addEventListener("load", () => {
     const dx = (e.clientX - cx) / (rect.width / 2);
     const dy = (e.clientY - cy) / (rect.height / 2);
     card.style.transform = `rotateX(${(-dy * 12).toFixed(2)}deg) rotateY(${(dx * 12).toFixed(2)}deg)`;
+    
+    // ✨ Holographic shine rotation
+    const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 180;
+    card.style.setProperty("--angle", `${angle}deg`);
   });
 
   tiltWrap.addEventListener("mouseleave", () => {
