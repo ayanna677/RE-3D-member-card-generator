@@ -128,6 +128,13 @@ window.addEventListener("load", () => {
     card.style.setProperty("--angle", `${angle}deg`);
   });
 
+  // 💡 Dynamic light reflection (follows cursor)
+  const mx = ((e.clientX - rect.left) / rect.width) * 100;
+  const my = ((e.clientY - rect.top) / rect.height) * 100;
+  card.style.setProperty("--mx", `${mx}%`);
+  card.style.setProperty("--my", `${my}%`);
+});
+
   tiltWrap.addEventListener("mouseleave", () => {
     card.style.transform = "rotateX(0) rotateY(0)";
   });
