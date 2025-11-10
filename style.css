@@ -65,6 +65,20 @@ body {
 }
 .card > * { position: relative; z-index: 1; }
 
+/* 💡 Dynamic Light Reflection Effect */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.2),
+    transparent 60%
+  );
+  pointer-events: none;
+  transition: background 0.1s ease;
+  z-index: 0;
+}
 /* Background inside card */
 .card-bg {
   position: absolute;
