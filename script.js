@@ -157,16 +157,40 @@ window.addEventListener("load", () => {
   const levelInput = document.getElementById("levelInput");
   const xpFill = document.querySelector(".xp-fill");
   const rank = document.querySelector(".rank");
+  const roleBadge = document.querySelector(".role-badge");
 
   levelInput.addEventListener("input", () => {
-    const level = parseInt(levelInput.value) || 1;
-    const percent = Math.min(level * 10, 100);
-    xpFill.style.width = `${percent}%`;
-    rank.textContent = `LEVEL ${level}`;
-    rank.classList.remove("level-up");
-    void rank.offsetWidth;
-    rank.classList.add("level-up");
-  });
+  const level = parseInt(levelInput.value) || 1;
+  const percent = Math.min(level * 10, 100);
+  xpFill.style.width = `${percent}%`;
+  rank.textContent = `LEVEL ${level}`;
+
+  // ✨ Trigger level-up animation
+  rank.classList.remove("level-up");
+  void rank.offsetWidth;
+  rank.classList.add("level-up");
+
+  // 🏅 Auto role badge update based on RE Discord levels
+  if (roleBadge) {
+    if (level < 4) {
+      roleBadge.textContent = "NEWBIE";
+      roleBadge.style.background = "linear-gradient(145deg,#b0bec5,#90a4ae)";
+      roleBadge.style.color = "#111";
+    } else if (level < 7) {
+      roleBadge.textContent = "(re)al CONTRIBUTOR";
+      roleBadge.style.background = "linear-gradient(145deg,#42a5f5,#1e88e5)";
+      roleBadge.style.color = "#fff";
+    } else if (level < 9) {
+      roleBadge.textContent = "(re)al OG";
+      roleBadge.style.background = "linear-gradient(145deg,#ab47bc,#7b1fa2)";
+      roleBadge.style.color = "#fff";
+    } else {
+      roleBadge.textContent = "(re)al GIGACHAD";
+      roleBadge.style.background = "linear-gradient(145deg,#ffd76a,#ffb347)";
+      roleBadge.style.color = "#111";
+    }
+  }
+});
 
   // 🌌 Floating Particle Aura
   const particleLayer = document.querySelector(".particle-layer");
